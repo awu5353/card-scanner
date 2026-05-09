@@ -12,220 +12,200 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" />
 <style>
   :root {
-    --red: #E24B4A;
-    --red-dark: #c73b3a;
-    --bg: #f5f5f0;
-    --surface: #ffffff;
-    --surface2: #f0efea;
-    --border: rgba(0,0,0,0.10);
-    --border2: rgba(0,0,0,0.18);
-    --text: #1a1a18;
-    --text2: #6b6b67;
-    --text3: #a0a09c;
-    --success-bg: #eaf3de;
-    --success-text: #3b6d11;
-    --warn-bg: #faeeda;
-    --warn-text: #854f0b;
-    --danger-bg: #fcebeb;
-    --danger-text: #a32d2d;
-    --info-bg: #e6f1fb;
-    --info-text: #185fa5;
-    --radius: 12px;
-    --radius-sm: 8px;
+    --red:#E24B4A; --bg:#f5f5f0; --surface:#ffffff; --surface2:#f0efea;
+    --border:rgba(0,0,0,0.10); --border2:rgba(0,0,0,0.18);
+    --text:#1a1a18; --text2:#6b6b67; --text3:#a0a09c;
+    --success-bg:#eaf3de; --success-text:#3b6d11;
+    --warn-bg:#faeeda; --warn-text:#854f0b;
+    --danger-bg:#fcebeb; --danger-text:#a32d2d;
+    --info-bg:#e6f1fb; --info-text:#185fa5;
+    --radius:12px; --radius-sm:8px;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #141413;
-      --surface: #1e1e1c;
-      --surface2: #272725;
-      --border: rgba(255,255,255,0.10);
-      --border2: rgba(255,255,255,0.18);
-      --text: #f0f0ec;
-      --text2: #9a9a96;
-      --text3: #5a5a56;
-      --success-bg: #173404;
-      --success-text: #c0dd97;
-      --warn-bg: #412402;
-      --warn-text: #fac775;
-      --danger-bg: #501313;
-      --danger-text: #f09595;
-      --info-bg: #042c53;
-      --info-text: #85b7eb;
-    }
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  html, body { height: 100%; background: var(--bg); font-family: 'DM Sans', sans-serif; color: var(--text); overscroll-behavior: none; }
-  body { display: flex; flex-direction: column; }
+  @media(prefers-color-scheme:dark){:root{
+    --bg:#141413; --surface:#1e1e1c; --surface2:#272725;
+    --border:rgba(255,255,255,0.10); --border2:rgba(255,255,255,0.18);
+    --text:#f0f0ec; --text2:#9a9a96; --text3:#5a5a56;
+    --success-bg:#173404; --success-text:#c0dd97;
+    --warn-bg:#412402; --warn-text:#fac775;
+    --danger-bg:#501313; --danger-text:#f09595;
+    --info-bg:#042c53; --info-text:#85b7eb;
+  }}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text);overscroll-behavior:none}
+  body{display:flex;flex-direction:column}
 
-  /* HEADER */
-  .hdr {
-    background: var(--surface);
-    border-bottom: 0.5px solid var(--border);
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; color: var(--text); }
-  .logo span { color: var(--red); }
-  .hdr-sub { font-size: 11px; color: var(--text2); }
-  .live-pill { margin-left: auto; background: var(--red); color: #fff; font-size: 10px; font-weight: 500; padding: 2px 9px; border-radius: 20px; letter-spacing: .8px; }
+  .hdr{background:var(--surface);border-bottom:.5px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;position:sticky;top:0;z-index:20}
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:var(--text)}
+  .logo span{color:var(--red)}
+  .hdr-sub{font-size:11px;color:var(--text2)}
+  .live-pill{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:500;padding:2px 9px;border-radius:20px;letter-spacing:.8px}
+  .hdr-hist-btn{background:none;border:.5px solid var(--border2);border-radius:8px;padding:5px 9px;cursor:pointer;color:var(--text2);display:flex;align-items:center;gap:4px;font-size:11px;font-family:'DM Sans',sans-serif}
+  .hdr-hist-btn svg{width:13px;height:13px}
 
-  /* MODE TABS */
-  .mode-bar { display: grid; grid-template-columns: 1fr 1fr; background: var(--surface); border-bottom: 0.5px solid var(--border); flex-shrink: 0; }
-  .mode-btn { padding: 12px 8px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; border: none; background: none; cursor: pointer; color: var(--text2); border-bottom: 2.5px solid transparent; transition: color .15s, border-color .15s; display: flex; align-items: center; justify-content: center; gap: 5px; }
-  .mode-btn.active { color: var(--red); border-bottom-color: var(--red); }
-  .mode-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+  .mode-bar{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border-bottom:.5px solid var(--border);flex-shrink:0}
+  .mode-btn{padding:12px 8px;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--text2);border-bottom:2.5px solid transparent;transition:color .15s,border-color .15s;display:flex;align-items:center;justify-content:center;gap:5px}
+  .mode-btn.active{color:var(--red);border-bottom-color:var(--red)}
+  .mode-btn svg{width:15px;height:15px;flex-shrink:0}
 
-  /* SCROLLABLE BODY */
-  .body { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; padding-bottom: 32px; }
+  .body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;padding-bottom:40px}
 
-  /* API KEY SETUP */
-  .setup-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px; }
-  .setup-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-  .setup-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
-  .setup-desc a { color: var(--red); text-decoration: none; }
-  .key-row { display: flex; gap: 8px; }
-  .key-input { flex: 1; padding: 10px 12px; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--surface2); color: var(--text); font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; min-width: 0; }
-  .key-input:focus { border-color: var(--red); }
-  .key-save-btn { padding: 10px 16px; background: var(--red); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; flex-shrink: 0; }
+  /* SETUP */
+  .setup-card{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:16px}
+  .setup-title{font-size:15px;font-weight:500;margin-bottom:6px}
+  .setup-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px}
+  .setup-desc a{color:var(--red);text-decoration:none}
+  .key-row{display:flex;gap:8px}
+  .key-input{flex:1;padding:10px 12px;border:.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;min-width:0}
+  .key-input:focus{border-color:var(--red)}
+  .key-save-btn{padding:10px 16px;background:var(--red);color:#fff;border:none;border-radius:var(--radius-sm);font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;flex-shrink:0}
 
-  /* CAPTURE ZONE */
-  .capture-zone { background: var(--surface); border: 1.5px dashed var(--border2); border-radius: var(--radius); padding: 28px 16px; text-align: center; position: relative; cursor: pointer; transition: border-color .2s; }
-  .capture-zone.drag-over { border-color: var(--red); }
-  .capture-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .cap-icon { font-size: 0; display: block; margin: 0 auto 12px; }
-  .cap-icon svg { width: 36px; height: 36px; color: var(--text2); }
-  .cap-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-  .cap-sub { font-size: 12px; color: var(--text2); line-height: 1.6; }
-  .cap-sub strong { color: var(--red); font-weight: 500; }
+  /* CAPTURE */
+  .capture-zone{background:var(--surface);border:1.5px dashed var(--border2);border-radius:var(--radius);padding:28px 16px;text-align:center;position:relative;cursor:pointer;transition:border-color .2s}
+  .capture-zone.drag-over{border-color:var(--red)}
+  .capture-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+  .cap-icon{font-size:0;display:block;margin:0 auto 12px}
+  .cap-icon svg{width:36px;height:36px;color:var(--text2)}
+  .cap-title{font-size:15px;font-weight:500;margin-bottom:4px}
+  .cap-sub{font-size:12px;color:var(--text2);line-height:1.6}
+  .cap-sub strong{color:var(--red);font-weight:500}
 
-  /* CAMERA BUTTON */
-  .cam-open-btn { width: 100%; padding: 13px; background: var(--red); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; transition: opacity .15s; }
-  .cam-open-btn:hover { opacity: .9; }
-  .cam-open-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .cam-open-btn{width:100%;padding:13px;background:var(--red);color:#fff;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:opacity .15s}
+  .cam-open-btn:hover{opacity:.9}
+  .cam-open-btn svg{width:18px;height:18px;flex-shrink:0}
 
-  /* CAMERA PREVIEW */
-  .cam-wrap { position: relative; border-radius: var(--radius); overflow: hidden; background: #000; cursor: pointer; }
-  .cam-wrap video { width: 100%; display: block; max-height: 65vw; object-fit: cover; pointer-events: none; }
-  .cam-tap-hint { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.55); color: #fff; font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; white-space: nowrap; pointer-events: none; }
-  .cam-close { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.5); border: none; color: #fff; border-radius: 50%; width: 32px; height: 32px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; pointer-events: all; }
-  canvas#snap { display: none; }
+  .cam-wrap{position:relative;border-radius:var(--radius);overflow:hidden;background:#000;cursor:pointer;user-select:none}
+  .cam-wrap video{width:100%;display:block;max-height:65vw;object-fit:cover;pointer-events:none}
+  .cam-tap-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.55);color:#fff;font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;white-space:nowrap;pointer-events:none}
+  .cam-close{position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.5);border:none;color:#fff;border-radius:50%;width:32px;height:32px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  canvas#snap{display:none}
 
-  /* PREVIEW BAR */
-  .prev-bar { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 12px; }
-  .prev-thumb { width: 44px; height: 62px; border-radius: 5px; object-fit: cover; border: 0.5px solid var(--border); flex-shrink: 0; }
-  .prev-info { flex: 1; min-width: 0; }
-  .prev-name { font-size: 12px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .prev-sz { font-size: 11px; color: var(--text2); margin-top: 2px; }
-  .rm-btn { background: none; border: 0.5px solid var(--border); border-radius: 6px; padding: 6px 8px; cursor: pointer; color: var(--text2); display: flex; align-items: center; }
-  .rm-btn svg { width: 14px; height: 14px; }
+  .prev-bar{display:flex;align-items:center;gap:10px;background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:10px 12px}
+  .prev-thumb{width:44px;height:62px;border-radius:5px;object-fit:cover;border:.5px solid var(--border);flex-shrink:0}
+  .prev-info{flex:1;min-width:0}
+  .prev-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prev-sz{font-size:11px;color:var(--text2);margin-top:2px}
+  .rm-btn{background:none;border:.5px solid var(--border);border-radius:6px;padding:6px 8px;cursor:pointer;color:var(--text2);display:flex;align-items:center}
+  .rm-btn svg{width:14px;height:14px}
 
-  /* SCAN BUTTON */
-  .scan-btn { width: 100%; padding: 14px; background: var(--red); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity .15s, transform .1s; }
-  .scan-btn:active { transform: scale(.99); }
-  .scan-btn:disabled { opacity: .4; cursor: default; }
-  .scan-btn svg { width: 18px; height: 18px; }
+  .scan-btn{width:100%;padding:14px;background:var(--red);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .15s,transform .1s}
+  .scan-btn:active{transform:scale(.99)}
+  .scan-btn:disabled{opacity:.4;cursor:default}
+  .scan-btn svg{width:18px;height:18px}
 
-  /* STATUS */
-  .status-box { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
-  .spinner { width: 18px; height: 18px; flex-shrink: 0; border: 2px solid var(--border2); border-top-color: var(--red); border-radius: 50%; animation: spin .7s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .status-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
-  .status-text strong { color: var(--text); font-weight: 500; }
+  .status-box{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px}
+  .spinner{width:18px;height:18px;flex-shrink:0;border:2px solid var(--border2);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .status-text{font-size:13px;color:var(--text2);line-height:1.5}
+  .status-text strong{color:var(--text);font-weight:500}
 
-  /* ERROR */
-  .err-box { background: var(--danger-bg); border: 0.5px solid rgba(163,45,45,0.3); border-radius: var(--radius); padding: 12px 14px; display: flex; align-items: flex-start; gap: 9px; }
-  .err-box svg { width: 18px; height: 18px; color: var(--danger-text); flex-shrink: 0; margin-top: 1px; }
-  .err-text { font-size: 13px; color: var(--danger-text); line-height: 1.5; }
+  .err-box{background:var(--danger-bg);border:.5px solid rgba(163,45,45,0.3);border-radius:var(--radius);padding:12px 14px;display:flex;align-items:flex-start;gap:9px}
+  .err-box svg{width:18px;height:18px;color:var(--danger-text);flex-shrink:0;margin-top:1px}
+  .err-text{font-size:13px;color:var(--danger-text);line-height:1.5}
 
   /* RESULTS */
-  .id-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px; display: flex; gap: 12px; align-items: flex-start; }
-  .thumb-wrap { flex-shrink: 0; position: relative; }
-  .thumb-lg { width: 70px; height: 98px; border-radius: 6px; object-fit: cover; border: 0.5px solid var(--border); }
-  .grade-dot { position: absolute; bottom: -7px; right: -7px; background: var(--red); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 15px; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2.5px solid var(--surface); }
-  .raw-dot { position: absolute; bottom: -7px; right: -7px; background: #888; color: #fff; font-size: 8px; font-weight: 600; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2.5px solid var(--surface); letter-spacing: .2px; }
-  .card-meta { flex: 1; min-width: 0; }
-  .game-tag { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: .7px; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; background: var(--info-bg); color: var(--info-text); margin-bottom: 5px; }
-  .raw-tag { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: .7px; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; background: var(--surface2); color: var(--text2); margin-bottom: 5px; }
-  .card-name { font-size: 17px; font-weight: 500; line-height: 1.3; }
-  .card-det { margin-top: 4px; font-size: 12px; color: var(--text2); line-height: 1.7; }
-  .cert-row { margin-top: 8px; display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text2); background: var(--surface2); border-radius: 5px; padding: 5px 9px; }
+  .id-card{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;gap:12px;align-items:flex-start}
+  .thumb-wrap{flex-shrink:0;position:relative}
+  .thumb-lg{width:70px;height:98px;border-radius:6px;object-fit:cover;border:.5px solid var(--border)}
+  .grade-dot{position:absolute;bottom:-7px;right:-7px;background:var(--red);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:15px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid var(--surface)}
+  .raw-dot{position:absolute;bottom:-7px;right:-7px;background:#888;color:#fff;font-size:8px;font-weight:600;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid var(--surface);letter-spacing:.2px}
+  .card-meta{flex:1;min-width:0}
+  .game-tag{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.7px;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--info-bg);color:var(--info-text);margin-bottom:5px}
+  .raw-tag{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.7px;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--text2);margin-bottom:5px}
+  .card-name{font-size:17px;font-weight:500;line-height:1.3}
+  .card-det{margin-top:4px;font-size:12px;color:var(--text2);line-height:1.7}
+  .cert-row{margin-top:8px;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);background:var(--surface2);border-radius:5px;padding:5px 9px}
 
-  /* PRICE GRID */
-  .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .p-card { background: var(--surface2); border-radius: var(--radius-sm); padding: 12px 14px; }
-  .p-lbl { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
-  .p-val { font-size: 22px; font-weight: 500; font-family: 'Bebas Neue', sans-serif; letter-spacing: .5px; }
-  .p-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
-  .trend-pill { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-top: 4px; font-weight: 500; }
-  .t-up { background: var(--success-bg); color: var(--success-text); }
-  .t-down { background: var(--danger-bg); color: var(--danger-text); }
-  .t-flat { background: var(--surface2); color: var(--text2); }
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .p-card{background:var(--surface2);border-radius:var(--radius-sm);padding:12px 14px}
+  .p-lbl{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+  .p-val{font-size:22px;font-weight:500;font-family:'Bebas Neue',sans-serif;letter-spacing:.5px}
+  .p-sub{font-size:11px;color:var(--text2);margin-top:2px}
+  .trend-pill{display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 6px;border-radius:4px;margin-top:4px;font-weight:500}
+  .t-up{background:var(--success-bg);color:var(--success-text)}
+  .t-down{background:var(--danger-bg);color:var(--danger-text)}
+  .t-flat{background:var(--surface2);color:var(--text2)}
 
-  /* SECTION CARD */
-  .sec-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .sec-hdr { padding: 12px 14px; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; gap: 7px; }
-  .sec-hdr-title { font-size: 13px; font-weight: 500; }
-  .sec-hdr-count { margin-left: auto; font-size: 11px; color: var(--text2); }
-  .sale-row { padding: 10px 14px; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; gap: 7px; }
-  .sale-row:last-child { border-bottom: none; }
-  .sale-plat { font-size: 11px; color: var(--text2); width: 40px; flex-shrink: 0; }
-  .sale-badge { font-size: 9px; font-weight: 600; padding: 1px 5px; border-radius: 3px; flex-shrink: 0; background: var(--red); color: #fff; }
-  .sale-raw-badge { font-size: 9px; font-weight: 600; padding: 1px 5px; border-radius: 3px; flex-shrink: 0; background: var(--surface2); color: var(--text2); }
-  .sale-title-t { flex: 1; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sale-price-t { font-size: 13px; font-weight: 500; flex-shrink: 0; }
-  .sale-date-t { font-size: 10px; color: var(--text2); flex-shrink: 0; width: 44px; text-align: right; }
+  .sec-card{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .sec-hdr{padding:12px 14px;border-bottom:.5px solid var(--border);display:flex;align-items:center;gap:7px}
+  .sec-hdr-title{font-size:13px;font-weight:500}
+  .sec-hdr-count{margin-left:auto;font-size:11px;color:var(--text2)}
+
+  /* SALE ROWS */
+  .sale-row{padding:10px 14px;border-bottom:.5px solid var(--border);display:grid;grid-template-columns:auto auto 1fr auto auto;align-items:center;gap:7px}
+  .sale-row:last-child{border-bottom:none}
+  .sale-row.linked{cursor:pointer}
+  .sale-row.linked:hover{background:var(--surface2)}
+  .sale-plat{font-size:11px;color:var(--text2)}
+  .sale-badge{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;background:var(--red);color:#fff;white-space:nowrap}
+  .sale-raw-badge{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;background:var(--surface2);color:var(--text2)}
+  .sale-title-t{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sale-price-t{font-size:13px;font-weight:500;white-space:nowrap}
+  .sale-link-icon{color:var(--text3);flex-shrink:0}
+  .sale-link-icon svg{width:12px;height:12px;display:block}
 
   /* GRADE PREDICT */
-  .cg-row { padding: 12px 14px; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; gap: 10px; }
-  .cg-row:last-child { border-bottom: none; }
-  .cg-logo { font-size: 11px; font-weight: 600; color: var(--text2); width: 32px; flex-shrink: 0; }
-  .cg-grade-big { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--red); flex-shrink: 0; width: 44px; line-height: 1; }
-  .cg-bar-wrap { flex: 1; min-width: 0; }
-  .cg-bar-bg { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; margin-bottom: 4px; }
-  .cg-bar-fill { height: 100%; background: var(--red); border-radius: 3px; }
-  .cg-grade-lbl { font-size: 11px; color: var(--text2); }
-  .conf-pill { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
-  .conf-high { background: var(--success-bg); color: var(--success-text); }
-  .conf-med { background: var(--warn-bg); color: var(--warn-text); }
-  .conf-low { background: var(--danger-bg); color: var(--danger-text); }
+  .cg-row{padding:12px 14px;border-bottom:.5px solid var(--border);display:flex;align-items:center;gap:10px}
+  .cg-row:last-child{border-bottom:none}
+  .cg-logo{font-size:11px;font-weight:600;color:var(--text2);width:32px;flex-shrink:0}
+  .cg-grade-big{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--red);flex-shrink:0;width:44px;line-height:1}
+  .cg-bar-wrap{flex:1;min-width:0}
+  .cg-bar-bg{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-bottom:4px}
+  .cg-bar-fill{height:100%;background:var(--red);border-radius:3px}
+  .cg-grade-lbl{font-size:11px;color:var(--text2)}
+  .conf-pill{font-size:10px;font-weight:500;padding:2px 6px;border-radius:4px;flex-shrink:0}
+  .conf-high{background:var(--success-bg);color:var(--success-text)}
+  .conf-med{background:var(--warn-bg);color:var(--warn-text)}
+  .conf-low{background:var(--danger-bg);color:var(--danger-text)}
 
-  /* CONDITION */
-  .cond-section { padding: 12px 14px; border-top: 0.5px solid var(--border); }
-  .cond-section-title { font-size: 11px; font-weight: 500; color: var(--text2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .5px; }
-  .cond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-  .cond-item { background: var(--surface2); border-radius: 6px; padding: 8px 10px; }
-  .cond-item-lbl { font-size: 10px; color: var(--text2); margin-bottom: 3px; text-transform: uppercase; letter-spacing: .4px; }
-  .cond-item-val { font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 5px; }
-  .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-  .dot-good { background: #639922; }
-  .dot-ok { background: #BA7517; }
-  .dot-bad { background: #E24B4A; }
+  .cond-section{padding:12px 14px;border-top:.5px solid var(--border)}
+  .cond-section-title{font-size:11px;font-weight:500;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+  .cond-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .cond-item{background:var(--surface2);border-radius:6px;padding:8px 10px}
+  .cond-item-lbl{font-size:10px;color:var(--text2);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px}
+  .cond-item-val{font-size:12px;font-weight:500;display:flex;align-items:center;gap:5px}
+  .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .dot-good{background:#639922}
+  .dot-ok{background:#BA7517}
+  .dot-bad{background:#E24B4A}
 
-  /* ANALYSIS */
-  .analysis-box { background: var(--surface); border: 0.5px solid var(--border); border-left: 3px solid var(--red); border-radius: var(--radius); padding: 12px 14px; }
-  .analysis-box.green { border-left-color: #1D9E75; }
-  .an-title { font-size: 11px; font-weight: 500; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; }
-  .an-text { font-size: 13px; color: var(--text); line-height: 1.65; }
+  .analysis-box{background:var(--surface);border:.5px solid var(--border);border-left:3px solid var(--red);border-radius:var(--radius);padding:12px 14px}
+  .analysis-box.green{border-left-color:#1D9E75}
+  .an-title{font-size:11px;font-weight:500;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+  .an-text{font-size:13px;color:var(--text);line-height:1.65}
 
-  /* LINKS */
-  .links-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
-  .links-title { font-size: 13px; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .chip { display: inline-flex; align-items: center; gap: 5px; border: 0.5px solid var(--border2); border-radius: 20px; padding: 6px 13px; font-size: 12px; color: var(--text); text-decoration: none; background: var(--surface2); font-family: 'DM Sans', sans-serif; transition: background .15s; }
+  .links-card{background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:12px 14px}
+  .links-title{font-size:13px;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{display:inline-flex;align-items:center;gap:5px;border:.5px solid var(--border2);border-radius:20px;padding:6px 13px;font-size:12px;color:var(--text);text-decoration:none;background:var(--surface2);font-family:'DM Sans',sans-serif;transition:background .15s}
+  .chip:hover{background:var(--surface)}
 
-  /* SECONDARY BUTTON */
-  .sec-btn { width: 100%; padding: 12px; background: none; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; color: var(--text); font-family: 'DM Sans', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: background .15s; }
-  .sec-btn:hover { background: var(--surface2); }
-  .sec-btn svg { width: 15px; height: 15px; }
+  .sec-btn{width:100%;padding:12px;background:none;border:.5px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;font-weight:500;color:var(--text);font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .15s}
+  .sec-btn:hover{background:var(--surface2)}
+  .sec-btn svg{width:15px;height:15px}
 
-  .hidden { display: none !important; }
-  @media (min-width: 500px) { body { max-width: 480px; margin: 0 auto; } }
+  /* HISTORY PANEL */
+  .hist-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:30;display:flex;flex-direction:column;justify-content:flex-end}
+  .hist-panel{background:var(--surface);border-radius:var(--radius) var(--radius) 0 0;max-height:80vh;display:flex;flex-direction:column;overflow:hidden}
+  .hist-hdr{padding:14px 16px;border-bottom:.5px solid var(--border);display:flex;align-items:center;gap:8px;flex-shrink:0}
+  .hist-hdr-title{font-size:15px;font-weight:500;flex:1}
+  .hist-clear-btn{font-size:11px;color:var(--danger-text);background:var(--danger-bg);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:3px 8px;border-radius:4px}
+  .hist-close-btn{background:none;border:none;cursor:pointer;color:var(--text2);display:flex;align-items:center;padding:4px}
+  .hist-close-btn svg{width:16px;height:16px}
+  .hist-list{overflow-y:auto;flex:1;padding:8px 0}
+  .hist-empty{padding:32px 16px;text-align:center;font-size:13px;color:var(--text2)}
+  .hist-item{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;transition:background .15s}
+  .hist-item:hover{background:var(--surface2)}
+  .hist-thumb{width:36px;height:50px;border-radius:4px;object-fit:cover;border:.5px solid var(--border);flex-shrink:0}
+  .hist-thumb-placeholder{width:36px;height:50px;border-radius:4px;background:var(--surface2);border:.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .hist-info{flex:1;min-width:0}
+  .hist-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hist-meta{font-size:11px;color:var(--text2);margin-top:2px}
+  .hist-price{font-size:13px;font-weight:500;font-family:'Bebas Neue',sans-serif;letter-spacing:.3px;flex-shrink:0}
+  .hist-badge{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;background:var(--red);color:#fff;flex-shrink:0}
+  .hist-raw-badge{font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;background:var(--surface2);color:var(--text2);flex-shrink:0}
+
+  .hidden{display:none!important}
+  @media(min-width:500px){body{max-width:480px;margin:0 auto}}
 </style>
 </head>
 <body>
@@ -233,7 +213,11 @@
 <div class="hdr">
   <span class="logo">CARD<span>GRADE</span></span>
   <span class="hdr-sub">PSA · BGS · CGC</span>
-  <span class="live-pill">Live Pricing</span>
+  <button class="hdr-hist-btn" id="hist-btn" onclick="openHistory()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    History
+  </button>
+  <span class="live-pill">Live</span>
 </div>
 
 <div class="mode-bar">
@@ -249,12 +233,12 @@
 
 <div class="body" id="main-body">
 
-  <!-- API KEY SETUP -->
+  <!-- API KEY -->
   <div class="setup-card" id="setup-card">
     <div class="setup-title">Enter your Anthropic API key</div>
     <div class="setup-desc">
-      This app runs <strong>entirely on your device</strong>. Your key is saved only in this browser's localStorage and is never sent anywhere except directly to Anthropic's API over HTTPS. No server, no third party ever sees it.<br><br>
-      Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>. For extra safety, set a <strong>low monthly spend limit</strong> on your key in the Anthropic console so even if someone somehow got it, damage is capped.
+      This app runs <strong>entirely on your device</strong>. Your key is saved only in this browser's localStorage and sent exclusively to Anthropic's API over HTTPS — no middleman, no third party.<br><br>
+      Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>. Set a <strong>monthly spend limit</strong> on the key for safety.
     </div>
     <div class="key-row">
       <input class="key-input" type="password" id="api-key-input" placeholder="sk-ant-..." autocomplete="off" />
@@ -262,14 +246,13 @@
     </div>
   </div>
 
-  <!-- KEY STATUS BAR -->
-  <div id="key-mgmt" class="hidden" style="display:flex;align-items:center;gap:8px;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:10px 14px;">
+  <div id="key-mgmt" class="hidden" style="display:flex;align-items:center;gap:8px;background:var(--surface);border:.5px solid var(--border);border-radius:var(--radius);padding:10px 14px;">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#639922" stroke-width="2" style="flex-shrink:0"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-    <span style="font-size:12px;color:var(--text2);flex:1">API key saved &mdash; calls go directly to Anthropic</span>
+    <span style="font-size:12px;color:var(--text2);flex:1">API key saved — calls go directly to Anthropic</span>
     <button onclick="clearKey()" style="font-size:11px;color:var(--danger-text);background:var(--danger-bg);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:3px 8px;border-radius:4px;">Remove</button>
   </div>
 
-  <!-- UPLOAD / CAMERA -->
+  <!-- UPLOAD -->
   <div id="upload-section">
     <div class="capture-zone" id="drop-zone">
       <input type="file" id="file-input" accept="image/*" />
@@ -279,42 +262,39 @@
       <div class="cap-title" id="cap-title">Scan your graded card</div>
       <div class="cap-sub">Tap to choose a photo<br><strong>PSA · BGS · CGC</strong></div>
     </div>
-
     <button class="cam-open-btn" id="open-cam-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
       Use camera
     </button>
   </div>
 
-  <!-- CAMERA VIEW -->
+  <!-- CAMERA -->
   <div id="cam-section" class="hidden">
     <div class="cam-wrap" id="cam-wrap">
       <video id="cam-video" autoplay playsinline muted></video>
       <div class="cam-tap-hint">Tap anywhere to capture</div>
-      <button class="cam-close" id="close-cam-btn" aria-label="Close camera">&#x2715;</button>
+      <button class="cam-close" id="close-cam-btn">&#x2715;</button>
     </div>
     <canvas id="snap"></canvas>
   </div>
 
-  <!-- PREVIEW BAR -->
+  <!-- PREVIEW -->
   <div class="prev-bar hidden" id="prev-bar">
     <img id="prev-thumb" class="prev-thumb" src="" alt="Preview" />
     <div class="prev-info">
       <div class="prev-name" id="prev-name">card.jpg</div>
       <div class="prev-sz" id="prev-sz"></div>
     </div>
-    <button class="rm-btn" id="rm-btn" aria-label="Remove">
+    <button class="rm-btn" id="rm-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
   </div>
 
-  <!-- SCAN BUTTON -->
   <button class="scan-btn" id="scan-btn" disabled>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
     <span id="scan-label">Scan &amp; Get Pricing</span>
   </button>
 
-  <!-- STATUS -->
   <div id="status-section" class="hidden">
     <div class="status-box">
       <div class="spinner"></div>
@@ -322,7 +302,6 @@
     </div>
   </div>
 
-  <!-- ERROR -->
   <div id="error-section" class="hidden">
     <div class="err-box">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
@@ -335,332 +314,431 @@
     </button>
   </div>
 
-  <!-- RESULTS -->
   <div id="results-section" class="hidden"></div>
+</div>
 
+<!-- HISTORY PANEL -->
+<div class="hist-overlay hidden" id="hist-overlay" onclick="handleOverlayClick(event)">
+  <div class="hist-panel" id="hist-panel">
+    <div class="hist-hdr">
+      <span class="hist-hdr-title">Scan history</span>
+      <button class="hist-clear-btn" onclick="clearHistory()">Clear all</button>
+      <button class="hist-close-btn" onclick="closeHistory()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="hist-list" id="hist-list"></div>
+  </div>
 </div>
 
 <script>
-const $ = id => document.getElementById(id);
-let mode = 'graded';
-let imageBase64 = null;
-let mediaStream = null;
-let apiKey = localStorage.getItem('cg_api_key') || '';
+const $=id=>document.getElementById(id);
+let mode='graded', imageBase64=null, mediaStream=null;
+let apiKey=localStorage.getItem('cg_api_key')||'';
 
-function init() {
-  if (apiKey) {
-    $('setup-card').classList.add('hidden');
-    $('key-mgmt').classList.remove('hidden');
+// ── HISTORY ──────────────────────────────────────────────
+const HIST_KEY='cg_history_v2';
+function loadHistory(){try{return JSON.parse(localStorage.getItem(HIST_KEY)||'[]')}catch{return[]}}
+function saveHistory(h){try{localStorage.setItem(HIST_KEY,JSON.stringify(h.slice(0,50)))}catch{}}
+function addToHistory(entry){
+  const h=loadHistory();
+  h.unshift({...entry, id:Date.now()});
+  saveHistory(h);
+  updateHistBadge();
+}
+function updateHistBadge(){
+  const h=loadHistory();
+  $('hist-btn').innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> History${h.length?` (${h.length})`:''}`;
+}
+function openHistory(){
+  const h=loadHistory();
+  const list=$('hist-list');
+  if(!h.length){list.innerHTML='<div class="hist-empty">No scans yet. Scan a card to get started.</div>';}
+  else{
+    list.innerHTML=h.map(item=>`
+      <div class="hist-item" onclick="loadHistoryItem(${item.id})">
+        ${item.thumb?`<img class="hist-thumb" src="${item.thumb}" alt="${item.cardName}" loading="lazy" />`:`<div class="hist-thumb-placeholder">🃏</div>`}
+        <div class="hist-info">
+          <div class="hist-name">${item.cardName||'Unknown card'}</div>
+          <div class="hist-meta">${item.setName||''}${item.grade?' · '+(item.gradingCompany||'')+(item.mode==='graded'?' Grade ':' ~')+(item.grade||''):''}${item.scannedAt?' · '+item.scannedAt:''}</div>
+        </div>
+        ${item.marketValue?`<span class="hist-price">$${Math.round(item.marketValue)}</span>`:''}
+        ${item.mode==='raw'?`<span class="hist-raw-badge">RAW</span>`:`<span class="hist-badge">${item.gradingCompany||''}${item.grade?' '+item.grade:''}</span>`}
+      </div>`).join('');
+  }
+  $('hist-overlay').classList.remove('hidden');
+}
+function closeHistory(){$('hist-overlay').classList.add('hidden')}
+function handleOverlayClick(e){if(e.target===$('hist-overlay'))closeHistory()}
+function clearHistory(){
+  if(!confirm('Clear all scan history?'))return;
+  localStorage.removeItem(HIST_KEY);
+  closeHistory();
+  updateHistBadge();
+}
+const historyItems={};
+function loadHistoryItem(id){
+  const h=loadHistory();
+  const item=h.find(x=>x.id===id);
+  if(!item)return;
+  closeHistory();
+  resetToUpload();
+  // re-render from cached results
+  if(item.cachedCard && item.cachedPricing){
+    imageBase64=item.rawBase64||null;
+    if(item.thumb){$('prev-thumb').src=item.thumb;$('prev-bar').classList.remove('hidden');}
+    hide('upload-section','status-section','error-section');
+    if(item.mode==='graded') renderGraded(item.cachedCard, item.cachedPricing, item.thumb);
+    else renderRaw(item.cachedCard, item.cachedPricing, item.thumb);
+    show('results-section');
   }
 }
 
-function saveKey() {
-  const val = $('api-key-input').value.trim();
-  if (!val.startsWith('sk-')) { alert('Please enter a valid Anthropic API key starting with sk-ant-'); return; }
-  apiKey = val;
-  localStorage.setItem('cg_api_key', apiKey);
+// ── INIT ────────────────────────────────────────────────
+function init(){
+  if(apiKey){$('setup-card').classList.add('hidden');$('key-mgmt').classList.remove('hidden');}
+  updateHistBadge();
+  $('key-mgmt').style.display='';
+}
+function saveKey(){
+  const val=$('api-key-input').value.trim();
+  if(!val.startsWith('sk-')){alert('Please enter a valid Anthropic API key starting with sk-ant-');return;}
+  apiKey=val; localStorage.setItem('cg_api_key',apiKey);
   $('setup-card').classList.add('hidden');
   $('key-mgmt').classList.remove('hidden');
+  $('key-mgmt').style.display='';
 }
-
-function clearKey() {
-  if (!confirm('Remove your saved API key from this browser?')) return;
-  apiKey = '';
-  localStorage.removeItem('cg_api_key');
-  $('api-key-input').value = '';
+function clearKey(){
+  if(!confirm('Remove your saved API key?'))return;
+  apiKey=''; localStorage.removeItem('cg_api_key');
+  $('api-key-input').value='';
   $('key-mgmt').classList.add('hidden');
   $('setup-card').classList.remove('hidden');
 }
-
-function setMode(m) {
-  mode = m;
-  $('mode-graded').classList.toggle('active', m === 'graded');
-  $('mode-raw').classList.toggle('active', m === 'raw');
-  $('cap-title').textContent = m === 'graded' ? 'Scan your graded card' : 'Scan your raw card';
-  $('scan-label').textContent = m === 'graded' ? 'Scan & Get Pricing' : 'Scan, Grade & Price';
+function setMode(m){
+  mode=m;
+  $('mode-graded').classList.toggle('active',m==='graded');
+  $('mode-raw').classList.toggle('active',m==='raw');
+  $('cap-title').textContent=m==='graded'?'Scan your graded card':'Scan your raw card';
+  $('scan-label').textContent=m==='graded'?'Scan & Get Pricing':'Scan, Grade & Price';
   resetToUpload();
 }
 
-function fmtBytes(b) {
-  if (!b) return '';
-  if (b < 1024) return b + ' B';
-  if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
-  return (b/1048576).toFixed(1) + ' MB';
+// ── IMAGE HANDLING ───────────────────────────────────────
+function fmtBytes(b){
+  if(!b)return'';
+  if(b<1024)return b+' B';
+  if(b<1048576)return(b/1024).toFixed(1)+' KB';
+  return(b/1048576).toFixed(1)+' MB';
 }
-
-function setImage(dataUrl, name, size) {
-  imageBase64 = dataUrl.split(',')[1];
-  $('prev-thumb').src = dataUrl;
-  $('prev-name').textContent = name || 'photo.jpg';
-  $('prev-sz').textContent = fmtBytes(size);
+function setImage(dataUrl,name,size){
+  imageBase64=dataUrl.split(',')[1];
+  $('prev-thumb').src=dataUrl;
+  $('prev-name').textContent=name||'photo.jpg';
+  $('prev-sz').textContent=fmtBytes(size);
   $('prev-bar').classList.remove('hidden');
-  $('scan-btn').disabled = false;
-  $('upload-section').classList.remove('hidden');
+  $('scan-btn').disabled=false;
+  show('upload-section');
 }
-
-$('file-input').addEventListener('change', e => {
-  const f = e.target.files[0];
-  if (!f) return;
-  const r = new FileReader();
-  r.onload = ev => setImage(ev.target.result, f.name, f.size);
+$('file-input').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>setImage(ev.target.result,f.name,f.size);
   r.readAsDataURL(f);
 });
-
-const dz = $('drop-zone');
-dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
-dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
-dz.addEventListener('drop', e => {
-  e.preventDefault(); dz.classList.remove('drag-over');
-  const f = e.dataTransfer.files[0]; if (!f) return;
-  const r = new FileReader();
-  r.onload = ev => setImage(ev.target.result, f.name, f.size);
+const dz=$('drop-zone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
+dz.addEventListener('drop',e=>{
+  e.preventDefault();dz.classList.remove('drag-over');
+  const f=e.dataTransfer.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>setImage(ev.target.result,f.name,f.size);
   r.readAsDataURL(f);
 });
-
-$('rm-btn').addEventListener('click', () => {
-  imageBase64 = null; $('file-input').value = '';
+$('rm-btn').addEventListener('click',()=>{
+  imageBase64=null;$('file-input').value='';
   $('prev-bar').classList.add('hidden');
-  $('scan-btn').disabled = true;
+  $('scan-btn').disabled=true;
 });
-
-$('open-cam-btn').addEventListener('click', openCamera);
-
-async function openCamera() {
-  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    showErr('Camera not available on this device/browser. Please use the file picker instead.'); return;
-  }
-  try {
-    mediaStream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } }
-    });
-    $('cam-video').srcObject = mediaStream;
-    $('cam-section').classList.remove('hidden');
-    $('upload-section').classList.add('hidden');
+$('open-cam-btn').addEventListener('click',openCamera);
+async function openCamera(){
+  if(!navigator.mediaDevices?.getUserMedia){showErr('Camera not available. Use the file picker instead.');return;}
+  try{
+    mediaStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}}});
+    $('cam-video').srcObject=mediaStream;
+    show('cam-section');
+    hide('upload-section');
     $('prev-bar').classList.add('hidden');
-    $('scan-btn').disabled = true;
-  } catch (err) {
-    showErr('Camera access denied. Please allow camera permissions and try again, or use the file picker above.');
-  }
+    $('scan-btn').disabled=true;
+  }catch(err){showErr('Camera access denied. Allow camera permissions or use the file picker.');}
 }
-
-$('cam-wrap').addEventListener('click', capturePhoto);
-$('cam-wrap').addEventListener('touchend', e => { e.preventDefault(); capturePhoto(); });
-
-function capturePhoto() {
-  const video = $('cam-video');
-  const canvas = $('snap');
-  const w = video.videoWidth || 1280;
-  const h = video.videoHeight || 720;
-  canvas.width = w; canvas.height = h;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(video, 0, 0, w, h);
-  const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+$('cam-wrap').addEventListener('click',capturePhoto);
+$('cam-wrap').addEventListener('touchend',e=>{e.preventDefault();capturePhoto();});
+function capturePhoto(){
+  const video=$('cam-video');
+  const canvas=$('snap');
+  const w=video.videoWidth||1280, h=video.videoHeight||720;
+  canvas.width=w; canvas.height=h;
+  canvas.getContext('2d').drawImage(video,0,0,w,h);
+  const dataUrl=canvas.toDataURL('image/jpeg',0.85);
   stopCamera();
-  setImage(dataUrl, 'camera-photo.jpg', 0);
+  setImage(dataUrl,'camera-photo.jpg',0);
 }
-
-$('close-cam-btn').addEventListener('click', e => { e.stopPropagation(); stopCamera(); $('upload-section').classList.remove('hidden'); });
-
-function stopCamera() {
-  if (mediaStream) { mediaStream.getTracks().forEach(t => t.stop()); mediaStream = null; }
-  $('cam-section').classList.add('hidden');
+$('close-cam-btn').addEventListener('click',e=>{e.stopPropagation();stopCamera();show('upload-section');});
+function stopCamera(){
+  if(mediaStream){mediaStream.getTracks().forEach(t=>t.stop());mediaStream=null;}
+  hide('cam-section');
 }
-
-$('retry-btn').addEventListener('click', resetToUpload);
-
-function resetToUpload() {
-  $('error-section').classList.add('hidden');
-  $('results-section').classList.add('hidden');
-  $('status-section').classList.add('hidden');
-  $('results-section').innerHTML = '';
-  $('upload-section').classList.remove('hidden');
+$('retry-btn').addEventListener('click',resetToUpload);
+function resetToUpload(){
+  hide('error-section','results-section','status-section');
+  $('results-section').innerHTML='';
+  show('upload-section');
 }
-
-function setStatus(msg) { $('status-text').innerHTML = msg; }
-
-function showErr(msg) {
-  $('status-section').classList.add('hidden');
-  $('err-text').textContent = msg;
-  $('error-section').classList.remove('hidden');
+function setStatus(msg){$('status-text').innerHTML=msg;}
+function showErr(msg){
+  hide('status-section');
+  $('err-text').textContent=msg;
+  show('error-section');
 }
+function hide(...ids){ids.forEach(id=>$(id)&&$(id).classList.add('hidden'))}
+function show(...ids){ids.forEach(id=>$(id)&&$(id).classList.remove('hidden'))}
 
-function hide(...ids) { ids.forEach(id => $(id).classList.add('hidden')); }
-function show(...ids) { ids.forEach(id => $(id).classList.remove('hidden')); }
-
-$('scan-btn').addEventListener('click', async () => {
-  if (!imageBase64) return;
-  if (!apiKey) { alert('Please enter your Anthropic API key first.'); $('setup-card').classList.remove('hidden'); return; }
-  hide('upload-section', 'prev-bar', 'error-section', 'results-section');
-  $('results-section').innerHTML = '';
-  show('status-section');
-  try {
-    mode === 'graded' ? await runGraded() : await runRaw();
-  } catch (e) {
-    showErr(e.message || 'An unexpected error occurred. Please try again.');
+// ── API CALL WITH RETRY ──────────────────────────────────
+async function callClaude(messages, useWebSearch, retries=3){
+  const body={model:'claude-sonnet-4-5', max_tokens:1500, messages};
+  if(useWebSearch) body.tools=[{type:'web_search_20250305',name:'web_search'}];
+  for(let attempt=0; attempt<retries; attempt++){
+    if(attempt>0){
+      const wait=1500*(attempt);
+      setStatus(`<strong>Rate limit hit — retrying in ${Math.round(wait/1000)}s...</strong>`);
+      await new Promise(r=>setTimeout(r,wait));
+    }
+    try{
+      const resp=await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+        body:JSON.stringify(body)
+      });
+      if(resp.status===429){
+        if(attempt===retries-1) throw new Error('Rate limit reached. Please wait 30 seconds and try again.');
+        continue;
+      }
+      if(!resp.ok){
+        const err=await resp.json().catch(()=>({}));
+        const msg=err.error?.message||('API error '+resp.status);
+        if(resp.status===401) throw new Error('Invalid API key. Please check your key in Settings.');
+        throw new Error(msg);
+      }
+      const data=await resp.json();
+      return data.content.map(b=>b.text||'').join('');
+    }catch(e){
+      if(e.message.includes('Invalid API key')||e.message.includes('API error')) throw e;
+      if(attempt===retries-1) throw e;
+    }
   }
+}
+
+function parseJSON(text){
+  const start=text.indexOf('{'), end=text.lastIndexOf('}');
+  if(start===-1||end===-1) throw new Error('No JSON in response');
+  return JSON.parse(text.slice(start,end+1));
+}
+
+// ── SCAN BUTTON ──────────────────────────────────────────
+$('scan-btn').addEventListener('click',async()=>{
+  if(!imageBase64)return;
+  if(!apiKey){alert('Please enter your Anthropic API key first.');show('setup-card');return;}
+  hide('upload-section','prev-bar','error-section','results-section');
+  $('results-section').innerHTML='';
+  show('status-section');
+  try{
+    mode==='graded'?await runGraded():await runRaw();
+  }catch(e){showErr(e.message||'Unexpected error. Please try again.');}
 });
 
-async function callClaude(messages, useWebSearch) {
-  const body = { model: 'claude-sonnet-4-5', max_tokens: 1200, messages };
-  if (useWebSearch) body.tools = [{ type: 'web_search_20250305', name: 'web_search' }];
-  const resp = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-    body: JSON.stringify(body)
+// ── GRADED FLOW (single combined prompt) ─────────────────
+async function runGraded(){
+  setStatus('<strong>Step 1/2</strong> — Reading card & grading label...');
+  const identText=await callClaude([{
+    role:'user',
+    content:[
+      {type:'image',source:{type:'base64',media_type:'image/jpeg',data:imageBase64}},
+      {type:'text',text:`Analyze this graded trading card image carefully. Extract every visible detail from the card and grading label.
+Respond with ONLY a valid JSON object — absolutely no markdown, no code fences, no explanation:
+{"cardName":"full card name","setName":"set or expansion or null","cardNumber":"number if visible or null","year":"year or null","game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","gradingCompany":"PSA|BGS|CGC|Other","grade":"e.g. 10","certNumber":"cert number if visible or null","variety":"e.g. Holo 1st Edition or null","fullSearchQuery":"optimized eBay search e.g. PSA 10 Charizard Base Set Holo 1st Edition"}`}
+    ]
+  }], false);
+
+  let card;
+  try{card=parseJSON(identText);}
+  catch{throw new Error('Could not read card details. Please ensure the image is clear and shows the grading label.');}
+  if(!card.cardName||card.cardName.toLowerCase()==='unknown') throw new Error('Could not identify this card. Try a clearer, well-lit photo.');
+
+  setStatus('<strong>Step 2/2</strong> — Searching live 30-day sales for '+card.cardName+'...');
+
+  // Search specifically for last 30 days of eBay sold listings
+  const searchQuery=card.fullSearchQuery||`${card.gradingCompany} ${card.grade} ${card.cardName}`;
+  const priceText=await callClaude([{
+    role:'user',
+    content:`Search eBay completed/sold listings for the LAST 30 DAYS for this exact graded card: "${searchQuery}"
+Also search 130point.com or mavin.io for recent sales data.
+Card details: ${card.cardName}, ${card.setName||''}, ${card.gradingCompany} grade ${card.grade}${card.variety?', '+card.variety:''}
+
+For each sale found, try to get the direct eBay listing URL (format: https://www.ebay.com/itm/ITEMNUMBER).
+
+Respond ONLY with a valid JSON object, no markdown:
+{"marketValue":125.00,"lowPrice":90.00,"highPrice":200.00,"trend":"up|down|stable","trendPercent":12,"recentSales":[{"price":145.00,"date":"May 3 2025","platform":"eBay","title":"PSA 10 Charizard Base Set Holo","url":"https://www.ebay.com/itm/123456789"},{"price":130.00,"date":"Apr 28 2025","platform":"eBay","title":"listing title","url":null}],"totalSalesFound":8,"marketAnalysis":"2-3 sentence market analysis for this specific card and grade","confidence":"high|medium|low"}`
+  }], true);
+
+  let pricing;
+  try{pricing=parseJSON(priceText);}
+  catch{pricing={marketValue:null,lowPrice:null,highPrice:null,trend:'stable',trendPercent:0,recentSales:[],totalSalesFound:0,marketAnalysis:'Live pricing searched. Check the marketplace links below for current sales.',confidence:'low'};}
+
+  hide('status-section');
+  const thumbSrc=$('prev-thumb').src;
+  renderGraded(card,pricing,thumbSrc);
+
+  // Save to history
+  addToHistory({
+    mode:'graded',
+    cardName:card.cardName,
+    setName:card.setName,
+    gradingCompany:card.gradingCompany,
+    grade:card.grade,
+    marketValue:pricing.marketValue,
+    thumb:thumbSrc,
+    scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),
+    cachedCard:card,
+    cachedPricing:pricing
   });
-  if (!resp.ok) {
-    const err = await resp.json().catch(() => ({}));
-    const msg = err.error?.message || ('API error ' + resp.status);
-    if (resp.status === 401) throw new Error('Invalid API key. Please check your key and try again.');
-    if (resp.status === 429) throw new Error('Rate limit reached. Please wait a moment and try again.');
-    throw new Error(msg);
-  }
-  const data = await resp.json();
-  return data.content.map(b => b.text || '').join('');
 }
 
-function parseJSON(text) {
-  const cleaned = text.replace(/```json[\s\S]*?```/g, m => m.slice(7, -3)).replace(/```[\s\S]*?```/g, m => m.slice(3, -3)).trim();
-  const start = cleaned.indexOf('{');
-  const end = cleaned.lastIndexOf('}');
-  if (start === -1 || end === -1) throw new Error('No JSON found');
-  return JSON.parse(cleaned.slice(start, end + 1));
-}
+// ── RAW FLOW (single combined prompt using web search) ────
+async function runRaw(){
+  setStatus('<strong>Step 1/2</strong> — Identifying card and inspecting condition...');
 
-async function runGraded() {
-  setStatus('<strong>Step 1/3</strong> — Reading card details...');
-
-  const identText = await callClaude([{
-    role: 'user',
-    content: [
-      { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: imageBase64 } },
-      { type: 'text', text: 'Analyze this graded trading card image. Extract all visible info. Respond ONLY with a valid JSON object — no markdown fences, no extra text:\n{"cardName":"full card name","setName":"set/expansion name or null","cardNumber":"# if visible or null","year":"year or null","game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","gradingCompany":"PSA|BGS|CGC|Other","grade":"e.g. 10 or 9.5","certNumber":"cert # if visible or null","variety":"e.g. Holo 1st Edition or null","fullSearchQuery":"best eBay search string e.g. PSA 10 Charizard Base Set Holo 1st Edition"}' }
+  // Step 1: vision-only identification (no web search, so no rate limit pressure)
+  const identText=await callClaude([{
+    role:'user',
+    content:[
+      {type:'image',source:{type:'base64',media_type:'image/jpeg',data:imageBase64}},
+      {type:'text',text:`Analyze this raw (ungraded) trading card extremely carefully. Examine every detail of the card's physical condition.
+Respond with ONLY a valid JSON object — no markdown, no code fences, no extra text whatsoever:
+{"cardName":"full name","setName":"set name or null","cardNumber":"number or null","year":"year or null","game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","variety":"e.g. Holo 1st Edition or null","fullSearchQuery":"eBay search for raw card e.g. Charizard Base Set Holo 1st Edition raw ungraded","condition":{"centering":"Excellent|Good|Moderate|Off-center","corners":"Sharp|Minor Wear|Moderate Wear|Rounded","edges":"Clean|Minor Chips|Moderate Chips|Heavy Damage","surface":"Clean|Minor Scratches|Moderate Scratches|Heavy Scratches"},"psaGrade":{"grade":"1-10","confidence":"high|medium|low","reasoning":"one sentence"},"bgsGrade":{"grade":"1-10 in .5 steps","confidence":"high|medium|low","reasoning":"one sentence"},"cgcGrade":{"grade":"1-10 in .5 steps","confidence":"high|medium|low","reasoning":"one sentence"},"gradingNotes":"2 sentences on condition and whether submitting is worthwhile"}`}
     ]
   }], false);
 
   let card;
-  try { card = parseJSON(identText); }
-  catch { throw new Error('Could not read card details. Please ensure the image is clear and shows the grading label.'); }
-  if (!card.cardName || card.cardName.toLowerCase() === 'unknown') throw new Error('Could not identify this card. Please try a clearer, well-lit photo.');
+  try{card=parseJSON(identText);}
+  catch{throw new Error('Could not analyze this card. Try a clearer, well-lit photo with the card filling the frame.');}
+  if(!card.cardName||card.cardName.toLowerCase()==='unknown') throw new Error('Could not identify the card. Try a clearer image.');
 
-  setStatus('<strong>Step 2/3</strong> — Searching live sales for ' + card.cardName + ' ' + (card.gradingCompany || '') + ' ' + (card.grade || '') + '...');
+  setStatus('<strong>Step 2/2</strong> — Searching raw card market prices for '+card.cardName+'...');
 
-  const priceText = await callClaude([{
-    role: 'user',
-    content: 'Search eBay sold listings and card pricing sites for the latest sales of this graded card: "' + card.fullSearchQuery + '". Game: ' + card.game + '. Grading: ' + card.gradingCompany + ' ' + card.grade + '. Respond ONLY with a valid JSON object — no markdown:\n{"marketValue":125.00,"lowPrice":90.00,"highPrice":180.00,"trend":"up","trendPercent":12,"recentSales":[{"price":125,"date":"Apr 2025","platform":"eBay","title":"short listing title"}],"totalSalesFound":15,"marketAnalysis":"2-3 sentence analysis","confidence":"high"}'
+  // Step 2: web search for pricing (separate call, giving the API a moment to breathe)
+  await new Promise(r=>setTimeout(r,800));
+  const priceText=await callClaude([{
+    role:'user',
+    content:`Search eBay completed sales for raw/ungraded versions of this trading card sold in the last 30-60 days: "${card.fullSearchQuery}"
+Card: ${card.cardName}, Set: ${card.setName||'unknown'}, Game: ${card.game}${card.variety?', Variant: '+card.variety:''}
+
+Look for raw, ungraded copies — exclude PSA/BGS/CGC graded copies from the pricing.
+For each sale, try to get the direct eBay item URL.
+
+Respond ONLY with a valid JSON object, no markdown:
+{"marketValue":40.00,"lowPrice":25.00,"highPrice":65.00,"trend":"up|down|stable","trendPercent":5,"recentSales":[{"price":42.00,"date":"May 2 2025","platform":"eBay","title":"Charizard Base Set Holo raw NM","url":"https://www.ebay.com/itm/123456789"},{"price":38.00,"date":"Apr 25 2025","platform":"eBay","title":"listing title","url":null}],"totalSalesFound":12,"marketAnalysis":"2-3 sentences about raw card market","gradingROI":"one sentence on whether grading adds enough value to be worth it","confidence":"high|medium|low"}`
   }], true);
 
   let pricing;
-  try { pricing = parseJSON(priceText); }
-  catch { pricing = { marketValue: null, lowPrice: null, highPrice: null, trend: 'stable', trendPercent: 0, recentSales: [], totalSalesFound: 0, marketAnalysis: 'Pricing data searched. Check the marketplace links below for current sales.', confidence: 'low' }; }
+  try{pricing=parseJSON(priceText);}
+  catch{pricing={marketValue:null,lowPrice:null,highPrice:null,trend:'stable',trendPercent:0,recentSales:[],totalSalesFound:0,marketAnalysis:'Pricing searched. Check marketplace links below.',gradingROI:'',confidence:'low'};}
 
-  setStatus('<strong>Step 3/3</strong> — Building your report...');
-  await new Promise(r => setTimeout(r, 300));
   hide('status-section');
-  renderGraded(card, pricing);
+  const thumbSrc=$('prev-thumb').src;
+  renderRaw(card,pricing,thumbSrc);
+
+  addToHistory({
+    mode:'raw',
+    cardName:card.cardName,
+    setName:card.setName,
+    grade:card.psaGrade?.grade,
+    marketValue:pricing.marketValue,
+    thumb:thumbSrc,
+    scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),
+    cachedCard:card,
+    cachedPricing:pricing
+  });
 }
 
-async function runRaw() {
-  setStatus('<strong>Step 1/3</strong> — Identifying card and assessing condition...');
-
-  const identText = await callClaude([{
-    role: 'user',
-    content: [
-      { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: imageBase64 } },
-      { type: 'text', text: 'Analyze this raw (ungraded) trading card very carefully — inspect centering, corners, edges, and surface. Respond ONLY with a valid JSON object — no markdown:\n{"cardName":"full name","setName":"set name or null","cardNumber":"# or null","year":"year or null","game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","variety":"e.g. Holo 1st Edition or null","fullSearchQuery":"eBay search for raw version e.g. Charizard Base Set Holo raw","condition":{"centering":"Excellent|Good|Moderate|Off-center","corners":"Sharp|Minor Wear|Moderate Wear|Rounded","edges":"Clean|Minor Chips|Moderate Chips|Heavy Damage","surface":"Clean|Minor Scratches|Moderate Scratches|Heavy Scratches"},"psaGrade":{"grade":"1-10","confidence":"high|medium|low","reasoning":"brief reason"},"bgsGrade":{"grade":"1-10 in .5 steps","confidence":"high|medium|low","reasoning":"brief reason"},"cgcGrade":{"grade":"1-10 in .5 steps","confidence":"high|medium|low","reasoning":"brief reason"},"gradingNotes":"2-3 sentences on condition and submission worthiness"}' }
-    ]
-  }], false);
-
-  let card;
-  try { card = parseJSON(identText); }
-  catch { throw new Error('Could not analyze this card. Please try a clearer, well-lit photo.'); }
-  if (!card.cardName || card.cardName.toLowerCase() === 'unknown') throw new Error('Could not identify the card. Please try a clearer image.');
-
-  setStatus('<strong>Step 2/3</strong> — Searching raw card prices for ' + card.cardName + '...');
-
-  const priceText = await callClaude([{
-    role: 'user',
-    content: 'Search eBay sold listings for RAW (ungraded) sales of this card: "' + card.fullSearchQuery + '". Game: ' + card.game + '. Also check if grading it would significantly increase value. Respond ONLY with a valid JSON object — no markdown:\n{"marketValue":40.00,"lowPrice":25.00,"highPrice":65.00,"trend":"stable","trendPercent":0,"recentSales":[{"price":40,"date":"Apr 2025","platform":"eBay","title":"short title"}],"totalSalesFound":20,"marketAnalysis":"2-3 sentence market analysis","gradingROI":"sentence on whether grading is worth it financially","confidence":"high"}'
-  }], true);
-
-  let pricing;
-  try { pricing = parseJSON(priceText); }
-  catch { pricing = { marketValue: null, lowPrice: null, highPrice: null, trend: 'stable', trendPercent: 0, recentSales: [], totalSalesFound: 0, marketAnalysis: 'Pricing searched. Check marketplace links below.', gradingROI: '', confidence: 'low' }; }
-
-  setStatus('<strong>Step 3/3</strong> — Building report...');
-  await new Promise(r => setTimeout(r, 300));
-  hide('status-section');
-  renderRaw(card, pricing);
+// ── RENDER HELPERS ───────────────────────────────────────
+function fmt(v){
+  if(v==null||isNaN(+v))return'N/A';
+  return'$'+parseFloat(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+}
+function gradeLabel(g){
+  const n=parseFloat(g);
+  if(isNaN(n))return'';
+  if(n>=9.5)return'Gem Mint';if(n>=9)return'Mint';if(n>=8)return'NM-Mint';
+  if(n>=7)return'Near Mint';if(n>=6)return'Excellent-Mint';if(n>=5)return'Excellent';
+  if(n>=4)return'VG-Excellent';return'Good or lower';
+}
+function gradeBarPct(g){const n=parseFloat(g);return isNaN(n)?0:Math.round((Math.min(n,10)/10)*100);}
+function dotClass(val){
+  if(!val)return'';const v=val.toLowerCase();
+  if(v.includes('sharp')||v.includes('clean')||v.includes('excellent'))return'dot-good';
+  if(v.includes('minor')||v.includes('moderate')||v.includes('off'))return'dot-ok';
+  return'dot-bad';
+}
+function trendHTML(pricing){
+  const tUp=pricing.trend==='up',tDn=pricing.trend==='down';
+  if(!tUp&&!tDn)return'<span class="trend-pill t-flat">Stable</span>';
+  const cls=tUp?'t-up':'t-down',sign=tUp?'+':'-',arrow=tUp?'↑':'↓';
+  return`<span class="trend-pill ${cls}">${arrow} ${sign}${pricing.trendPercent||0}% 30d</span>`;
 }
 
-function fmt(v) {
-  if (v == null || isNaN(+v)) return 'N/A';
-  return '$' + parseFloat(v).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-}
-
-function gradeLabel(g) {
-  const n = parseFloat(g);
-  if (isNaN(n)) return '';
-  if (n >= 9.5) return 'Gem Mint';
-  if (n >= 9) return 'Mint';
-  if (n >= 8) return 'NM-Mint';
-  if (n >= 7) return 'Near Mint';
-  if (n >= 6) return 'Excellent-Mint';
-  if (n >= 5) return 'Excellent';
-  if (n >= 4) return 'VG-Excellent';
-  return 'Good or lower';
-}
-
-function gradeBarPct(g) {
-  const n = parseFloat(g);
-  return isNaN(n) ? 0 : Math.round((Math.min(n, 10) / 10) * 100);
-}
-
-function dotClass(val) {
-  if (!val) return '';
-  const v = val.toLowerCase();
-  if (v.includes('sharp') || v.includes('clean') || v.includes('excellent') || v.includes('good')) return 'dot-good';
-  if (v.includes('minor') || v.includes('slight') || v.includes('moderate') || v.includes('off')) return 'dot-ok';
-  return 'dot-bad';
-}
-
-function trendHTML(pricing) {
-  const tUp = pricing.trend === 'up', tDn = pricing.trend === 'down';
-  if (!tUp && !tDn) return '<span class="trend-pill t-flat">Stable</span>';
-  const cls = tUp ? 't-up' : 't-down';
-  const sign = tUp ? '+' : '-';
-  const arrow = tUp ? '↑' : '↓';
-  return `<span class="trend-pill ${cls}">${arrow} ${sign}${pricing.trendPercent}% 30d</span>`;
-}
-
-function salesRowsHTML(sales, badge, grade) {
-  return (sales || []).slice(0, 5).map(s => `
-    <div class="sale-row">
-      <span class="sale-plat">${s.platform || 'eBay'}</span>
-      <span class="${badge === 'raw' ? 'sale-raw-badge' : 'sale-badge'}">${badge === 'raw' ? 'RAW' : (grade || '')}</span>
-      <span class="sale-title-t">${s.title || ''}</span>
+function buildSaleRows(sales, badge, gradeLabel){
+  if(!sales||!sales.length)return'';
+  return sales.map(s=>{
+    const hasLink=s.url&&s.url.startsWith('http');
+    const rowContent=`
+      <span class="sale-plat">${s.platform||'eBay'}</span>
+      <span class="${badge==='raw'?'sale-raw-badge':'sale-badge'}">${badge==='raw'?'RAW':gradeLabel}</span>
+      <span class="sale-title-t">${s.title||''}</span>
       <span class="sale-price-t">${fmt(s.price)}</span>
-      <span class="sale-date-t">${s.date || ''}</span>
-    </div>`).join('');
+      ${hasLink?`<span class="sale-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg></span>`:'<span></span>'}`;
+    if(hasLink){
+      return`<a class="sale-row linked" href="${s.url}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">${rowContent}</a>`;
+    }
+    return`<div class="sale-row">${rowContent}</div>`;
+  }).join('');
 }
 
-function renderGraded(card, pricing) {
-  const q = encodeURIComponent(card.fullSearchQuery || (card.cardName + ' ' + card.gradingCompany + ' ' + card.grade));
-  const gradeBadge = (card.gradingCompany || 'PSA') + ' ' + (card.grade || '');
-  const details = [card.setName, card.cardNumber ? '#' + card.cardNumber : null, card.year, card.variety].filter(Boolean).join(' · ');
+function newScanHandler(){
+  resetToUpload();imageBase64=null;$('file-input').value='';
+  $('prev-bar').classList.add('hidden');$('scan-btn').disabled=true;
+}
 
-  $('results-section').innerHTML = `
+// ── RENDER GRADED ────────────────────────────────────────
+function renderGraded(card,pricing,thumbSrc){
+  const q=encodeURIComponent(card.fullSearchQuery||(card.cardName+' '+(card.gradingCompany||'PSA')+' '+(card.grade||'')));
+  const gradeBadge=(card.gradingCompany||'PSA')+' '+(card.grade||'');
+  const details=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' · ');
+  const thumb=thumbSrc||$('prev-thumb').src;
+
+  $('results-section').innerHTML=`
     <div class="id-card">
       <div class="thumb-wrap">
-        <img class="thumb-lg" src="${$('prev-thumb').src}" alt="${card.cardName}" />
-        <div class="grade-dot">${card.grade || '?'}</div>
+        <img class="thumb-lg" src="${thumb}" alt="${card.cardName}" />
+        <div class="grade-dot">${card.grade||'?'}</div>
       </div>
       <div class="card-meta">
-        <span class="game-tag">${card.game || 'Card'}</span>
+        <span class="game-tag">${card.game||'Card'}</span>
         <div class="card-name">${card.cardName}</div>
-        ${details ? `<div class="card-det">${details}</div>` : ''}
-        <div class="card-det">${card.gradingCompany || 'Graded'} · Grade ${card.grade || '?'}</div>
-        ${card.certNumber ? `<div class="cert-row"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2M12 12v4M10 14h4"/></svg> Cert #${card.certNumber}</div>` : ''}
+        ${details?`<div class="card-det">${details}</div>`:''}
+        <div class="card-det">${card.gradingCompany||'Graded'} · Grade ${card.grade||'?'}</div>
+        ${card.certNumber?`<div class="cert-row"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/></svg> Cert #${card.certNumber}</div>`:''}
       </div>
     </div>
 
@@ -672,79 +750,81 @@ function renderGraded(card, pricing) {
         ${trendHTML(pricing)}
       </div>
       <div class="p-card">
-        <div class="p-lbl">Recent low</div>
+        <div class="p-lbl">30-day low</div>
         <div class="p-val">${fmt(pricing.lowPrice)}</div>
-        <div class="p-sub">Last 90 days</div>
+        <div class="p-sub">Recent low</div>
       </div>
       <div class="p-card">
-        <div class="p-lbl">Recent high</div>
+        <div class="p-lbl">30-day high</div>
         <div class="p-val">${fmt(pricing.highPrice)}</div>
-        <div class="p-sub">Last 90 days</div>
+        <div class="p-sub">Recent high</div>
       </div>
       <div class="p-card">
         <div class="p-lbl">Sales found</div>
-        <div class="p-val" style="font-size:22px">${pricing.totalSalesFound || '—'}</div>
-        <div class="p-sub">${pricing.confidence === 'high' ? 'High confidence' : pricing.confidence === 'medium' ? 'Med. confidence' : 'Low confidence'}</div>
+        <div class="p-val" style="font-size:22px">${pricing.totalSalesFound||'—'}</div>
+        <div class="p-sub">${pricing.confidence==='high'?'High confidence':pricing.confidence==='medium'?'Med. confidence':'Low confidence'}</div>
       </div>
     </div>
 
-    ${(pricing.recentSales || []).length ? `
+    ${(pricing.recentSales||[]).length?`
     <div class="sec-card">
       <div class="sec-hdr">
-        <div class="sec-hdr-title">Recent sales</div>
-        <div class="sec-hdr-count">${pricing.recentSales.length} shown</div>
+        <div class="sec-hdr-title">Last 30 days · sold listings</div>
+        <div class="sec-hdr-count">${(pricing.recentSales||[]).length} sales · tap to verify</div>
       </div>
-      ${salesRowsHTML(pricing.recentSales, 'graded', gradeBadge)}
-    </div>` : ''}
+      ${buildSaleRows(pricing.recentSales,'graded',gradeBadge)}
+    </div>`:''}
 
-    ${pricing.marketAnalysis ? `<div class="analysis-box"><div class="an-title">Market analysis</div><div class="an-text">${pricing.marketAnalysis}</div></div>` : ''}
+    ${pricing.marketAnalysis?`<div class="analysis-box"><div class="an-title">Market analysis</div><div class="an-text">${pricing.marketAnalysis}</div></div>`:''}
 
     <div class="links-card">
       <div class="links-title">Marketplaces</div>
       <div class="chips">
-        <a class="chip" href="https://www.ebay.com/sch/i.html?_nkw=${q}&LH_Sold=1&LH_Complete=1" target="_blank">eBay Sold</a>
+        <a class="chip" href="https://www.ebay.com/sch/i.html?_nkw=${q}&LH_Sold=1&LH_Complete=1&LH_ItemCondition=3000" target="_blank">eBay Sold</a>
         <a class="chip" href="https://www.130point.com/sales/?query=${q}" target="_blank">130point</a>
+        <a class="chip" href="https://mavin.io/search?q=${q}&sold=1" target="_blank">Mavin</a>
         <a class="chip" href="https://www.pwccmarketplace.com/search?query=${encodeURIComponent(card.cardName)}" target="_blank">PWCC</a>
-        ${card.certNumber ? `<a class="chip" href="https://www.psacard.com/cert/${card.certNumber}" target="_blank">PSA Verify</a>` : ''}
+        ${card.certNumber?`<a class="chip" href="https://www.psacard.com/cert/${card.certNumber}" target="_blank">PSA Verify</a>`:''}
       </div>
     </div>
 
     <button class="sec-btn" id="new-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
       Scan another card
-    </button>
-  `;
+    </button>`;
   show('results-section');
-  $('new-btn').addEventListener('click', () => { resetToUpload(); imageBase64 = null; $('file-input').value = ''; $('prev-bar').classList.add('hidden'); $('scan-btn').disabled = true; });
+  $('new-btn').addEventListener('click',newScanHandler);
 }
 
-function renderRaw(card, pricing) {
-  const q = encodeURIComponent(card.fullSearchQuery || card.cardName);
-  const details = [card.setName, card.cardNumber ? '#' + card.cardNumber : null, card.year, card.variety].filter(Boolean).join(' · ');
-  const cond = card.condition || {};
-  const condItems = [
-    { lbl: 'Centering', val: cond.centering || 'N/A' },
-    { lbl: 'Corners', val: cond.corners || 'N/A' },
-    { lbl: 'Edges', val: cond.edges || 'N/A' },
-    { lbl: 'Surface', val: cond.surface || 'N/A' },
+// ── RENDER RAW ───────────────────────────────────────────
+function renderRaw(card,pricing,thumbSrc){
+  const q=encodeURIComponent(card.fullSearchQuery||card.cardName);
+  const details=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' · ');
+  const thumb=thumbSrc||$('prev-thumb').src;
+  const cond=card.condition||{};
+  const condItems=[
+    {lbl:'Centering',val:cond.centering||'N/A'},
+    {lbl:'Corners',val:cond.corners||'N/A'},
+    {lbl:'Edges',val:cond.edges||'N/A'},
+    {lbl:'Surface',val:cond.surface||'N/A'},
   ];
-  const companies = [
-    { label: 'PSA', data: card.psaGrade || {} },
-    { label: 'BGS', data: card.bgsGrade || {} },
-    { label: 'CGC', data: card.cgcGrade || {} },
+  const companies=[
+    {label:'PSA',data:card.psaGrade||{}},
+    {label:'BGS',data:card.bgsGrade||{}},
+    {label:'CGC',data:card.cgcGrade||{}},
   ];
 
-  $('results-section').innerHTML = `
+  $('results-section').innerHTML=`
     <div class="id-card">
       <div class="thumb-wrap">
-        <img class="thumb-lg" src="${$('prev-thumb').src}" alt="${card.cardName}" />
+        <img class="thumb-lg" src="${thumb}" alt="${card.cardName}" />
         <div class="raw-dot">RAW</div>
       </div>
       <div class="card-meta">
         <span class="raw-tag">Ungraded</span>
         <div class="card-name">${card.cardName}</div>
-        ${details ? `<div class="card-det">${details}</div>` : ''}
-        <div class="card-det">${card.game || 'Trading Card'}</div>
+        ${details?`<div class="card-det">${details}</div>`:''}
+        <div class="card-det">${card.game||'Trading Card'}</div>
       </div>
     </div>
 
@@ -756,19 +836,19 @@ function renderRaw(card, pricing) {
         ${trendHTML(pricing)}
       </div>
       <div class="p-card">
-        <div class="p-lbl">Recent low</div>
+        <div class="p-lbl">30-day low</div>
         <div class="p-val">${fmt(pricing.lowPrice)}</div>
-        <div class="p-sub">Last 90 days</div>
+        <div class="p-sub">Recent low</div>
       </div>
       <div class="p-card">
-        <div class="p-lbl">Recent high</div>
+        <div class="p-lbl">30-day high</div>
         <div class="p-val">${fmt(pricing.highPrice)}</div>
-        <div class="p-sub">Last 90 days</div>
+        <div class="p-sub">Recent high</div>
       </div>
       <div class="p-card">
         <div class="p-lbl">Sales found</div>
-        <div class="p-val" style="font-size:22px">${pricing.totalSalesFound || '—'}</div>
-        <div class="p-sub">${pricing.confidence === 'high' ? 'High confidence' : pricing.confidence === 'medium' ? 'Med. confidence' : 'Low confidence'}</div>
+        <div class="p-val" style="font-size:22px">${pricing.totalSalesFound||'—'}</div>
+        <div class="p-sub">${pricing.confidence==='high'?'High confidence':pricing.confidence==='medium'?'Med. confidence':'Low confidence'}</div>
       </div>
     </div>
 
@@ -776,11 +856,11 @@ function renderRaw(card, pricing) {
       <div class="sec-hdr">
         <div class="sec-hdr-title">Predicted grades</div>
       </div>
-      ${companies.map(co => {
-        const g = co.data.grade || '?';
-        const pct = gradeBarPct(g);
-        const conf = co.data.confidence || 'low';
-        return `<div class="cg-row">
+      ${companies.map(co=>{
+        const g=co.data.grade||'?';
+        const pct=gradeBarPct(g);
+        const conf=co.data.confidence||'low';
+        return`<div class="cg-row">
           <span class="cg-logo">${co.label}</span>
           <span class="cg-grade-big">${g}</span>
           <div class="cg-bar-wrap">
@@ -793,29 +873,30 @@ function renderRaw(card, pricing) {
       <div class="cond-section">
         <div class="cond-section-title">Condition breakdown</div>
         <div class="cond-grid">
-          ${condItems.map(ci => `<div class="cond-item"><div class="cond-item-lbl">${ci.lbl}</div><div class="cond-item-val"><span class="dot ${dotClass(ci.val)}"></span>${ci.val}</div></div>`).join('')}
+          ${condItems.map(ci=>`<div class="cond-item"><div class="cond-item-lbl">${ci.lbl}</div><div class="cond-item-val"><span class="dot ${dotClass(ci.val)}"></span>${ci.val}</div></div>`).join('')}
         </div>
       </div>
     </div>
 
-    ${card.gradingNotes ? `<div class="analysis-box"><div class="an-title">Grading notes</div><div class="an-text">${card.gradingNotes}</div></div>` : ''}
-    ${pricing.gradingROI ? `<div class="analysis-box green"><div class="an-title">Grading ROI</div><div class="an-text">${pricing.gradingROI}</div></div>` : ''}
+    ${card.gradingNotes?`<div class="analysis-box"><div class="an-title">Grading notes</div><div class="an-text">${card.gradingNotes}</div></div>`:''}
+    ${pricing.gradingROI?`<div class="analysis-box green"><div class="an-title">Grading ROI</div><div class="an-text">${pricing.gradingROI}</div></div>`:''}
 
-    ${(pricing.recentSales || []).length ? `
+    ${(pricing.recentSales||[]).length?`
     <div class="sec-card">
       <div class="sec-hdr">
-        <div class="sec-hdr-title">Recent raw sales</div>
+        <div class="sec-hdr-title">Recent raw sales · tap to verify</div>
         <div class="sec-hdr-count">${pricing.recentSales.length} shown</div>
       </div>
-      ${salesRowsHTML(pricing.recentSales, 'raw', '')}
-    </div>` : ''}
+      ${buildSaleRows(pricing.recentSales,'raw','')}
+    </div>`:''}
 
-    ${pricing.marketAnalysis ? `<div class="analysis-box"><div class="an-title">Market analysis</div><div class="an-text">${pricing.marketAnalysis}</div></div>` : ''}
+    ${pricing.marketAnalysis?`<div class="analysis-box"><div class="an-title">Market analysis</div><div class="an-text">${pricing.marketAnalysis}</div></div>`:''}
 
     <div class="links-card">
       <div class="links-title">Marketplaces &amp; submit</div>
       <div class="chips">
         <a class="chip" href="https://www.ebay.com/sch/i.html?_nkw=${q}&LH_Sold=1&LH_Complete=1" target="_blank">eBay Sold</a>
+        <a class="chip" href="https://mavin.io/search?q=${q}&sold=1" target="_blank">Mavin</a>
         <a class="chip" href="https://www.130point.com/sales/?query=${q}" target="_blank">130point</a>
         <a class="chip" href="https://www.psacard.com/submission" target="_blank">Submit to PSA</a>
         <a class="chip" href="https://www.cgccomics.com/cards/submit/" target="_blank">Submit to CGC</a>
@@ -825,10 +906,9 @@ function renderRaw(card, pricing) {
     <button class="sec-btn" id="new-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
       Scan another card
-    </button>
-  `;
+    </button>`;
   show('results-section');
-  $('new-btn').addEventListener('click', () => { resetToUpload(); imageBase64 = null; $('file-input').value = ''; $('prev-bar').classList.add('hidden'); $('scan-btn').disabled = true; });
+  $('new-btn').addEventListener('click',newScanHandler);
 }
 
 init();
