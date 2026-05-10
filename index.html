@@ -11,45 +11,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap"/>
 <style>
-:root{
-  --red:#E24B4A;--bg:#f5f5f0;--sur:#fff;--sur2:#f0efea;
-  --bdr:rgba(0,0,0,.10);--bdr2:rgba(0,0,0,.18);
-  --tx:#1a1a18;--tx2:#6b6b67;--tx3:#a0a09c;
-  --ok-bg:#eaf3de;--ok-tx:#3b6d11;
-  --warn-bg:#faeeda;--warn-tx:#854f0b;
-  --err-bg:#fcebeb;--err-tx:#a32d2d;
-  --info-bg:#e6f1fb;--info-tx:#185fa5;
-  --r:12px;--rs:8px;
-}
-@media(prefers-color-scheme:dark){:root{
-  --bg:#141413;--sur:#1e1e1c;--sur2:#272725;
-  --bdr:rgba(255,255,255,.10);--bdr2:rgba(255,255,255,.18);
-  --tx:#f0f0ec;--tx2:#9a9a96;--tx3:#5a5a56;
-  --ok-bg:#173404;--ok-tx:#c0dd97;
-  --warn-bg:#412402;--warn-tx:#fac775;
-  --err-bg:#501313;--err-tx:#f09595;
-  --info-bg:#042c53;--info-tx:#85b7eb;
-}}
+:root{--red:#E24B4A;--bg:#f5f5f0;--sur:#fff;--sur2:#f0efea;--bdr:rgba(0,0,0,.10);--bdr2:rgba(0,0,0,.18);--tx:#1a1a18;--tx2:#6b6b67;--tx3:#a0a09c;--ok-bg:#eaf3de;--ok-tx:#3b6d11;--warn-bg:#faeeda;--warn-tx:#854f0b;--err-bg:#fcebeb;--err-tx:#a32d2d;--info-bg:#e6f1fb;--info-tx:#185fa5;--r:12px;--rs:8px}
+@media(prefers-color-scheme:dark){:root{--bg:#141413;--sur:#1e1e1c;--sur2:#272725;--bdr:rgba(255,255,255,.10);--bdr2:rgba(255,255,255,.18);--tx:#f0f0ec;--tx2:#9a9a96;--tx3:#5a5a56;--ok-bg:#173404;--ok-tx:#c0dd97;--warn-bg:#412402;--warn-tx:#fac775;--err-bg:#501313;--err-tx:#f09595;--info-bg:#042c53;--info-tx:#85b7eb}}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--tx);overscroll-behavior:none}
 body{display:flex;flex-direction:column}
-
+/* HEADER */
 .hdr{background:var(--sur);border-bottom:.5px solid var(--bdr);padding:11px 14px;display:flex;align-items:center;gap:9px;flex-shrink:0;position:sticky;top:0;z-index:20}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:1px;color:var(--tx)}
-.logo span{color:var(--red)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:23px;letter-spacing:1px;color:var(--tx)}.logo span{color:var(--red)}
 .hdr-sub{font-size:11px;color:var(--tx2)}
 .hist-btn{margin-left:auto;background:none;border:.5px solid var(--bdr2);border-radius:7px;padding:5px 9px;cursor:pointer;color:var(--tx2);display:flex;align-items:center;gap:4px;font-size:11px;font-family:'DM Sans',sans-serif;white-space:nowrap}
 .hist-btn svg{width:12px;height:12px;flex-shrink:0}
 .live-pill{background:var(--red);color:#fff;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;letter-spacing:.7px}
-
+/* TABS */
 .tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--sur);border-bottom:.5px solid var(--bdr);flex-shrink:0}
 .tab{padding:11px 8px;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;border:none;background:none;cursor:pointer;color:var(--tx2);border-bottom:2.5px solid transparent;display:flex;align-items:center;justify-content:center;gap:5px}
 .tab.on{color:var(--red);border-bottom-color:var(--red)}
 .tab svg{width:14px;height:14px;flex-shrink:0}
-
+/* BODY */
 .body{flex:1;overflow-y:auto;padding:13px;display:flex;flex-direction:column;gap:10px;padding-bottom:80px}
-
-/* API KEY — no class named key-bar to avoid CSS/hidden conflict */
+/* SETUP */
 .setup-card{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:15px}
 .setup-title{font-size:15px;font-weight:500;margin-bottom:5px}
 .setup-desc{font-size:12px;color:var(--tx2);line-height:1.6;margin-bottom:11px}
@@ -58,20 +39,25 @@ body{display:flex;flex-direction:column}
 .key-input{flex:1;padding:9px 11px;border:.5px solid var(--bdr2);border-radius:var(--rs);background:var(--sur2);color:var(--tx);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;min-width:0}
 .key-input:focus{border-color:var(--red)}
 .key-save-btn{padding:9px 14px;background:var(--red);color:#fff;border:none;border-radius:var(--rs);font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;flex-shrink:0}
-.saved-key-row{display:flex;align-items:center;gap:8px;background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:9px 13px}
-
-.drop-zone{background:var(--sur);border:1.5px dashed var(--bdr2);border-radius:var(--r);padding:26px 14px;text-align:center;position:relative;cursor:pointer;transition:border-color .2s}
+.saved-key-row{align-items:center;gap:8px;background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:9px 13px}
+/* UPLOAD */
+.drop-zone{background:var(--sur);border:1.5px dashed var(--bdr2);border-radius:var(--r);padding:22px 14px;text-align:center;position:relative;cursor:pointer;transition:border-color .2s}
 .drop-zone.drag-over{border-color:var(--red)}
 .drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.drop-icon{display:block;margin:0 auto 10px}
-.drop-icon svg{width:34px;height:34px;color:var(--tx2)}
+.drop-icon{display:block;margin:0 auto 8px}.drop-icon svg{width:30px;height:30px;color:var(--tx2)}
 .drop-title{font-size:14px;font-weight:500;margin-bottom:3px}
-.drop-sub{font-size:12px;color:var(--tx2);line-height:1.6}
+.drop-sub{font-size:12px;color:var(--tx2)}
 .drop-sub strong{color:var(--red);font-weight:500}
-
-.cam-open-btn{width:100%;padding:12px;background:var(--red);color:#fff;border:none;border-radius:var(--rs);font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:10px}
-.cam-open-btn svg{width:17px;height:17px;flex-shrink:0}
-
+.cam-btn{width:100%;padding:11px;background:var(--red);color:#fff;border:none;border-radius:var(--rs);font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:8px}
+.cam-btn svg{width:16px;height:16px;flex-shrink:0}
+/* BACK PHOTO STEP (raw only) */
+.back-step{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center}
+.back-step-title{font-size:14px;font-weight:500;margin-bottom:4px}
+.back-step-sub{font-size:12px;color:var(--tx2);margin-bottom:12px}
+.back-step-imgs{display:flex;gap:10px;justify-content:center;margin-bottom:12px}
+.back-step-thumb{width:60px;height:84px;border-radius:6px;object-fit:cover;border:.5px solid var(--bdr)}
+.back-step-ph{width:60px;height:84px;border-radius:6px;background:var(--sur2);border:1.5px dashed var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:22px}
+/* PREV BAR */
 .prev-bar{display:flex;align-items:center;gap:10px;background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:9px 11px}
 .prev-thumb{width:42px;height:58px;border-radius:5px;object-fit:cover;border:.5px solid var(--bdr);flex-shrink:0}
 .prev-info{flex:1;min-width:0}
@@ -79,129 +65,122 @@ body{display:flex;flex-direction:column}
 .prev-sz{font-size:11px;color:var(--tx2);margin-top:1px}
 .rm-btn{background:none;border:.5px solid var(--bdr);border-radius:5px;padding:5px 7px;cursor:pointer;color:var(--tx2);display:flex;align-items:center}
 .rm-btn svg{width:13px;height:13px}
-
+/* SCAN BTN */
 .scan-btn{width:100%;padding:13px;background:var(--red);color:#fff;border:none;border-radius:var(--rs);font-size:15px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .15s,transform .1s}
-.scan-btn:active{transform:scale(.99)}
-.scan-btn:disabled{opacity:.38;cursor:default}
-.scan-btn svg{width:17px;height:17px}
-
+.scan-btn:active{transform:scale(.99)}.scan-btn:disabled{opacity:.38;cursor:default}.scan-btn svg{width:16px;height:16px}
+/* STATUS */
 .status-box{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:13px 15px;display:flex;align-items:center;gap:11px}
 .spin{width:17px;height:17px;flex-shrink:0;border:2px solid var(--bdr2);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.status-text{font-size:13px;color:var(--tx2);line-height:1.5}
-.status-text strong{color:var(--tx);font-weight:500}
-
+.status-text{font-size:13px;color:var(--tx2);line-height:1.5}.status-text strong{color:var(--tx);font-weight:500}
+/* ERROR */
 .err-box{background:var(--err-bg);border:.5px solid rgba(163,45,45,.3);border-radius:var(--r);padding:11px 13px;display:flex;align-items:flex-start;gap:8px}
 .err-box svg{width:17px;height:17px;color:var(--err-tx);flex-shrink:0;margin-top:1px}
 .err-text{font-size:13px;color:var(--err-tx);line-height:1.5}
-
-/* CARD ANNOTATION CANVAS */
-.annotation-wrap{position:relative;border-radius:var(--r);overflow:hidden;background:var(--sur2);border:.5px solid var(--bdr)}
-.annotation-wrap canvas{display:block;width:100%;height:auto}
-.annotation-legend{padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px;border-top:.5px solid var(--bdr)}
-.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--tx2)}
-.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-
 /* RESULTS */
 .id-card{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:13px;display:flex;gap:11px;align-items:flex-start}
 .thumb-wrap{flex-shrink:0;position:relative}
-.thumb-lg{width:68px;height:95px;border-radius:6px;object-fit:cover;border:.5px solid var(--bdr)}
-.grade-dot{position:absolute;bottom:-7px;right:-7px;background:var(--red);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:14px;width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid var(--sur)}
-.raw-dot{position:absolute;bottom:-7px;right:-7px;background:#777;color:#fff;font-size:7px;font-weight:600;width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid var(--sur)}
+.thumb-lg{width:64px;height:90px;border-radius:6px;object-fit:cover;border:.5px solid var(--bdr)}
+.grade-dot{position:absolute;bottom:-6px;right:-6px;background:var(--red);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:13px;width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--sur)}
+.raw-dot{position:absolute;bottom:-6px;right:-6px;background:#777;color:#fff;font-size:7px;font-weight:600;width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--sur)}
 .card-meta{flex:1;min-width:0}
 .game-tag{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;padding:2px 7px;border-radius:20px;background:var(--info-bg);color:var(--info-tx);margin-bottom:4px}
 .raw-tag{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;padding:2px 7px;border-radius:20px;background:var(--sur2);color:var(--tx2);margin-bottom:4px}
 .card-name{font-size:16px;font-weight:500;line-height:1.3}
 .card-det{margin-top:3px;font-size:12px;color:var(--tx2);line-height:1.7}
-.cert-row{margin-top:7px;display:flex;align-items:center;gap:5px;font-size:11px;color:var(--tx2);background:var(--sur2);border-radius:5px;padding:4px 8px}
-
+.cert-row{margin-top:6px;display:flex;align-items:center;gap:5px;font-size:11px;color:var(--tx2);background:var(--sur2);border-radius:5px;padding:4px 8px}
+.edit-card-btn{margin-top:8px;background:none;border:.5px solid var(--bdr2);border-radius:6px;padding:5px 10px;font-size:11px;font-weight:500;color:var(--tx2);font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;gap:4px}
+.edit-card-btn svg{width:11px;height:11px}
+/* PRICE */
 .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .p-card{background:var(--sur2);border-radius:var(--rs);padding:11px 13px}
 .p-lbl{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .p-val{font-size:21px;font-weight:500;font-family:'Bebas Neue',sans-serif;letter-spacing:.4px}
 .p-sub{font-size:10px;color:var(--tx2);margin-top:2px}
 .trend-pill{display:inline-flex;align-items:center;gap:2px;font-size:10px;padding:2px 5px;border-radius:4px;margin-top:3px;font-weight:500}
-.t-up{background:var(--ok-bg);color:var(--ok-tx)}
-.t-dn{background:var(--err-bg);color:var(--err-tx)}
-.t-fl{background:var(--sur2);color:var(--tx2)}
-
-.verdict-card{border-radius:var(--r);padding:13px 14px;border:.5px solid var(--bdr)}
+.t-up{background:var(--ok-bg);color:var(--ok-tx)}.t-dn{background:var(--err-bg);color:var(--err-tx)}.t-fl{background:var(--sur2);color:var(--tx2)}
+/* VERDICT */
+.verdict-card{border-radius:var(--r);padding:12px 13px;border:.5px solid var(--bdr)}
 .verdict-card.yes{background:var(--ok-bg);border-color:rgba(99,153,34,.3)}
 .verdict-card.maybe{background:var(--warn-bg);border-color:rgba(186,117,23,.3)}
 .verdict-card.no{background:var(--err-bg);border-color:rgba(163,45,45,.3)}
-.verdict-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.verdict-icon{font-size:20px;flex-shrink:0}
+.verdict-top{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.verdict-icon{font-size:18px;flex-shrink:0}
 .verdict-title{font-size:13px;font-weight:500}
 .verdict-title.yes{color:var(--ok-tx)}.verdict-title.maybe{color:var(--warn-tx)}.verdict-title.no{color:var(--err-tx)}
-.verdict-body{font-size:12px;color:var(--tx2);line-height:1.6}
-
+.verdict-body{font-size:12px;color:var(--tx2);line-height:1.55}
+/* SECTIONS */
 .sec-card{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);overflow:hidden}
-.sec-hdr{padding:11px 13px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center;gap:6px}
+.sec-hdr{padding:10px 13px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center}
 .sec-hdr-title{font-size:13px;font-weight:500}
 .sec-hdr-sub{margin-left:auto;font-size:11px;color:var(--tx2)}
-
-.cg-row{padding:11px 13px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center;gap:9px}
-.cg-row:last-child{border-bottom:none}
+/* GRADE ROWS */
+.cg-row{padding:10px 13px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center;gap:9px}
+.cg-row:last-of-type{border-bottom:none}
 .cg-logo{font-size:11px;font-weight:600;color:var(--tx2);width:30px;flex-shrink:0}
-.cg-grade{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--red);flex-shrink:0;width:40px;line-height:1}
+.cg-grade{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--red);flex-shrink:0;width:38px;line-height:1}
 .cg-mid{flex:1;min-width:0}
-.cg-bar-bg{height:5px;background:var(--sur2);border-radius:3px;overflow:hidden;margin-bottom:3px}
+.cg-bar-bg{height:4px;background:var(--sur2);border-radius:3px;overflow:hidden;margin-bottom:3px}
 .cg-bar-fill{height:100%;background:var(--red);border-radius:3px}
-.cg-lbl{font-size:11px;color:var(--tx2)}
-.cg-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0}
-.cg-val{font-size:12px;font-weight:500;color:var(--tx)}
-.cg-val-lbl{font-size:10px;color:var(--tx2)}
+.cg-lbl{font-size:10px;color:var(--tx2)}
+.cg-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
+.cg-val{font-size:12px;font-weight:500;color:var(--tx)}.cg-val-lbl{font-size:10px;color:var(--tx2)}
 .conf-pill{font-size:9px;font-weight:500;padding:2px 5px;border-radius:3px}
 .conf-high{background:var(--ok-bg);color:var(--ok-tx)}.conf-med{background:var(--warn-bg);color:var(--warn-tx)}.conf-low{background:var(--err-bg);color:var(--err-tx)}
-
-.cond-sec{padding:11px 13px;border-top:.5px solid var(--bdr)}
+/* CONDITION */
+.cond-sec{padding:10px 13px;border-top:.5px solid var(--bdr)}
 .cond-title{font-size:10px;font-weight:500;color:var(--tx2);margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
 .cond-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
 .cond-item{background:var(--sur2);border-radius:5px;padding:7px 9px}
 .cond-lbl{font-size:10px;color:var(--tx2);margin-bottom:2px;text-transform:uppercase;letter-spacing:.4px}
 .cond-val{font-size:12px;font-weight:500;display:flex;align-items:center;gap:4px}
-.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.dot-g{background:#639922}.dot-o{background:#BA7517}.dot-b{background:#E24B4A}
-
-.info-box{background:var(--sur);border:.5px solid var(--bdr);border-left:3px solid var(--red);border-radius:var(--r);padding:11px 13px}
-.info-box.green{border-left-color:#1D9E75}
-.info-title{font-size:10px;font-weight:500;color:var(--tx2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
-.info-text{font-size:13px;color:var(--tx);line-height:1.65}
-
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}.dot-g{background:#639922}.dot-o{background:#BA7517}.dot-b{background:#E24B4A}
+/* ANNOTATION */
+.anno-img{width:100%;display:block}
+.anno-legend{padding:7px 12px;display:flex;flex-wrap:wrap;gap:5px;border-top:.5px solid var(--bdr)}
+.leg-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2)}
+.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+/* SALE ROWS */
 .sale-row{padding:9px 13px;border-bottom:.5px solid var(--bdr);display:grid;grid-template-columns:auto auto 1fr auto auto;align-items:center;gap:6px;text-decoration:none;color:inherit}
-.sale-row:last-child{border-bottom:none}
-a.sale-row:hover,a.sale-row:active{background:var(--sur2)}
-.s-plat{font-size:10px;color:var(--tx2)}
-.s-badge{font-size:9px;font-weight:600;padding:2px 4px;border-radius:3px;background:var(--red);color:#fff;white-space:nowrap}
+.sale-row:last-of-type{border-bottom:none}
+a.sale-row:active{background:var(--sur2)}
+.s-plat{font-size:10px;color:var(--tx2)}.s-badge{font-size:9px;font-weight:600;padding:2px 4px;border-radius:3px;background:var(--red);color:#fff;white-space:nowrap}
 .s-raw-badge{font-size:9px;font-weight:600;padding:2px 4px;border-radius:3px;background:var(--sur2);color:var(--tx2)}
-.s-title{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.s-price{font-size:13px;font-weight:500;white-space:nowrap}
-.s-ext{color:var(--tx3);display:flex;align-items:center}
-.s-ext svg{width:11px;height:11px}
-
-.links-card{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:11px 13px}
-.links-title{font-size:13px;font-weight:500;margin-bottom:7px}
+.s-title{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.s-price{font-size:13px;font-weight:500;white-space:nowrap}
+.s-ext{color:var(--tx3);display:flex;align-items:center}.s-ext svg{width:11px;height:11px}
+/* LINKS */
+.links-card{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:10px 13px}
+.links-title{font-size:12px;font-weight:500;margin-bottom:7px;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px}
 .chips{display:flex;flex-wrap:wrap;gap:5px}
 .chip{display:inline-flex;align-items:center;border:.5px solid var(--bdr2);border-radius:20px;padding:5px 11px;font-size:12px;color:var(--tx);text-decoration:none;background:var(--sur2);font-family:'DM Sans',sans-serif}
-
+/* SEC BTN */
 .sec-btn{width:100%;padding:11px;background:none;border:.5px solid var(--bdr2);border-radius:var(--rs);font-size:13px;font-weight:500;color:var(--tx);font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
 .sec-btn svg{width:14px;height:14px}
-
-/* Floating scan again button */
-.fab{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;border:none;border-radius:30px;padding:13px 28px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;gap:7px;box-shadow:0 4px 16px rgba(226,75,74,.45);z-index:15;white-space:nowrap}
-.fab svg{width:16px;height:16px}
-
-/* Camera */
+/* FAB */
+.fab{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;border:none;border-radius:30px;padding:12px 26px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;gap:7px;box-shadow:0 4px 16px rgba(226,75,74,.45);z-index:15;white-space:nowrap}
+.fab svg{width:15px;height:15px}
+/* CAMERA */
 .cam-overlay{position:fixed;inset:0;z-index:50;background:#000;display:flex;flex-direction:column}
 .cam-overlay video{flex:1;width:100%;object-fit:cover;display:block}
-.cam-footer{background:rgba(0,0,0,.7);padding:18px 16px;display:flex;align-items:center;justify-content:center;gap:20px;flex-shrink:0}
-.shutter-btn{width:66px;height:66px;border-radius:50%;background:#fff;border:4px solid var(--red);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.shutter-btn svg{width:26px;height:26px;color:var(--red)}
-.cam-cancel-btn{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:7px;padding:9px 16px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer}
-.cam-hint-lbl{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:500;padding:5px 13px;border-radius:20px;white-space:nowrap;pointer-events:none}
+.cam-footer{background:rgba(0,0,0,.75);padding:18px 16px;display:flex;align-items:center;justify-content:center;gap:20px;flex-shrink:0}
+.shutter-btn{width:64px;height:64px;border-radius:50%;background:#fff;border:4px solid var(--red);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.shutter-btn svg{width:24px;height:24px;color:var(--red)}
+.cam-cancel-btn{background:rgba(255,255,255,.15);border:none;color:#fff;border-radius:7px;padding:9px 14px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer}
+.cam-hint-lbl{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;font-size:12px;font-weight:500;padding:5px 13px;border-radius:20px;white-space:nowrap;pointer-events:none;text-align:center;max-width:90%}
 canvas#snap{display:none}
-
-/* History */
+/* EDIT MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+.modal-panel{background:var(--sur);border-radius:var(--r) var(--r) 0 0;width:100%;max-width:480px;padding:20px 16px 32px;display:flex;flex-direction:column;gap:12px}
+.modal-title{font-size:15px;font-weight:500}
+.modal-field{display:flex;flex-direction:column;gap:4px}
+.modal-lbl{font-size:11px;font-weight:500;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px}
+.modal-input{padding:9px 11px;border:.5px solid var(--bdr2);border-radius:var(--rs);background:var(--sur2);color:var(--tx);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:100%}
+.modal-input:focus{border-color:var(--red)}
+.modal-row{display:flex;gap:8px}
+.modal-btn{flex:1;padding:11px;border:none;border-radius:var(--rs);font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer}
+.modal-btn.primary{background:var(--red);color:#fff}
+.modal-btn.secondary{background:var(--sur2);color:var(--tx)}
+/* HISTORY */
 .hist-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:30;display:flex;flex-direction:column;justify-content:flex-end}
 .hist-panel{background:var(--sur);border-radius:var(--r) var(--r) 0 0;max-height:80vh;display:flex;flex-direction:column;overflow:hidden}
 .hist-hdr{padding:13px 15px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center;gap:7px;flex-shrink:0}
@@ -221,882 +200,781 @@ canvas#snap{display:none}
 .hist-price{font-size:13px;font-weight:500;font-family:'Bebas Neue',sans-serif;flex-shrink:0}
 .hist-badge{font-size:9px;font-weight:600;padding:2px 4px;border-radius:3px;background:var(--red);color:#fff;flex-shrink:0}
 .hist-raw-badge{font-size:9px;font-weight:600;padding:2px 4px;border-radius:3px;background:var(--sur2);color:var(--tx2);flex-shrink:0}
-
-/* Use display:none / display:flex/block instead of a hidden class to avoid CSS specificity conflicts */
 .d-none{display:none!important}
 </style>
 </head>
 <body>
-
 <div class="hdr">
   <span class="logo">CARD<span>GRADE</span></span>
   <span class="hdr-sub">PSA·BGS·CGC</span>
-  <button class="hist-btn" id="hist-btn" onclick="openHist()">
+  <button class="hist-btn" id="hist-btn">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
     History
   </button>
   <span class="live-pill">Live</span>
 </div>
-
 <div class="tabs">
-  <button class="tab on" id="tab-graded" onclick="setMode('graded')">
+  <button class="tab on" id="tab-graded">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     Graded
   </button>
-  <button class="tab" id="tab-raw" onclick="setMode('raw')">
+  <button class="tab" id="tab-raw">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
     Raw
   </button>
 </div>
-
 <div class="body" id="main-body">
-
-  <!-- API KEY SETUP -->
+  <!-- API KEY -->
   <div class="setup-card" id="setup-card">
-    <div class="setup-title">Anthropic API key required</div>
-    <div class="setup-desc">
-      Runs entirely on your device. Key is stored in your browser only, sent exclusively to Anthropic over HTTPS.<br>
-      Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — set a monthly spend limit for safety.
-    </div>
+    <div class="setup-title">Anthropic API key</div>
+    <div class="setup-desc">Runs on your device only. Key sent exclusively to Anthropic over HTTPS.<br>Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — set a spend limit for safety.</div>
     <div class="key-row">
       <input class="key-input" type="password" id="key-input" placeholder="sk-ant-..." autocomplete="off" spellcheck="false"/>
       <button class="key-save-btn" id="key-save-btn">Save</button>
     </div>
   </div>
-
-  <!-- SAVED KEY STATUS ROW -->
-  <div class="saved-key-row d-none" id="saved-key-row">
+  <div class="saved-key-row d-none" id="saved-key-row" style="display:none">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#639922" stroke-width="2" style="flex-shrink:0"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-    <span style="font-size:12px;color:var(--tx2);flex:1">API key saved — direct to Anthropic</span>
+    <span style="font-size:12px;color:var(--tx2);flex:1">API key saved</span>
     <button id="remove-key-btn" style="font-size:11px;color:var(--err-tx);background:var(--err-bg);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:2px 7px;border-radius:4px">Remove</button>
   </div>
-
-  <!-- UPLOAD ZONE -->
+  <!-- UPLOAD -->
   <div id="upload-sec">
     <div class="drop-zone" id="drop-zone">
       <input type="file" id="file-input" accept="image/*"/>
-      <span class="drop-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-      </span>
+      <span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
       <div class="drop-title" id="drop-title">Scan your graded card</div>
-      <div class="drop-sub">Tap to choose a photo · <strong>PSA · BGS · CGC</strong></div>
+      <div class="drop-sub">Tap to choose · <strong>PSA · BGS · CGC</strong></div>
     </div>
-    <button class="cam-open-btn" id="cam-open-btn">
+    <button class="cam-btn" id="cam-open-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
       Use camera
     </button>
   </div>
-
-  <!-- PREVIEW BAR -->
+  <!-- BACK PHOTO STEP (raw) -->
+  <div id="back-step" class="back-step d-none">
+    <div class="back-step-title">Now capture the <strong>back</strong> of the card</div>
+    <div class="back-step-sub">Both sides needed for full pre-grade assessment</div>
+    <div class="back-step-imgs">
+      <div><img id="front-preview" class="back-step-thumb" src="" alt="Front"/><div style="font-size:10px;color:var(--tx2);text-align:center;margin-top:3px">Front ✓</div></div>
+      <div><div class="back-step-ph" id="back-ph">📷</div><div style="font-size:10px;color:var(--tx2);text-align:center;margin-top:3px">Back</div></div>
+    </div>
+    <button class="cam-btn" id="cam-back-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      Capture back of card
+    </button>
+    <input type="file" id="back-file-input" accept="image/*" style="display:none"/>
+    <button class="sec-btn" id="skip-back-btn" style="margin-top:7px">Skip (front only)</button>
+  </div>
+  <!-- PREVIEW -->
   <div class="prev-bar d-none" id="prev-bar">
     <img id="prev-thumb" class="prev-thumb" src="" alt="Preview"/>
-    <div class="prev-info">
-      <div class="prev-name" id="prev-name">card.jpg</div>
-      <div class="prev-sz" id="prev-sz"></div>
-    </div>
-    <button class="rm-btn" id="rm-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
+    <div class="prev-info"><div class="prev-name" id="prev-name">card.jpg</div><div class="prev-sz" id="prev-sz"></div></div>
+    <button class="rm-btn" id="rm-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
-
-  <!-- SCAN BUTTON -->
-  <button class="scan-btn" id="scan-btn" disabled>
+  <button class="scan-btn d-none" id="scan-btn" disabled>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
     <span id="scan-lbl">Scan &amp; Get Pricing</span>
   </button>
-
   <!-- STATUS -->
-  <div id="status-sec" class="d-none">
-    <div class="status-box">
-      <div class="spin"></div>
-      <div class="status-text" id="status-text">Analyzing…</div>
-    </div>
-  </div>
-
+  <div id="status-sec" class="d-none"><div class="status-box"><div class="spin"></div><div class="status-text" id="status-text">Analyzing…</div></div></div>
   <!-- ERROR -->
   <div id="err-sec" class="d-none">
-    <div class="err-box">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-      <span class="err-text" id="err-text">Something went wrong.</span>
-    </div>
-    <br>
-    <button class="sec-btn" id="retry-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
-      Try again
-    </button>
+    <div class="err-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span class="err-text" id="err-text">Something went wrong.</span></div>
+    <br><button class="sec-btn" id="retry-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>Try again</button>
   </div>
-
   <!-- RESULTS -->
   <div id="results-sec" class="d-none"></div>
-
 </div>
-
-<!-- FLOATING SCAN AGAIN -->
-<button class="fab d-none" id="fab" id="fab">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-  Scan another card
-</button>
-
+<!-- FAB -->
+<button class="fab d-none" id="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Scan another</button>
 <!-- CAMERA OVERLAY -->
 <div class="cam-overlay d-none" id="cam-overlay">
-  <div class="cam-hint-lbl">Press the button to capture</div>
+  <div class="cam-hint-lbl" id="cam-hint">Press button to capture</div>
   <video id="cam-vid" autoplay playsinline muted></video>
   <canvas id="snap"></canvas>
   <div class="cam-footer">
     <button class="cam-cancel-btn" id="cam-cancel-btn">Cancel</button>
-    <button class="shutter-btn" id="shutter-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-    </button>
+    <button class="shutter-btn" id="shutter-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></button>
     <div style="width:60px"></div>
   </div>
 </div>
-
-<!-- HISTORY OVERLAY -->
+<!-- EDIT CARD MODAL -->
+<div class="modal-overlay d-none" id="edit-modal">
+  <div class="modal-panel">
+    <div class="modal-title">Correct card details</div>
+    <div class="modal-field"><label class="modal-lbl">Card name</label><input class="modal-input" id="edit-name" type="text" placeholder="e.g. Charizard"/></div>
+    <div class="modal-field"><label class="modal-lbl">Set / expansion</label><input class="modal-input" id="edit-set" type="text" placeholder="e.g. Base Set"/></div>
+    <div class="modal-field"><label class="modal-lbl">Card number</label><input class="modal-input" id="edit-num" type="text" placeholder="e.g. 4/102"/></div>
+    <div class="modal-field"><label class="modal-lbl">Year</label><input class="modal-input" id="edit-year" type="text" placeholder="e.g. 1999"/></div>
+    <div class="modal-field"><label class="modal-lbl">Variant / Edition</label><input class="modal-input" id="edit-variety" type="text" placeholder="e.g. Holo 1st Edition"/></div>
+    <div id="graded-edit-fields">
+      <div class="modal-field"><label class="modal-lbl">Grading company</label><input class="modal-input" id="edit-company" type="text" placeholder="PSA / BGS / CGC"/></div>
+      <div class="modal-field"><label class="modal-lbl">Grade</label><input class="modal-input" id="edit-grade" type="text" placeholder="e.g. 10"/></div>
+      <div class="modal-field"><label class="modal-lbl">Cert number</label><input class="modal-input" id="edit-cert" type="text" placeholder="optional"/></div>
+    </div>
+    <div class="modal-row">
+      <button class="modal-btn secondary" id="edit-cancel-btn">Cancel</button>
+      <button class="modal-btn primary" id="edit-save-btn">Re-scan with corrections</button>
+    </div>
+  </div>
+</div>
+<!-- HISTORY -->
 <div class="hist-overlay d-none" id="hist-overlay">
   <div class="hist-panel">
-    <div class="hist-hdr">
-      <span class="hist-hdr-title">Scan history</span>
-      <button class="hist-clear-btn" id="hist-clear-btn">Clear all</button>
-      <button class="hist-close-btn" id="hist-close-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
+    <div class="hist-hdr"><span class="hist-hdr-title">Scan history</span><button class="hist-clear-btn" id="hist-clear-btn">Clear all</button><button class="hist-close-btn" id="hist-close-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
     <div class="hist-list" id="hist-list"></div>
   </div>
 </div>
 
 <script>
-// ── UTILITIES ────────────────────────────────────────────
+// ── GLOBALS ──────────────────────────────────────────────
 var ge = function(id){ return document.getElementById(id); };
+function showEl(id){ var e=ge(id); if(e){ e.classList.remove('d-none'); } }
+function hideEl(id){ var e=ge(id); if(e){ e.classList.add('d-none'); } }
+function setHTML(id,h){ var e=ge(id); if(e) e.innerHTML=h; }
+function setTxt(id,t){ var e=ge(id); if(e) e.textContent=t; }
+function setStatus(msg){ var e=ge('status-text'); if(e) e.innerHTML=msg; }
 
-function showEl(id){
-  var el = ge(id);
-  if(!el) return;
-  el.classList.remove('d-none');
-}
-function hideEl(id){
-  var el = ge(id);
-  if(!el) return;
-  el.classList.add('d-none');
-}
-function setHTML(id, html){ var el=ge(id); if(el) el.innerHTML=html; }
-function setTxt(id, txt){ var el=ge(id); if(el) el.textContent=txt; }
-function setStatus(msg){ var el=ge('status-text'); if(el) el.innerHTML=msg; }
-
-// ── STATE ─────────────────────────────────────────────────
 var currentMode = 'graded';
-var currentImgB64 = null;
+var currentImgB64 = null;    // front image
+var currentBackB64 = null;   // back image (raw mode)
 var currentThumb = null;
 var camStream = null;
+var camPurpose = 'front';    // 'front' or 'back'
 var apiKey = '';
+try{ apiKey = localStorage.getItem('cg_key') || ''; }catch(e){}
 
-try { apiKey = localStorage.getItem('cg_key') || ''; } catch(e){}
+// Correction overrides set by the edit modal
+var manualCard = null;
+
+// ── RATE LIMIT QUEUE ────────────────────────────────────
+// Ensures minimum 4s gap between any two API calls to avoid 429s
+var lastCallTime = 0;
+var MIN_GAP = 4000;
+
+function callClaude(messages, useWebSearch, callback){
+  var now = Date.now();
+  var delay = Math.max(0, (lastCallTime + MIN_GAP) - now);
+  setTimeout(function(){
+    lastCallTime = Date.now();
+    _doCall(messages, useWebSearch, callback, 3);
+  }, delay);
+}
+
+function _doCall(messages, useWebSearch, callback, retriesLeft){
+  var body = {model:'claude-sonnet-4-5', max_tokens:900, messages:messages};
+  if(useWebSearch) body.tools = [{type:'web_search_20250305',name:'web_search'}];
+  fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':apiKey,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify(body)
+  }).then(function(resp){
+    if(resp.status===429){
+      if(retriesLeft<=0){ callback(new Error('Rate limited. Please wait 30 seconds and try again.'),null); return; }
+      var wait = 12000;
+      var cd = Math.round(wait/1000);
+      var t = setInterval(function(){ setStatus('<strong>Rate limited — retrying in '+(cd--)+'s…</strong>'); if(cd<0) clearInterval(t); },1000);
+      setTimeout(function(){ lastCallTime=Date.now(); _doCall(messages,useWebSearch,callback,retriesLeft-1); }, wait);
+      return;
+    }
+    if(!resp.ok){
+      resp.json().then(function(e){
+        var msg=(e&&e.error&&e.error.message)?e.error.message:'API error '+resp.status;
+        if(resp.status===401) msg='Invalid API key. Please remove and re-enter your key.';
+        callback(new Error(msg),null);
+      }).catch(function(){ callback(new Error('API error '+resp.status),null); });
+      return;
+    }
+    resp.json().then(function(data){
+      var text=data.content.map(function(b){return b.text||'';}).join('');
+      callback(null,text);
+    }).catch(function(e){ callback(e,null); });
+  }).catch(function(e){
+    if(retriesLeft>0){ setTimeout(function(){ _doCall(messages,useWebSearch,callback,retriesLeft-1); },3000); }
+    else { callback(e,null); }
+  });
+}
+
+function parseJSON(text){
+  var s=text.indexOf('{'), e=text.lastIndexOf('}');
+  if(s<0||e<0) throw new Error('No JSON found');
+  return JSON.parse(text.slice(s,e+1));
+}
 
 // ── HISTORY ──────────────────────────────────────────────
-var HIST_KEY = 'cg_hist_v3';
-function loadHist(){
-  try{ return JSON.parse(localStorage.getItem(HIST_KEY) || '[]'); }
-  catch(e){ return []; }
+var HK='cg_hist_v4';
+function loadHist(){ try{ return JSON.parse(localStorage.getItem(HK)||'[]'); }catch(e){ return []; } }
+function saveHist(a){ try{ localStorage.setItem(HK,JSON.stringify(a.slice(0,60))); }catch(e){} }
+function addHist(e){ var h=loadHist(); e.id=Date.now(); h.unshift(e); saveHist(h); updHistBtn(); }
+function updHistBtn(){
+  var n=loadHist().length;
+  ge('hist-btn').innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> History'+(n?' ('+n+')':'');
 }
-function saveHist(arr){
-  try{ localStorage.setItem(HIST_KEY, JSON.stringify(arr.slice(0,60))); }
-  catch(e){}
-}
-function addHist(entry){
-  var h = loadHist();
-  entry.id = Date.now();
-  h.unshift(entry);
-  saveHist(h);
-  updateHistBtn();
-}
-function updateHistBtn(){
-  var n = loadHist().length;
-  var el = ge('hist-btn');
-  if(!el) return;
-  el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> History' + (n ? ' (' + n + ')' : '');
-}
-
-ge('hist-btn').addEventListener('click', openHist);
-function openHist(){
-  var h = loadHist();
-  var el = ge('hist-list');
-  if(!h.length){
-    el.innerHTML = '<div class="hist-empty">No scans yet.</div>';
-  } else {
-    el.innerHTML = h.map(function(x){
-      var thumb = x.thumb ? '<img class="hist-thumb" src="'+x.thumb+'" alt="" loading="lazy">' : '<div class="hist-ph">&#127183;</div>';
-      var badge = x.mode==='raw'
-        ? '<span class="hist-raw-badge">RAW</span>'
-        : '<span class="hist-badge">'+(x.gradingCompany||'')+(x.grade?' '+x.grade:'')+'</span>';
-      var price = x.displayValue ? '<span class="hist-price">$'+Math.round(x.displayValue)+'</span>' : '';
-      var meta = [x.setName, x.gradingCompany&&x.grade?x.gradingCompany+' '+x.grade:null, x.scannedAt].filter(Boolean).join(' · ');
-      return '<div class="hist-item" onclick="loadHistItem('+x.id+')">'+thumb+'<div class="hist-info"><div class="hist-name">'+(x.cardName||'Unknown')+'</div><div class="hist-meta">'+meta+'</div></div>'+price+badge+'</div>';
-    }).join('');
-  }
+ge('hist-btn').addEventListener('click',function(){
+  var h=loadHist();
+  var el=ge('hist-list');
+  if(!h.length){ el.innerHTML='<div class="hist-empty">No scans yet.</div>'; }
+  else{ el.innerHTML=h.map(function(x){
+    var thumb=x.thumb?'<img class="hist-thumb" src="'+x.thumb+'" alt="" loading="lazy">':'<div class="hist-ph">&#127183;</div>';
+    var badge=x.mode==='raw'?'<span class="hist-raw-badge">RAW</span>':'<span class="hist-badge">'+(x.gradingCompany||'')+(x.grade?' '+x.grade:'')+'</span>';
+    var price=x.displayValue?'<span class="hist-price">$'+Math.round(x.displayValue)+'</span>':'';
+    var meta=[x.setName,x.gradingCompany&&x.grade?x.gradingCompany+' '+x.grade:null,x.scannedAt].filter(Boolean).join(' · ');
+    return '<div class="hist-item" onclick="loadHistItem('+x.id+')">'+thumb+'<div class="hist-info"><div class="hist-name">'+(x.cardName||'Unknown')+'</div><div class="hist-meta">'+meta+'</div></div>'+price+badge+'</div>';
+  }).join(''); }
   showEl('hist-overlay');
-}
-ge('hist-close-btn').addEventListener('click', function(){ hideEl('hist-overlay'); });
-ge('hist-overlay').addEventListener('click', function(e){ if(e.target===ge('hist-overlay')) hideEl('hist-overlay'); });
-ge('hist-clear-btn').addEventListener('click', function(){
-  if(!confirm('Clear all scan history?')) return;
-  try{ localStorage.removeItem(HIST_KEY); } catch(e){}
-  hideEl('hist-overlay');
-  updateHistBtn();
 });
-
+ge('hist-close-btn').addEventListener('click',function(){ hideEl('hist-overlay'); });
+ge('hist-overlay').addEventListener('click',function(e){ if(e.target===ge('hist-overlay')) hideEl('hist-overlay'); });
+ge('hist-clear-btn').addEventListener('click',function(){
+  if(!confirm('Clear all scan history?')) return;
+  try{ localStorage.removeItem(HK); }catch(e){}
+  hideEl('hist-overlay'); updHistBtn();
+});
 function loadHistItem(id){
-  var h = loadHist();
-  var item = null;
+  var h=loadHist(); var item=null;
   for(var i=0;i<h.length;i++){ if(h[i].id===id){ item=h[i]; break; } }
   if(!item) return;
-  hideEl('hist-overlay');
-  hideEl('upload-sec'); hideEl('prev-bar'); hideEl('status-sec'); hideEl('err-sec'); hideEl('fab');
-  setHTML('results-sec','');
+  hideEl('hist-overlay'); resetUI();
+  hideEl('upload-sec'); hideEl('scan-btn');
   if(item.thumb){ ge('prev-thumb').src=item.thumb; showEl('prev-bar'); }
-  if(item.cachedCard && item.cachedPricing){
-    if(item.mode==='raw') renderRaw(item.cachedCard, item.cachedPricing, item.thumb, item.annotationDataUrl);
-    else renderGraded(item.cachedCard, item.cachedPricing, item.thumb);
+  if(item.cachedCard&&item.cachedPricing){
+    if(item.mode==='raw') renderRaw(item.cachedCard,item.cachedPricing,item.thumb,item.annotation);
+    else renderGraded(item.cachedCard,item.cachedPricing,item.thumb);
     showEl('results-sec'); showEl('fab');
   }
 }
 
 // ── INIT ─────────────────────────────────────────────────
 function init(){
-  if(apiKey){
-    hideEl('setup-card');
-    ge('saved-key-row').style.display = 'flex';
-  }
-  updateHistBtn();
+  if(apiKey){ hideEl('setup-card'); ge('saved-key-row').style.display='flex'; }
+  updHistBtn();
+  showEl('scan-btn');
 }
-
-ge('key-save-btn').addEventListener('click', function(){
-  var v = ge('key-input').value.trim();
-  if(!v || v.indexOf('sk-') !== 0){
-    alert('Please enter a valid Anthropic API key starting with sk-');
-    return;
-  }
-  apiKey = v;
-  try{ localStorage.setItem('cg_key', apiKey); } catch(e){}
-  hideEl('setup-card');
-  ge('saved-key-row').style.display = 'flex';
+ge('key-save-btn').addEventListener('click',function(){
+  var v=ge('key-input').value.trim();
+  if(!v||v.indexOf('sk-')!==0){ alert('Enter a valid Anthropic API key starting with sk-'); return; }
+  apiKey=v; try{ localStorage.setItem('cg_key',apiKey); }catch(e){}
+  hideEl('setup-card'); ge('saved-key-row').style.display='flex';
 });
-
-ge('key-input').addEventListener('keydown', function(e){
-  if(e.key === 'Enter') ge('key-save-btn').click();
-});
-
-ge('remove-key-btn').addEventListener('click', function(){
+ge('key-input').addEventListener('keydown',function(e){ if(e.key==='Enter') ge('key-save-btn').click(); });
+ge('remove-key-btn').addEventListener('click',function(){
   if(!confirm('Remove saved API key?')) return;
-  apiKey = '';
-  try{ localStorage.removeItem('cg_key'); } catch(e){}
-  ge('key-input').value = '';
-  ge('saved-key-row').style.display = 'none';
-  showEl('setup-card');
+  apiKey=''; try{ localStorage.removeItem('cg_key'); }catch(e){}
+  ge('key-input').value=''; ge('saved-key-row').style.display='none'; showEl('setup-card');
 });
-
+ge('tab-graded').addEventListener('click',function(){ setMode('graded'); });
+ge('tab-raw').addEventListener('click',function(){ setMode('raw'); });
 function setMode(m){
-  currentMode = m;
-  ge('tab-graded').classList.toggle('on', m==='graded');
-  ge('tab-raw').classList.toggle('on', m==='raw');
-  setTxt('drop-title', m==='graded' ? 'Scan your graded card' : 'Scan your raw card');
-  setTxt('scan-lbl', m==='graded' ? 'Scan & Get Pricing' : 'Scan, Grade & Price');
+  currentMode=m;
+  ge('tab-graded').classList.toggle('on',m==='graded');
+  ge('tab-raw').classList.toggle('on',m==='raw');
+  setTxt('drop-title',m==='graded'?'Scan your graded card':'Scan the front of your card');
+  setTxt('scan-lbl',m==='graded'?'Scan & Get Pricing':'Scan, Grade & Price');
   resetUI();
 }
 
-// ── IMAGE RESIZE ──────────────────────────────────────────
-function resizeFile(file, cb){
-  var MAX = 800;
-  var img = new Image();
-  var url = URL.createObjectURL(file);
-  img.onload = function(){
+// ── IMAGE UTILS ───────────────────────────────────────────
+function resizeFile(file,cb){
+  var MAX=800,img=new Image(),url=URL.createObjectURL(file);
+  img.onload=function(){
     URL.revokeObjectURL(url);
-    var scale = Math.min(1, MAX/img.width);
-    var w = Math.round(img.width*scale), h = Math.round(img.height*scale);
-    var c = document.createElement('canvas'); c.width=w; c.height=h;
+    var s=Math.min(1,MAX/img.width),w=Math.round(img.width*s),h=Math.round(img.height*s);
+    var c=document.createElement('canvas');c.width=w;c.height=h;
     c.getContext('2d').drawImage(img,0,0,w,h);
-    cb(c.toDataURL('image/jpeg',.82), file.name, file.size);
+    cb(c.toDataURL('image/jpeg',.82),file.name,file.size);
   };
-  img.src = url;
+  img.src=url;
 }
-function resizeDataUrl(dataUrl, cb){
-  var MAX = 800;
-  var img = new Image();
-  img.onload = function(){
-    var scale = Math.min(1, MAX/img.width);
-    var w = Math.round(img.width*scale), h = Math.round(img.height*scale);
-    var c = document.createElement('canvas'); c.width=w; c.height=h;
+function resizeDU(dataUrl,cb){
+  var MAX=800,img=new Image();
+  img.onload=function(){
+    var s=Math.min(1,MAX/img.width),w=Math.round(img.width*s),h=Math.round(img.height*s);
+    var c=document.createElement('canvas');c.width=w;c.height=h;
     c.getContext('2d').drawImage(img,0,0,w,h);
     cb(c.toDataURL('image/jpeg',.82));
   };
-  img.src = dataUrl;
+  img.src=dataUrl;
 }
+function fmtB(b){ if(!b) return''; if(b<1024) return b+' B'; if(b<1048576) return(b/1024).toFixed(1)+' KB'; return(b/1048576).toFixed(1)+' MB'; }
 
-function setImageData(dataUrl, name, size){
-  currentImgB64 = dataUrl.split(',')[1];
-  currentThumb = dataUrl;
-  ge('prev-thumb').src = dataUrl;
-  setTxt('prev-name', name || 'photo.jpg');
-  setTxt('prev-sz', size ? fmtBytes(size) : '');
-  ge('saved-key-row').style.display = apiKey ? 'flex' : 'none';
+function setFrontImage(dataUrl,name,size){
+  currentImgB64=dataUrl.split(',')[1];
+  currentThumb=dataUrl;
+  currentBackB64=null;
+  ge('prev-thumb').src=dataUrl;
+  setTxt('prev-name',name||'card.jpg');
+  setTxt('prev-sz',size?fmtB(size):'');
   showEl('prev-bar');
-  ge('scan-btn').disabled = false;
+  if(currentMode==='raw'){
+    // Show back-of-card step
+    ge('front-preview').src=dataUrl;
+    hideEl('upload-sec');
+    showEl('back-step');
+    hideEl('scan-btn');
+  } else {
+    ge('scan-btn').disabled=false;
+    showEl('scan-btn');
+  }
 }
 
-function fmtBytes(b){
-  if(!b) return '';
-  if(b<1024) return b+' B';
-  if(b<1048576) return (b/1024).toFixed(1)+' KB';
-  return (b/1048576).toFixed(1)+' MB';
-}
-
-ge('file-input').addEventListener('change', function(e){
-  var f = e.target.files[0]; if(!f) return;
-  resizeFile(f, function(d,n,s){ setImageData(d,n,s); });
+// File picker (front)
+ge('file-input').addEventListener('change',function(e){
+  var f=e.target.files[0]; if(!f) return;
+  resizeFile(f,function(d,n,s){ setFrontImage(d,n,s); });
 });
-
-var dz = ge('drop-zone');
-dz.addEventListener('dragover', function(e){ e.preventDefault(); dz.classList.add('drag-over'); });
-dz.addEventListener('dragleave', function(){ dz.classList.remove('drag-over'); });
-dz.addEventListener('drop', function(e){
+var dz=ge('drop-zone');
+dz.addEventListener('dragover',function(e){ e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave',function(){ dz.classList.remove('drag-over'); });
+dz.addEventListener('drop',function(e){
   e.preventDefault(); dz.classList.remove('drag-over');
-  var f = e.dataTransfer.files[0]; if(!f) return;
-  resizeFile(f, function(d,n,s){ setImageData(d,n,s); });
+  var f=e.dataTransfer.files[0]; if(!f) return;
+  resizeFile(f,function(d,n,s){ setFrontImage(d,n,s); });
+});
+ge('rm-btn').addEventListener('click',function(){
+  currentImgB64=null; currentThumb=null; currentBackB64=null;
+  ge('file-input').value=''; hideEl('prev-bar'); hideEl('back-step');
+  showEl('upload-sec'); ge('scan-btn').disabled=true;
 });
 
-ge('rm-btn').addEventListener('click', function(){
-  currentImgB64 = null; currentThumb = null;
-  ge('file-input').value = '';
-  hideEl('prev-bar');
-  ge('scan-btn').disabled = true;
+// Back photo file picker
+ge('back-file-input').addEventListener('change',function(e){
+  var f=e.target.files[0]; if(!f) return;
+  resizeFile(f,function(d){ setBackImage(d); });
+});
+function setBackImage(dataUrl){
+  currentBackB64=dataUrl.split(',')[1];
+  // Replace ph with actual image
+  var ph=ge('back-ph');
+  if(ph){ ph.outerHTML='<img id="back-preview" class="back-step-thumb" src="'+dataUrl+'" alt="Back"/>'; }
+  hideEl('back-step');
+  ge('scan-btn').disabled=false;
+  showEl('scan-btn');
+}
+ge('skip-back-btn').addEventListener('click',function(){
+  currentBackB64=null;
+  hideEl('back-step');
+  ge('scan-btn').disabled=false;
+  showEl('scan-btn');
 });
 
 // ── CAMERA ────────────────────────────────────────────────
-ge('cam-open-btn').addEventListener('click', openCamera);
-function openCamera(){
-  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
-    showErr('Camera not available. Use the file picker instead.');
-    return;
-  }
+ge('cam-open-btn').addEventListener('click',function(){ camPurpose='front'; openCamera('Capture front of card'); });
+ge('cam-back-btn').addEventListener('click',function(){ camPurpose='back'; openCamera('Capture BACK of card'); });
+function openCamera(hint){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ showErr('Camera not available. Use file picker instead.'); return; }
   navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}}})
-    .then(function(stream){
-      camStream = stream;
-      ge('cam-vid').srcObject = stream;
-      ge('cam-vid').play().catch(function(){});
+    .then(function(s){
+      camStream=s; ge('cam-vid').srcObject=s; ge('cam-vid').play().catch(function(){});
+      setTxt('cam-hint',hint||'Press button to capture');
       showEl('cam-overlay');
     })
-    .catch(function(){
-      showErr('Camera access denied. Allow camera permissions and try again.');
-    });
+    .catch(function(){ showErr('Camera access denied. Allow camera permissions and try again.'); });
 }
-ge('shutter-btn').addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); doCapture(); });
-ge('cam-cancel-btn').addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); stopCamera(); });
+ge('shutter-btn').addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); doCapture(); });
+ge('cam-cancel-btn').addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); stopCamera(); });
 function stopCamera(){
   if(camStream){ camStream.getTracks().forEach(function(t){ t.stop(); }); camStream=null; }
-  ge('cam-vid').srcObject = null;
-  hideEl('cam-overlay');
+  ge('cam-vid').srcObject=null; hideEl('cam-overlay');
 }
 function doCapture(){
-  var v = ge('cam-vid'), c = ge('snap');
-  var w = v.videoWidth||1280, h = v.videoHeight||720;
-  c.width=w; c.height=h;
-  c.getContext('2d').drawImage(v,0,0,w,h);
-  var raw = c.toDataURL('image/jpeg',.85);
+  var v=ge('cam-vid'),c=ge('snap');
+  var w=v.videoWidth||1280,h=v.videoHeight||720;
+  c.width=w;c.height=h; c.getContext('2d').drawImage(v,0,0,w,h);
+  var raw=c.toDataURL('image/jpeg',.85);
   stopCamera();
-  resizeDataUrl(raw, function(d){ setImageData(d,'camera-photo.jpg',0); showEl('upload-sec'); });
+  resizeDU(raw,function(d){
+    if(camPurpose==='back'){ setBackImage(d); showEl('back-step'); /* setBackImage will hide it */ }
+    else { setFrontImage(d,'camera-photo.jpg',0); }
+  });
 }
 
-// ── UI HELPERS ────────────────────────────────────────────
-function showErr(msg){
-  hideEl('status-sec');
-  setTxt('err-text', msg);
-  showEl('err-sec');
-}
-ge('retry-btn').addEventListener('click', resetUI);
-
+// ── UI ────────────────────────────────────────────────────
+function showErr(msg){ hideEl('status-sec'); setTxt('err-text',msg); showEl('err-sec'); }
+ge('retry-btn').addEventListener('click',resetUI);
+ge('fab').addEventListener('click',function(){ resetUI(); });
 function resetUI(){
   hideEl('err-sec'); hideEl('results-sec'); hideEl('status-sec'); hideEl('fab');
-  setHTML('results-sec','');
-  showEl('upload-sec');
-  showEl('scan-btn');
-  var body = ge('main-body');
-  if(body) body.scrollTop = 0;
-}
-
-ge('fab').addEventListener('click', function(){
-  resetUI();
-});
-
-// ── API ───────────────────────────────────────────────────
-function callClaude(messages, useWebSearch, callback){
-  var body = {model:'claude-sonnet-4-5', max_tokens:1400, messages:messages};
-  if(useWebSearch) body.tools = [{type:'web_search_20250305',name:'web_search'}];
-
-  function attempt(retriesLeft, delayMs){
-    setTimeout(function(){
-      fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify(body)
-      })
-      .then(function(resp){
-        if(resp.status === 429){
-          if(retriesLeft <= 0){ callback(new Error('Rate limited. Please wait a minute and try again.'), null); return; }
-          var wait = 7000;
-          var countdown = Math.round(wait/1000);
-          var tick = setInterval(function(){
-            setStatus('<strong>Rate limited — retrying in '+countdown+'s…</strong>');
-            countdown--;
-            if(countdown <= 0) clearInterval(tick);
-          }, 1000);
-          setTimeout(function(){ attempt(retriesLeft-1, 0); }, wait);
-          return;
-        }
-        if(!resp.ok){
-          resp.json().then(function(e){
-            var msg = (e && e.error && e.error.message) ? e.error.message : ('API error '+resp.status);
-            if(resp.status===401) msg = 'Invalid API key. Please remove and re-enter your key.';
-            callback(new Error(msg), null);
-          }).catch(function(){ callback(new Error('API error '+resp.status), null); });
-          return;
-        }
-        resp.json().then(function(data){
-          var text = data.content.map(function(b){ return b.text||''; }).join('');
-          callback(null, text);
-        }).catch(function(e){ callback(e, null); });
-      })
-      .catch(function(e){
-        if(retriesLeft>0){ attempt(retriesLeft-1, 2000); }
-        else { callback(e, null); }
-      });
-    }, delayMs);
-  }
-  attempt(3, 0);
-}
-
-function parseJSON(text){
-  var s = text.indexOf('{'), e = text.lastIndexOf('}');
-  if(s<0||e<0) throw new Error('No JSON in response');
-  return JSON.parse(text.slice(s,e+1));
+  hideEl('back-step'); setHTML('results-sec','');
+  showEl('upload-sec'); showEl('scan-btn');
+  manualCard=null;
+  var b=ge('main-body'); if(b) b.scrollTop=0;
 }
 
 // ── SCAN ──────────────────────────────────────────────────
-ge('scan-btn').addEventListener('click', function(){
+showEl('scan-btn');
+ge('scan-btn').addEventListener('click',function(){
   if(!currentImgB64) return;
   if(!apiKey){ alert('Please enter your Anthropic API key first.'); showEl('setup-card'); return; }
-  hideEl('upload-sec'); hideEl('prev-bar'); hideEl('err-sec'); hideEl('results-sec'); hideEl('fab');
-  setHTML('results-sec','');
-  showEl('status-sec');
+  hideEl('upload-sec'); hideEl('prev-bar'); hideEl('back-step');
+  hideEl('err-sec'); hideEl('results-sec'); hideEl('fab'); hideEl('scan-btn');
+  setHTML('results-sec',''); showEl('status-sec');
   if(currentMode==='graded') runGraded();
   else runRaw();
 });
 
 // ── GRADED FLOW ───────────────────────────────────────────
 function runGraded(){
-  setStatus('<strong>1/2</strong> — Reading card &amp; grading label…');
-  var imgB64 = currentImgB64;
+  // If manualCard provided, skip vision identify and go straight to pricing
+  if(manualCard){
+    fetchGradedPricing(manualCard);
+    return;
+  }
+  setStatus('Reading grading label…');
   callClaude([{role:'user',content:[
-    {type:'image',source:{type:'base64',media_type:'image/jpeg',data:imgB64}},
-    {type:'text',text:'Identify this graded trading card. Return ONLY valid JSON, no markdown, no extra text:\n{"cardName":"","setName":null,"cardNumber":null,"year":null,"game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","gradingCompany":"PSA|BGS|CGC|Other","grade":"10","certNumber":null,"variety":null,"fullSearchQuery":"PSA 10 Charizard Base Set Holo"}'}
-  ]}], false, function(err, identText){
+    {type:'image',source:{type:'base64',media_type:'image/jpeg',data:currentImgB64}},
+    {type:'text',text:'Identify this graded card. Return ONLY JSON:\n{"cardName":"","setName":null,"cardNumber":null,"year":null,"game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","gradingCompany":"PSA|BGS|CGC|Other","grade":"10","certNumber":null,"variety":null,"sq":"PSA 10 Charizard Base Set Holo 1st Edition"}'}
+  ]},], false, function(err,txt){
     if(err){ showErr(err.message); return; }
     var card;
-    try{ card = parseJSON(identText); }
-    catch(e){ showErr('Could not read card details. Try a clearer photo showing the grading label.'); return; }
-    if(!card.cardName || card.cardName.toLowerCase()==='unknown'){ showErr('Could not identify this card. Try a clearer, well-lit photo.'); return; }
+    try{ card=parseJSON(txt); }
+    catch(e){ showErr('Could not read card. Try a clearer photo of the grading label.'); return; }
+    if(!card.cardName||card.cardName.toLowerCase()==='unknown'){ showErr('Could not identify card. Try a clearer photo.'); return; }
+    fetchGradedPricing(card);
+  });
+}
 
-    setStatus('<strong>2/2</strong> — Finding the 10 most recent sales for '+card.cardName+'…');
-    var sq = card.fullSearchQuery || ((card.gradingCompany||'PSA')+' '+(card.grade||'')+' '+card.cardName);
-
-    setTimeout(function(){
-      callClaude([{role:'user',content:
-        'Find the 10 most recent eBay sold listings for this graded card: "'+sq+'" — '+(card.gradingCompany||'PSA')+' grade '+(card.grade||'')+(card.variety?', '+card.variety:'')+', set: '+(card.setName||'?')+'.\nGet direct eBay item URLs where possible (https://www.ebay.com/itm/NUMBER).\nReturn ONLY valid JSON, no markdown:\n{"recentSales":[{"price":145.00,"date":"May 3 2025","platform":"eBay","title":"listing title","url":"https://www.ebay.com/itm/123456789"}],"trend":"up|down|stable","trendPercent":8,"marketAnalysis":"2 sentences on demand and outlook.","confidence":"high|medium|low"}'
-      }], true, function(err2, priceText){
-        if(err2){ showErr(err2.message); return; }
-        var pricing;
-        try{ pricing = parseJSON(priceText); }
-        catch(e){ pricing = {recentSales:[],trend:'stable',trendPercent:0,marketAnalysis:'Check marketplace links below.',confidence:'low'}; }
-
-        var sales = (pricing.recentSales||[]).slice(0,10);
-        var prices = sales.map(function(s){ return +s.price; }).filter(function(p){ return p>0; });
-        var avg = prices.length ? Math.round(prices.reduce(function(a,b){ return a+b; },0)/prices.length) : null;
-        var low = prices.length ? Math.min.apply(null,prices) : null;
-        var high = prices.length ? Math.max.apply(null,prices) : null;
-        pricing.avgValue = avg; pricing.lowPrice = low; pricing.highPrice = high; pricing.recentSales = sales;
-
-        hideEl('status-sec');
-        renderGraded(card, pricing, currentThumb);
-        addHist({mode:'graded',cardName:card.cardName,setName:card.setName,gradingCompany:card.gradingCompany,grade:card.grade,displayValue:avg,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing});
-      });
-    }, 1000);
+function fetchGradedPricing(card){
+  setStatus('Finding 10 most recent sales…');
+  var sq=card.sq||card.fullSearchQuery||((card.gradingCompany||'PSA')+' '+(card.grade||'')+' '+card.cardName+(card.setName?' '+card.setName:'')+(card.variety?' '+card.variety:''));
+  callClaude([{role:'user',content:
+    'Search eBay sold listings for the 10 most recently sold copies of: "'+sq+'". No date filter — just the 10 most recent regardless of when. Return eBay item URLs where possible.\nReturn ONLY JSON:\n{"sales":[{"price":145,"date":"May 3 2025","title":"listing title","url":"https://www.ebay.com/itm/123"}],"trend":"up|down|stable","confidence":"high|medium|low"}'
+  }], true, function(err,txt){
+    if(err){ showErr(err.message); return; }
+    var pricing;
+    try{ pricing=parseJSON(txt); }
+    catch(e){ pricing={sales:[],trend:'stable',confidence:'low'}; }
+    var sales=(pricing.sales||[]).slice(0,10);
+    var prices=sales.map(function(s){return +s.price;}).filter(function(p){return p>0;});
+    var avg=prices.length?Math.round(prices.reduce(function(a,b){return a+b;},0)/prices.length):null;
+    pricing.avg=avg; pricing.low=prices.length?Math.min.apply(null,prices):null; pricing.high=prices.length?Math.max.apply(null,prices):null; pricing.sales=sales;
+    hideEl('status-sec');
+    renderGraded(card,pricing,currentThumb);
+    addHist({mode:'graded',cardName:card.cardName,setName:card.setName,gradingCompany:card.gradingCompany,grade:card.grade,displayValue:avg,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing});
+    manualCard=null;
   });
 }
 
 // ── RAW FLOW ──────────────────────────────────────────────
 function runRaw(){
-  setStatus('<strong>1/3</strong> — Identifying card &amp; inspecting condition…');
-  var imgB64 = currentImgB64;
-  var thumbDataUrl = currentThumb;
+  setStatus('Analyzing card condition…');
+  var frontB64=currentImgB64;
+  var backB64=currentBackB64;
 
-  callClaude([{role:'user',content:[
-    {type:'image',source:{type:'base64',media_type:'image/jpeg',data:imgB64}},
-    {type:'text',text:'Analyze this raw ungraded trading card. Inspect condition carefully. Return ONLY valid JSON, no markdown:\n{"cardName":"","setName":null,"cardNumber":null,"year":null,"game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","variety":null,"rawSearchQuery":"Charizard Base Set Holo raw ungraded","condition":{"centering":"Excellent|Good|Moderate|Off-center","corners":"Sharp|Minor Wear|Moderate Wear|Rounded","edges":"Clean|Minor Chips|Moderate Chips|Heavy Damage","surface":"Clean|Minor Scratches|Moderate Scratches|Heavy Scratches"},"issues":[{"type":"whitening|scratch|dent|print_defect|crease|stain|other","location":"top-left corner","severity":"minor|moderate|severe","x":0.12,"y":0.05,"w":0.08,"h":0.06}],"psaGrade":{"grade":"9","confidence":"high|medium|low","reasoning":"one sentence"},"bgsGrade":{"grade":"9","confidence":"high|medium|low","reasoning":"one sentence"},"cgcGrade":{"grade":"9","confidence":"high|medium|low","reasoning":"one sentence"},"gradingNotes":"2 sentences on condition and submission worthiness"}'}
-  ]}], false, function(err, identText){
+  // Build content array — front always included, back if available
+  var content=[
+    {type:'image',source:{type:'base64',media_type:'image/jpeg',data:frontB64}},
+  ];
+  if(backB64){
+    content.push({type:'image',source:{type:'base64',media_type:'image/jpeg',data:backB64}});
+    content.push({type:'text',text:'First image is FRONT, second is BACK of the same card.'});
+  }
+  content.push({type:'text',text:'Analyze this raw trading card (both sides if shown). Return ONLY JSON:\n{"cardName":"","setName":null,"cardNumber":null,"year":null,"game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","variety":null,"tcgName":"exact name for TCGplayer search","condition":{"centering":"Excellent|Good|Moderate|Off-center","corners":"Sharp|Minor Wear|Moderate Wear|Rounded","edges":"Clean|Minor Chips|Moderate Chips|Heavy Damage","surface":"Clean|Minor Scratches|Moderate Scratches|Heavy Scratches","backCondition":"Clean|Minor Wear|Moderate Wear|Heavy Wear"},"issues":[{"type":"whitening|scratch|dent|crease|stain|print_defect","severity":"minor|moderate|severe","x":0.1,"y":0.05,"w":0.1,"h":0.08}],"psa":{"grade":"9","conf":"high|medium|low"},"bgs":{"grade":"9.5","conf":"high|medium|low"},"cgc":{"grade":"9","conf":"high|medium|low"},"notes":"one sentence on condition"}'});
+
+  callClaude([{role:'user',content:content}], false, function(err,identText){
     if(err){ showErr(err.message); return; }
     var card;
-    try{ card = parseJSON(identText); }
+    try{ card=parseJSON(identText); }
     catch(e){ showErr('Could not analyze card. Try a clearer, well-lit photo.'); return; }
-    if(!card.cardName || card.cardName.toLowerCase()==='unknown'){ showErr('Could not identify the card. Try a clearer image.'); return; }
+    if(!card.cardName||card.cardName.toLowerCase()==='unknown'){ showErr('Could not identify card. Try a clearer image.'); return; }
 
-    // Step 2: draw annotation while pricing call fires
-    setStatus('<strong>2/3</strong> — Annotating card condition…');
-    var annotationDataUrl = null;
-    try{ annotationDataUrl = drawAnnotation(thumbDataUrl, card); } catch(e){ annotationDataUrl = null; }
+    setStatus('Getting TCGplayer pricing…');
+    var tcgName=card.tcgName||card.cardName+(card.setName?' '+card.setName:'');
+    var psaG=(card.psa&&card.psa.grade)?card.psa.grade:'9';
 
-    setStatus('<strong>3/3</strong> — Searching raw &amp; graded prices for '+card.cardName+'…');
-    var psaG = (card.psaGrade && card.psaGrade.grade) ? card.psaGrade.grade : '9';
+    callClaude([{role:'user',content:
+      'Search TCGplayer.com for the current market price of this trading card: "'+tcgName+'" game: '+card.game+'. Also search eBay sold for PSA '+psaG+' graded copies: "'+card.cardName+(card.setName?' '+card.setName:'')+' PSA '+psaG+'".\nReturn ONLY JSON:\n{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/...","gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":30,"rawSales":[{"price":42,"date":"May 2025","title":"Charizard raw NM","url":"https://www.ebay.com/itm/123"}],"trend":"up|down|stable","conf":"high|medium|low"}'
+    }], true, function(err2,priceText){
+      if(err2){ showErr(err2.message); return; }
+      var pricing;
+      try{ pricing=parseJSON(priceText); }
+      catch(e){ pricing={tcgMarket:null,tcgLow:null,tcgHigh:null,tcgUrl:null,gradedPSA:null,gradedBGS:null,gradedCGC:null,gradingFee:30,rawSales:[],trend:'stable',conf:'low'}; }
 
-    setTimeout(function(){
-      callClaude([{role:'user',content:
-        'Search eBay sold listings for TWO things about this card: "'+card.cardName+'"'+(card.setName?', '+card.setName:'')+(card.variety?', '+card.variety:'')+'.\n1. RAW ungraded copies: "'+(card.rawSearchQuery||card.cardName+' raw ungraded')+'"\n2. PSA '+psaG+' graded copies: "'+card.cardName+(card.setName?' '+card.setName:'')+' PSA '+psaG+'"\nExclude graded copies from raw prices and raw copies from graded prices.\nReturn ONLY valid JSON, no markdown:\n{"rawValue":40.00,"rawLow":25.00,"rawHigh":65.00,"rawSalesFound":8,"gradedValuePSA":180.00,"gradedValueBGS":160.00,"gradedValueCGC":150.00,"gradingCostPSA":30,"trend":"up|down|stable","trendPercent":5,"recentRawSales":[{"price":42.00,"date":"May 2 2025","platform":"eBay","title":"Charizard raw NM","url":"https://www.ebay.com/itm/123456789"}],"marketAnalysis":"2 sentences about raw market and graded premium.","confidence":"high|medium|low"}'
-      }], true, function(err2, priceText){
-        if(err2){ showErr(err2.message); return; }
-        var pricing;
-        try{ pricing = parseJSON(priceText); }
-        catch(e){ pricing = {rawValue:null,rawLow:null,rawHigh:null,rawSalesFound:0,gradedValuePSA:null,gradedValueBGS:null,gradedValueCGC:null,gradingCostPSA:30,trend:'stable',trendPercent:0,recentRawSales:[],marketAnalysis:'Check marketplace links below.',confidence:'low'}; }
-
-        hideEl('status-sec');
-        renderRaw(card, pricing, thumbDataUrl, annotationDataUrl);
-        addHist({mode:'raw',cardName:card.cardName,setName:card.setName,grade:psaG,displayValue:pricing.rawValue,thumb:thumbDataUrl,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing,annotationDataUrl:annotationDataUrl});
-      });
-    }, 1000);
+      var anno=null;
+      try{ anno=drawAnnotation(currentThumb,card); }catch(e){}
+      hideEl('status-sec');
+      renderRaw(card,pricing,currentThumb,anno);
+      addHist({mode:'raw',cardName:card.cardName,setName:card.setName,grade:psaG,displayValue:pricing.tcgMarket,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing,annotation:anno});
+    });
   });
 }
 
-// ── CARD CONDITION ANNOTATION ─────────────────────────────
-function drawAnnotation(thumbDataUrl, card){
-  var IMG_W = 400, IMG_H = 560; // standard card aspect ~2.5x3.5
-  var CANVAS_W = IMG_W + 40, CANVAS_H = IMG_H + 40;
-  var c = document.createElement('canvas');
-  c.width = CANVAS_W; c.height = CANVAS_H;
-  var ctx = c.getContext('2d');
-
-  // background
-  ctx.fillStyle = '#1a1a18';
-  ctx.fillRect(0,0,CANVAS_W,CANVAS_H);
-
-  // draw card image if available
-  var drawn = false;
-  if(thumbDataUrl){
-    var img = new Image();
-    // draw synchronously via re-encode trick is not possible; draw placeholder then overlay
-    // We'll draw the card image via drawImage after loading
-    // Instead: draw a card outline and overlays, then composite image on top
-    ctx.save();
-    ctx.fillStyle = '#2a2a28';
-    ctx.beginPath();
-    ctx.roundRect(20, 20, IMG_W, IMG_H, 8);
-    ctx.fill();
-    ctx.restore();
-    drawn = true;
-  }
-
-  // centering overlay — draw crosshairs showing centering
-  var cond = card.condition || {};
-  var cx = 20 + IMG_W/2, cy = 20 + IMG_H/2;
-
-  // Draw centering guides
-  var centeringColor = condColor(cond.centering);
-  ctx.save();
-  ctx.strokeStyle = centeringColor;
-  ctx.lineWidth = 1.5;
-  ctx.setLineDash([6,4]);
-  ctx.globalAlpha = 0.6;
-  // vertical center line
-  ctx.beginPath(); ctx.moveTo(cx,25); ctx.lineTo(cx,20+IMG_H-5); ctx.stroke();
-  // horizontal center line
-  ctx.beginPath(); ctx.moveTo(25,cy); ctx.lineTo(20+IMG_W-5,cy); ctx.stroke();
-  ctx.restore();
-
-  // Border region boxes — corners, edges
-  var issues = card.issues || [];
-  var colorMap = {whitening:'#fbbf24',scratch:'#f87171',dent:'#a78bfa',print_defect:'#34d399',crease:'#fb923c',stain:'#f472b6',other:'#60a5fa'};
-  var legendItems = [];
-
-  issues.forEach(function(iss){
-    var col = colorMap[iss.type] || '#60a5fa';
-    var x = 20 + (iss.x||0)*IMG_W;
-    var y = 20 + (iss.y||0)*IMG_H;
-    var w = (iss.w||0.12)*IMG_W;
-    var h = (iss.h||0.08)*IMG_H;
-
-    ctx.save();
-    ctx.strokeStyle = col;
-    ctx.lineWidth = 2;
-    ctx.fillStyle = col;
-    ctx.globalAlpha = 0.25;
-    ctx.fillRect(x,y,w,h);
-    ctx.globalAlpha = 0.9;
-    ctx.strokeRect(x,y,w,h);
-    ctx.restore();
-
-    // label
-    ctx.save();
-    ctx.font = 'bold 10px DM Sans, sans-serif';
-    ctx.fillStyle = col;
-    ctx.globalAlpha = 1;
-    var label = (iss.type||'').replace('_',' ');
-    ctx.fillText(label, x+2, y>30?y-4:y+h+11);
-    ctx.restore();
-
-    // add to legend
-    var already = false;
-    for(var li=0;li<legendItems.length;li++){ if(legendItems[li].type===iss.type){ already=true; break; } }
-    if(!already) legendItems.push({type:iss.type, color:col, label:label});
-  });
-
-  // Corner indicators
-  var cornerColor = condColor(cond.corners);
-  var cornerSize = 14;
-  [[20,20],[20+IMG_W-cornerSize,20],[20,20+IMG_H-cornerSize],[20+IMG_W-cornerSize,20+IMG_H-cornerSize]].forEach(function(pt){
-    ctx.save();
-    ctx.fillStyle = cornerColor;
-    ctx.globalAlpha = 0.7;
-    ctx.fillRect(pt[0],pt[1],cornerSize,cornerSize);
-    ctx.restore();
-  });
-
-  // Edge indicators
-  var edgeColor = condColor(cond.edges);
-  ctx.save();
-  ctx.strokeStyle = edgeColor;
-  ctx.lineWidth = 3;
-  ctx.globalAlpha = 0.6;
-  ctx.strokeRect(20,20,IMG_W,IMG_H);
-  ctx.restore();
-
-  // Label overlays for centering
-  ctx.save();
-  ctx.font = '11px DM Sans, sans-serif';
-  ctx.fillStyle = '#f0f0ec';
-  ctx.globalAlpha = 0.8;
-  ctx.fillText('Centering: '+(cond.centering||'N/A'), 25, 16);
-  ctx.fillStyle = edgeColor;
-  ctx.fillText('Edges', 20+IMG_W+3, 20+IMG_H/2);
-  ctx.restore();
-
-  // Condition summary text at bottom
-  var summaryY = 20+IMG_H+16;
-  ctx.font = '11px DM Sans, sans-serif';
-  ctx.fillStyle = '#9a9a96';
-  ctx.globalAlpha = 1;
-  ctx.fillText('Corners: '+(cond.corners||'N/A')+'  ·  Surface: '+(cond.surface||'N/A'), 20, summaryY+2);
-
-  return {dataUrl: c.toDataURL('image/png'), legend: legendItems};
-}
-
+// ── ANNOTATION ────────────────────────────────────────────
 function condColor(val){
   if(!val) return '#6b6b67';
-  var v = val.toLowerCase();
+  var v=val.toLowerCase();
   if(v.indexOf('sharp')>=0||v.indexOf('clean')>=0||v.indexOf('excellent')>=0) return '#639922';
   if(v.indexOf('minor')>=0||v.indexOf('moderate')>=0||v.indexOf('off')>=0) return '#BA7517';
   return '#E24B4A';
 }
+function drawAnnotation(thumbDataUrl,card){
+  var W=360,H=504,PAD=0;
+  var c=document.createElement('canvas'); c.width=W; c.height=H;
+  var ctx=c.getContext('2d');
+  var cond=card.condition||{};
+  var issues=card.issues||[];
+  var colorMap={whitening:'#fbbf24',scratch:'#f87171',dent:'#a78bfa',crease:'#fb923c',stain:'#f472b6',print_defect:'#34d399'};
+  var legend=[];
+
+  // Load thumb and draw it
+  var imgEl=new Image();
+  imgEl.src=thumbDataUrl;
+  // Draw synchronously (image already loaded since it's a data URL)
+  try{ ctx.drawImage(imgEl,0,0,W,H); }catch(e){ ctx.fillStyle='#2a2a28'; ctx.fillRect(0,0,W,H); }
+
+  // Dark overlay for readability
+  ctx.fillStyle='rgba(0,0,0,0.18)'; ctx.fillRect(0,0,W,H);
+
+  // Edge border — color indicates edge condition
+  var edgeC=condColor(cond.edges);
+  ctx.strokeStyle=edgeC; ctx.lineWidth=4; ctx.globalAlpha=0.85;
+  ctx.strokeRect(2,2,W-4,H-4); ctx.globalAlpha=1;
+
+  // Corner indicators
+  var cornerC=condColor(cond.corners); var CS=18;
+  [[0,0],[W-CS,0],[0,H-CS],[W-CS,H-CS]].forEach(function(pt){
+    ctx.fillStyle=cornerC; ctx.globalAlpha=0.75;
+    ctx.fillRect(pt[0],pt[1],CS,CS); ctx.globalAlpha=1;
+  });
+
+  // Centering crosshair
+  var cxC=condColor(cond.centering);
+  ctx.strokeStyle=cxC; ctx.lineWidth=1.5; ctx.globalAlpha=0.5; ctx.setLineDash([5,4]);
+  ctx.beginPath(); ctx.moveTo(W/2,8); ctx.lineTo(W/2,H-8); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(8,H/2); ctx.lineTo(W-8,H/2); ctx.stroke();
+  ctx.setLineDash([]); ctx.globalAlpha=1;
+
+  // Issue overlays
+  issues.forEach(function(iss){
+    var col=colorMap[iss.type]||'#60a5fa';
+    var x=(iss.x||0)*W, y=(iss.y||0)*H, w=(iss.w||0.12)*W, h=(iss.h||0.1)*H;
+    ctx.fillStyle=col; ctx.globalAlpha=0.22; ctx.fillRect(x,y,w,h);
+    ctx.strokeStyle=col; ctx.lineWidth=1.5; ctx.globalAlpha=0.9; ctx.strokeRect(x,y,w,h);
+    ctx.fillStyle=col; ctx.globalAlpha=1; ctx.font='bold 10px sans-serif';
+    ctx.fillText((iss.type||'').replace('_',' '),x+2,y>16?y-3:y+h+11);
+    var already=false; for(var i=0;i<legend.length;i++){ if(legend[i].t===iss.type){ already=true; break; } }
+    if(!already) legend.push({t:iss.type,col:col});
+  });
+
+  // Labels
+  ctx.font='11px sans-serif'; ctx.fillStyle='#fff'; ctx.globalAlpha=0.85;
+  ctx.fillText('Centering: '+(cond.centering||'N/A'),6,H-6);
+  return {dataUrl:c.toDataURL('image/png'),legend:legend};
+}
 
 // ── RENDER HELPERS ────────────────────────────────────────
-function fmt(v){
-  if(v==null||isNaN(+v)) return 'N/A';
-  return '$'+parseFloat(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
-}
-function gradeLabel(g){
-  var n=parseFloat(g);
-  if(isNaN(n)) return '';
-  if(n>=9.5) return 'Gem Mint';
-  if(n>=9) return 'Mint';
-  if(n>=8) return 'NM-Mint';
-  if(n>=7) return 'Near Mint';
-  if(n>=6) return 'Exc-Mint';
-  if(n>=5) return 'Excellent';
-  if(n>=4) return 'VG-Exc';
-  return 'Good or lower';
-}
-function gradePct(g){ var n=parseFloat(g); return isNaN(n)?0:Math.round((Math.min(n,10)/10)*100); }
-function dotC(v){
-  if(!v) return '';
-  var s=v.toLowerCase();
-  if(s.indexOf('sharp')>=0||s.indexOf('clean')>=0||s.indexOf('excellent')>=0) return 'dot-g';
-  if(s.indexOf('minor')>=0||s.indexOf('moderate')>=0||s.indexOf('off')>=0) return 'dot-o';
-  return 'dot-b';
-}
-function trendH(trend, pct){
-  if(trend==='up') return '<span class="trend-pill t-up">&#8593; +'+( pct||0)+'% 30d</span>';
-  if(trend==='down') return '<span class="trend-pill t-dn">&#8595; -'+(pct||0)+'% 30d</span>';
-  return '<span class="trend-pill t-fl">Stable</span>';
-}
-function buildSales(sales, badge, badgeLbl){
+function fmt(v){ if(v==null||isNaN(+v)) return 'N/A'; return '$'+parseFloat(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+function glabel(g){ var n=parseFloat(g); if(isNaN(n)) return ''; if(n>=9.5) return 'Gem Mint'; if(n>=9) return 'Mint'; if(n>=8) return 'NM-Mint'; if(n>=7) return 'Near Mint'; if(n>=6) return 'Exc-Mint'; if(n>=5) return 'Excellent'; return 'VG or lower'; }
+function gpct(g){ var n=parseFloat(g); return isNaN(n)?0:Math.round(Math.min(n,10)/10*100); }
+function dotC(v){ if(!v) return ''; var s=v.toLowerCase(); if(s.indexOf('sharp')>=0||s.indexOf('clean')>=0||s.indexOf('excellent')>=0) return 'dot-g'; if(s.indexOf('minor')>=0||s.indexOf('moderate')>=0||s.indexOf('off')>=0) return 'dot-o'; return 'dot-b'; }
+function trendH(t,p){ if(t==='up') return '<span class="trend-pill t-up">&#8593;+'+( p||0)+'%</span>'; if(t==='down') return '<span class="trend-pill t-dn">&#8595;-'+(p||0)+'%</span>'; return '<span class="trend-pill t-fl">Stable</span>'; }
+function saleRows(sales,badge,bl){
   if(!sales||!sales.length) return '';
   return sales.slice(0,10).map(function(s){
-    var ok = s.url && s.url.indexOf('http')===0;
-    var inner = '<span class="s-plat">'+(s.platform||'eBay')+'</span>'
-      +'<span class="'+(badge==='raw'?'s-raw-badge':'s-badge')+'">'+(badge==='raw'?'RAW':badgeLbl)+'</span>'
-      +'<span class="s-title">'+(s.title||'')+'</span>'
-      +'<span class="s-price">'+fmt(s.price)+'</span>'
-      +'<span class="s-ext">'+(ok?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>':'')+'</span>';
-    return ok
-      ? '<a class="sale-row" href="'+s.url+'" target="_blank" rel="noopener">'+inner+'</a>'
-      : '<div class="sale-row">'+inner+'</div>';
+    var ok=s.url&&s.url.indexOf('http')===0;
+    var inner='<span class="s-plat">'+(s.platform||'eBay')+'</span><span class="'+(badge==='raw'?'s-raw-badge':'s-badge')+'">'+(badge==='raw'?'RAW':bl)+'</span><span class="s-title">'+(s.title||s.date||'')+'</span><span class="s-price">'+fmt(s.price)+'</span><span class="s-ext">'+(ok?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>':'')+'</span>';
+    return ok?'<a class="sale-row" href="'+s.url+'" target="_blank" rel="noopener">'+inner+'</a>':'<div class="sale-row">'+inner+'</div>';
   }).join('');
 }
 
-// ── RENDER GRADED ─────────────────────────────────────────
-function renderGraded(card, pricing, thumb){
-  var q = encodeURIComponent(card.fullSearchQuery||(card.cardName+' '+(card.gradingCompany||'PSA')+' '+(card.grade||'')));
-  var badge = (card.gradingCompany||'PSA')+' '+(card.grade||'');
-  var det = [card.setName, card.cardNumber?'#'+card.cardNumber:null, card.year, card.variety].filter(Boolean).join(' · ');
-  var salesHtml = buildSales(pricing.recentSales, 'graded', badge);
-  var n = pricing.recentSales ? pricing.recentSales.length : 0;
+// ── EDIT MODAL ────────────────────────────────────────────
+var pendingCardForEdit=null;
+function openEditModal(card, mode){
+  pendingCardForEdit=card;
+  ge('edit-name').value=card.cardName||'';
+  ge('edit-set').value=card.setName||'';
+  ge('edit-num').value=card.cardNumber||'';
+  ge('edit-year').value=card.year||'';
+  ge('edit-variety').value=card.variety||'';
+  if(mode==='graded'){
+    showEl('graded-edit-fields');
+    ge('edit-company').value=card.gradingCompany||'PSA';
+    ge('edit-grade').value=card.grade||'';
+    ge('edit-cert').value=card.certNumber||'';
+  } else {
+    hideEl('graded-edit-fields');
+  }
+  showEl('edit-modal');
+}
+ge('edit-cancel-btn').addEventListener('click',function(){ hideEl('edit-modal'); });
+ge('edit-modal').addEventListener('click',function(e){ if(e.target===ge('edit-modal')) hideEl('edit-modal'); });
+ge('edit-save-btn').addEventListener('click',function(){
+  if(!pendingCardForEdit) return;
+  var updated=JSON.parse(JSON.stringify(pendingCardForEdit));
+  updated.cardName=ge('edit-name').value.trim()||updated.cardName;
+  updated.setName=ge('edit-set').value.trim()||null;
+  updated.cardNumber=ge('edit-num').value.trim()||null;
+  updated.year=ge('edit-year').value.trim()||null;
+  updated.variety=ge('edit-variety').value.trim()||null;
+  if(currentMode==='graded'){
+    updated.gradingCompany=ge('edit-company').value.trim()||'PSA';
+    updated.grade=ge('edit-grade').value.trim()||updated.grade;
+    updated.certNumber=ge('edit-cert').value.trim()||null;
+    updated.sq=(updated.gradingCompany)+' '+(updated.grade)+' '+(updated.cardName)+(updated.setName?' '+updated.setName:'')+(updated.variety?' '+updated.variety:'');
+  } else {
+    updated.tcgName=updated.cardName+(updated.setName?' '+updated.setName:'');
+    updated.rawSearchQuery=updated.cardName+(updated.setName?' '+updated.setName:'')+' raw ungraded';
+  }
+  manualCard=updated;
+  hideEl('edit-modal');
+  hideEl('results-sec'); hideEl('fab'); hideEl('err-sec');
+  showEl('status-sec'); setHTML('results-sec','');
+  if(currentMode==='graded') fetchGradedPricing(updated);
+  else reScanRawPricing(updated);
+});
 
-  var html = '<div class="id-card">'
+function reScanRawPricing(card){
+  setStatus('Getting updated pricing…');
+  var psaG=(card.psa&&card.psa.grade)?card.psa.grade:'9';
+  var tcgName=card.tcgName||card.cardName+(card.setName?' '+card.setName:'');
+  callClaude([{role:'user',content:
+    'Search TCGplayer.com for: "'+tcgName+'" ('+card.game+'). Also search eBay sold for PSA '+psaG+' graded: "'+card.cardName+(card.setName?' '+card.setName:'')+' PSA '+psaG+'".\nReturn ONLY JSON:\n{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/...","gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":30,"rawSales":[{"price":42,"date":"May 2025","title":"title","url":"https://www.ebay.com/itm/123"}],"trend":"stable","conf":"medium"}'
+  }], true, function(err,txt){
+    var pricing;
+    try{ pricing=parseJSON(txt); }
+    catch(e){ pricing={tcgMarket:null,tcgLow:null,tcgHigh:null,tcgUrl:null,gradedPSA:null,gradedBGS:null,gradedCGC:null,gradingFee:30,rawSales:[],trend:'stable',conf:'low'}; }
+    hideEl('status-sec');
+    renderRaw(card,pricing,currentThumb,null);
+    manualCard=null;
+  });
+}
+
+// ── RENDER GRADED ─────────────────────────────────────────
+function renderGraded(card,pricing,thumb){
+  var q=encodeURIComponent((card.sq||card.fullSearchQuery)||(card.cardName+' '+(card.gradingCompany||'PSA')+' '+(card.grade||'')));
+  var badge=(card.gradingCompany||'PSA')+' '+(card.grade||'');
+  var det=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' · ');
+  var n=(pricing.sales||[]).length;
+  var sh=saleRows(pricing.sales,'graded',badge);
+
+  var html='<div class="id-card">'
     +'<div class="thumb-wrap"><img class="thumb-lg" src="'+(thumb||'')+'" alt="'+card.cardName+'"><div class="grade-dot">'+(card.grade||'?')+'</div></div>'
-    +'<div class="card-meta"><span class="game-tag">'+(card.game||'Card')+'</span>'
-    +'<div class="card-name">'+card.cardName+'</div>'
+    +'<div class="card-meta"><span class="game-tag">'+(card.game||'Card')+'</span><div class="card-name">'+card.cardName+'</div>'
     +(det?'<div class="card-det">'+det+'</div>':'')
     +'<div class="card-det">'+(card.gradingCompany||'Graded')+' · Grade '+(card.grade||'?')+'</div>'
-    +(card.certNumber?'<div class="cert-row"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/></svg> Cert #'+card.certNumber+'</div>':'')
+    +(card.certNumber?'<div class="cert-row">Cert #'+card.certNumber+'</div>':'')
+    +'<button class="edit-card-btn" onclick="openEditModal(window._lastGradedCard||{},\'graded\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit card</button>'
     +'</div></div>'
 
-    +'<div class="p-card" style="background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center">'
-    +'<div class="p-lbl" style="margin-bottom:4px">'+n+'-sale average value</div>'
-    +'<div style="font-family:\'Bebas Neue\',sans-serif;font-size:38px;color:var(--red);letter-spacing:.5px;line-height:1">'+fmt(pricing.avgValue)+'</div>'
-    +'<div style="font-size:11px;color:var(--tx2);margin-top:4px">From '+n+' most recent sales · '+trendH(pricing.trend,pricing.trendPercent)+'</div>'
+    +'<div style="background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center">'
+    +'<div class="p-lbl" style="margin-bottom:3px">'+n+'-sale average</div>'
+    +'<div style="font-family:\'Bebas Neue\',sans-serif;font-size:36px;color:var(--red);line-height:1">'+fmt(pricing.avg)+'</div>'
+    +'<div style="font-size:11px;color:var(--tx2);margin-top:3px">'+trendH(pricing.trend,pricing.trendPct)+'</div>'
     +'</div>'
 
     +'<div class="price-grid">'
-    +'<div class="p-card"><div class="p-lbl">Lowest sale</div><div class="p-val">'+fmt(pricing.lowPrice)+'</div><div class="p-sub">Of last '+n+' sales</div></div>'
-    +'<div class="p-card"><div class="p-lbl">Highest sale</div><div class="p-val">'+fmt(pricing.highPrice)+'</div><div class="p-sub">Of last '+n+' sales</div></div>'
+    +'<div class="p-card"><div class="p-lbl">Low</div><div class="p-val">'+fmt(pricing.low)+'</div></div>'
+    +'<div class="p-card"><div class="p-lbl">High</div><div class="p-val">'+fmt(pricing.high)+'</div></div>'
     +'</div>'
 
-    +(salesHtml?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Last 10 sales</div><div class="sec-hdr-sub">Tap to verify on eBay</div></div>'+salesHtml+'</div>':'')
-
-    +(pricing.marketAnalysis?'<div class="info-box"><div class="info-title">Market analysis</div><div class="info-text">'+pricing.marketAnalysis+'</div></div>':'')
+    +(sh?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Last '+n+' sales</div><div class="sec-hdr-sub">Tap to verify</div></div>'+sh+'</div>':'')
 
     +'<div class="links-card"><div class="links-title">Marketplaces</div><div class="chips">'
     +'<a class="chip" href="https://www.ebay.com/sch/i.html?_nkw='+q+'&LH_Sold=1&LH_Complete=1" target="_blank">eBay Sold</a>'
     +'<a class="chip" href="https://www.130point.com/sales/?query='+q+'" target="_blank">130point</a>'
     +'<a class="chip" href="https://mavin.io/search?q='+q+'&sold=1" target="_blank">Mavin</a>'
-    +'<a class="chip" href="https://www.pwccmarketplace.com/search?query='+encodeURIComponent(card.cardName)+'" target="_blank">PWCC</a>'
     +(card.certNumber?'<a class="chip" href="https://www.psacard.com/cert/'+card.certNumber+'" target="_blank">PSA Verify</a>':'')
     +'</div></div>';
 
-  setHTML('results-sec', html);
-  showEl('results-sec');
-  showEl('fab');
+  window._lastGradedCard=card;
+  setHTML('results-sec',html);
+  showEl('results-sec'); showEl('fab');
 }
 
 // ── RENDER RAW ────────────────────────────────────────────
-function renderRaw(card, pricing, thumb, annotation){
-  var q = encodeURIComponent(card.rawSearchQuery||card.cardName);
-  var det = [card.setName, card.cardNumber?'#'+card.cardNumber:null, card.year, card.variety].filter(Boolean).join(' · ');
-  var cond = card.condition || {};
-  var condItems = [{l:'Centering',v:cond.centering||'N/A'},{l:'Corners',v:cond.corners||'N/A'},{l:'Edges',v:cond.edges||'N/A'},{l:'Surface',v:cond.surface||'N/A'}];
-  var cos = [
-    {l:'PSA',d:card.psaGrade||{},gv:pricing.gradedValuePSA},
-    {l:'BGS',d:card.bgsGrade||{},gv:pricing.gradedValueBGS},
-    {l:'CGC',d:card.cgcGrade||{},gv:pricing.gradedValueCGC}
-  ];
+function renderRaw(card,pricing,thumb,annotation){
+  var q=encodeURIComponent(card.tcgName||card.cardName+(card.setName?' '+card.setName:''));
+  var det=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' · ');
+  var cond=card.condition||{};
+  var condItems=[{l:'Centering',v:cond.centering||'N/A'},{l:'Corners',v:cond.corners||'N/A'},{l:'Edges',v:cond.edges||'N/A'},{l:'Surface',v:cond.surface||'N/A'}];
+  if(cond.backCondition) condItems.push({l:'Back',v:cond.backCondition});
+  var cos=[{l:'PSA',d:card.psa||{},gv:pricing.gradedPSA},{l:'BGS',d:card.bgs||{},gv:pricing.gradedBGS},{l:'CGC',d:card.cgc||{},gv:pricing.gradedCGC}];
+  var psaG=(card.psa&&card.psa.grade)?card.psa.grade:'?';
 
-  var bestGradedVal = Math.max(pricing.gradedValuePSA||0, pricing.gradedValueBGS||0, pricing.gradedValueCGC||0);
-  var rawVal = pricing.rawValue||0;
-  var gradingCost = pricing.gradingCostPSA||30;
-  var profit = bestGradedVal - (rawVal + gradingCost);
-  var vClass='maybe', vIcon='&#x1F914;', vTitle='Maybe worth grading', vBody='';
-  if(bestGradedVal>0&&rawVal>0){
-    if(profit>30){ vClass='yes'; vIcon='&#x2705;'; vTitle='Worth grading!'; }
-    else if(profit<0){ vClass='no'; vIcon='&#x274C;'; vTitle='Not worth grading'; }
-    vBody='Graded value ~'+fmt(bestGradedVal)+' vs raw '+fmt(rawVal)+' + ~'+fmt(gradingCost)+' grading fee = estimated profit <strong>'+(profit>=0?'+':'')+fmt(profit)+'</strong>.';
-  } else {
-    vBody='Not enough pricing data to calculate ROI. Check marketplace links for current graded prices.';
-  }
+  // Verdict
+  var best=Math.max(pricing.gradedPSA||0,pricing.gradedBGS||0,pricing.gradedCGC||0);
+  var rawV=pricing.tcgMarket||0;
+  var fee=pricing.gradingFee||30;
+  var profit=best-(rawV+fee);
+  var vc='maybe',vi='&#x1F914;',vt='Maybe worth grading',vb='';
+  if(best>0&&rawV>0){
+    if(profit>30){vc='yes';vi='&#x2705;';vt='Worth grading!';}
+    else if(profit<0){vc='no';vi='&#x274C;';vt='Not worth grading';}
+    vb='Graded ~'+fmt(best)+' vs raw '+fmt(rawV)+' + '+fmt(fee)+' fee = <strong>'+(profit>=0?'+':'')+fmt(profit)+'</strong>';
+  } else { vb='Insufficient pricing data. Check TCGplayer link below.'; }
 
-  // Annotation section
-  var annoHtml = '';
-  if(annotation && annotation.dataUrl){
-    var legendHtml = '';
-    if(annotation.legend && annotation.legend.length){
-      legendHtml = '<div class="annotation-legend">';
-      annotation.legend.forEach(function(item){
-        legendHtml += '<div class="leg-item"><span class="leg-dot" style="background:'+item.color+'"></span>'+item.label+'</div>';
-      });
-      legendHtml += '</div>';
+  var annoHtml='';
+  if(annotation&&annotation.dataUrl){
+    var legHtml='';
+    var colorMap={whitening:'#fbbf24',scratch:'#f87171',dent:'#a78bfa',crease:'#fb923c',stain:'#f472b6',print_defect:'#34d399'};
+    if(annotation.legend&&annotation.legend.length){
+      legHtml='<div class="anno-legend">';
+      annotation.legend.forEach(function(item){ legHtml+='<div class="leg-item"><span class="leg-dot" style="background:'+item.col+'"></span>'+(item.t||'').replace('_',' ')+'</div>'; });
+      legHtml+='<div class="leg-item"><span class="leg-dot" style="background:#639922"></span>Good</div>'
+        +'<div class="leg-item"><span class="leg-dot" style="background:#BA7517"></span>Wear</div>'
+        +'<div class="leg-item"><span class="leg-dot" style="background:#E24B4A"></span>Damage</div>'
+        +'</div>';
     }
-    // Add legend entries for structural items always shown
-    legendHtml += '<div class="annotation-legend" style="border-top:none;padding-top:0">'
-      +'<div class="leg-item"><span class="leg-dot" style="background:#639922"></span>Good</div>'
-      +'<div class="leg-item"><span class="leg-dot" style="background:#BA7517"></span>Minor wear</div>'
-      +'<div class="leg-item"><span class="leg-dot" style="background:#E24B4A"></span>Damage</div>'
-      +'</div>';
-    annoHtml = '<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Condition map</div><div class="sec-hdr-sub">AI-detected issues</div></div>'
-      +'<div class="annotation-wrap"><img src="'+annotation.dataUrl+'" style="width:100%;display:block;border-radius:0" alt="Card condition map"/></div>'
-      +legendHtml+'</div>';
+    annoHtml='<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Condition map</div><div class="sec-hdr-sub">AI-detected issues</div></div>'
+      +'<img class="anno-img" src="'+annotation.dataUrl+'" alt="Condition map"/>'+legHtml+'</div>';
   }
 
-  var salesHtml = buildSales(pricing.recentRawSales, 'raw', '');
+  var sh=saleRows(pricing.rawSales,'raw','');
 
-  var html = '<div class="id-card">'
+  var html='<div class="id-card">'
     +'<div class="thumb-wrap"><img class="thumb-lg" src="'+(thumb||'')+'" alt="'+card.cardName+'"><div class="raw-dot">RAW</div></div>'
-    +'<div class="card-meta"><span class="raw-tag">Ungraded</span>'
-    +'<div class="card-name">'+card.cardName+'</div>'
+    +'<div class="card-meta"><span class="raw-tag">Ungraded</span><div class="card-name">'+card.cardName+'</div>'
     +(det?'<div class="card-det">'+det+'</div>':'')
-    +'<div class="card-det">'+(card.game||'Trading Card')+'</div>'
+    +'<button class="edit-card-btn" onclick="openEditModal(window._lastRawCard||{},\'raw\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit card</button>'
     +'</div></div>'
 
-    +'<div class="p-card" style="background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center">'
-    +'<div class="p-lbl" style="margin-bottom:4px">Raw market value</div>'
-    +'<div style="font-family:\'Bebas Neue\',sans-serif;font-size:38px;color:var(--tx);letter-spacing:.5px;line-height:1">'+fmt(pricing.rawValue)+'</div>'
-    +'<div style="font-size:11px;color:var(--tx2);margin-top:4px">'+trendH(pricing.trend,pricing.trendPercent)+' · '+(pricing.rawSalesFound||0)+' sales found</div>'
+    +'<div style="background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center">'
+    +'<div class="p-lbl" style="margin-bottom:3px">TCGplayer market price</div>'
+    +'<div style="font-family:\'Bebas Neue\',sans-serif;font-size:36px;color:var(--tx);line-height:1">'+fmt(pricing.tcgMarket)+'</div>'
+    +'<div style="font-size:11px;color:var(--tx2);margin-top:3px">'+trendH(pricing.trend,pricing.trendPct)+(pricing.tcgUrl?'&nbsp;<a href="'+pricing.tcgUrl+'" target="_blank" style="color:var(--red);text-decoration:none;font-size:11px">View on TCGplayer &#x2197;</a>':'')+'</div>'
     +'</div>'
 
-    // Condition annotation image
+    +'<div class="price-grid">'
+    +'<div class="p-card"><div class="p-lbl">TCG Low</div><div class="p-val">'+fmt(pricing.tcgLow)+'</div></div>'
+    +'<div class="p-card"><div class="p-lbl">TCG High</div><div class="p-val">'+fmt(pricing.tcgHigh)+'</div></div>'
+    +'</div>'
+
     + annoHtml
 
-    // Grade predictions
     +'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Predicted grades &amp; graded value</div></div>'
     +cos.map(function(co){
-      var g=co.d.grade||'?';
-      var pct=gradePct(g);
-      var conf=co.d.confidence||'low';
+      var g=(co.d&&co.d.grade)?co.d.grade:'?';
+      var conf=(co.d&&co.d.conf)?co.d.conf:'low';
       return '<div class="cg-row"><span class="cg-logo">'+co.l+'</span><span class="cg-grade">'+g+'</span>'
-        +'<div class="cg-mid"><div class="cg-bar-bg"><div class="cg-bar-fill" style="width:'+pct+'%"></div></div><div class="cg-lbl">'+gradeLabel(g)+'</div></div>'
+        +'<div class="cg-mid"><div class="cg-bar-bg"><div class="cg-bar-fill" style="width:'+gpct(g)+'%"></div></div><div class="cg-lbl">'+glabel(g)+'</div></div>'
         +'<div class="cg-right"><span class="cg-val">'+(co.gv!=null?fmt(co.gv):'N/A')+'</span><span class="cg-val-lbl">if graded</span><span class="conf-pill conf-'+conf+'">'+conf+'</span></div>'
         +'</div>';
     }).join('')
-    +'<div class="cond-sec"><div class="cond-title">Condition breakdown</div><div class="cond-grid">'
+    +'<div class="cond-sec"><div class="cond-title">Condition</div><div class="cond-grid">'
     +condItems.map(function(ci){ return '<div class="cond-item"><div class="cond-lbl">'+ci.l+'</div><div class="cond-val"><span class="dot '+dotC(ci.v)+'"></span>'+ci.v+'</div></div>'; }).join('')
     +'</div></div></div>'
 
-    +(card.gradingNotes?'<div class="info-box"><div class="info-title">Grading notes</div><div class="info-text">'+card.gradingNotes+'</div></div>':'')
+    +(card.notes?'<div style="font-size:12px;color:var(--tx2);padding:2px 2px">'+card.notes+'</div>':'')
 
-    +'<div class="verdict-card '+vClass+'"><div class="verdict-top"><span class="verdict-icon">'+vIcon+'</span><span class="verdict-title '+vClass+'">'+vTitle+'</span></div><div class="verdict-body">'+vBody+'</div></div>'
+    +'<div class="verdict-card '+vc+'"><div class="verdict-top"><span class="verdict-icon">'+vi+'</span><span class="verdict-title '+vc+'">'+vt+'</span></div><div class="verdict-body">'+vb+'</div></div>'
 
-    +(salesHtml?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Recent raw sales</div><div class="sec-hdr-sub">Tap to verify on eBay</div></div>'+salesHtml+'</div>':'')
+    +(sh?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Recent raw sales (eBay)</div><div class="sec-hdr-sub">Tap to verify</div></div>'+sh+'</div>':'')
 
-    +(pricing.marketAnalysis?'<div class="info-box"><div class="info-title">Market analysis</div><div class="info-text">'+pricing.marketAnalysis+'</div></div>':'')
-
-    +'<div class="links-card"><div class="links-title">Marketplaces &amp; submit</div><div class="chips">'
-    +'<a class="chip" href="https://www.ebay.com/sch/i.html?_nkw='+q+'&LH_Sold=1&LH_Complete=1" target="_blank">eBay Sold</a>'
-    +'<a class="chip" href="https://mavin.io/search?q='+q+'&sold=1" target="_blank">Mavin</a>'
-    +'<a class="chip" href="https://www.130point.com/sales/?query='+q+'" target="_blank">130point</a>'
+    +'<div class="links-card"><div class="links-title">Links</div><div class="chips">'
+    +(pricing.tcgUrl?'<a class="chip" href="'+pricing.tcgUrl+'" target="_blank">TCGplayer</a>':'<a class="chip" href="https://www.tcgplayer.com/search/all/product?q='+q+'&view=grid" target="_blank">TCGplayer</a>')
+    +'<a class="chip" href="https://www.ebay.com/sch/i.html?_nkw='+q+'+raw&LH_Sold=1&LH_Complete=1" target="_blank">eBay Raw</a>'
     +'<a class="chip" href="https://www.psacard.com/submission" target="_blank">Submit PSA</a>'
     +'<a class="chip" href="https://www.cgccomics.com/cards/submit/" target="_blank">Submit CGC</a>'
     +'</div></div>';
 
-  setHTML('results-sec', html);
-  showEl('results-sec');
-  showEl('fab');
+  window._lastRawCard=card;
+  setHTML('results-sec',html);
+  showEl('results-sec'); showEl('fab');
 }
 
 // ── START ─────────────────────────────────────────────────
