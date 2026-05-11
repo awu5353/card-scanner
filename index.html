@@ -41,7 +41,7 @@ body{display:flex;flex-direction:column}
 .scan-area-sub{font-size:11px;color:var(--tx2);margin-left:auto}
 /* LIVE VIEWFINDER */
 .viewfinder-wrap{position:relative;background:#000;cursor:pointer}
-.viewfinder-wrap video{width:100%;display:block;max-height:56vw;object-fit:cover}
+.viewfinder-wrap video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
 .viewfinder-overlay{position:absolute;inset:0;pointer-events:none}
 .vf-guide{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68%;height:90%;border:2px solid rgba(226,75,74,.8);border-radius:4px;box-shadow:0 0 0 9999px rgba(0,0,0,.35)}
 .vf-corner{position:absolute;width:16px;height:16px;border-color:var(--red);border-style:solid}
@@ -526,16 +526,32 @@ function stopViewfinder(){
 }
 function captureFromViewfinder(){
   var v=ge('vf-vid'),c=ge('vf-detect');
-  var w=v.videoWidth||1280,h=v.videoHeight||720;
-  c.width=w; c.height=h; c.getContext('2d').drawImage(v,0,0,w,h);
-  var raw=c.toDataURL('image/jpeg',.85);
+  var vw=v.videoWidth||1280, vh=v.videoHeight||720;
+  if(currentMode==='raw'){
+    // For raw cards: crop to guide box (68% wide, 90% tall, centered) to isolate the card
+    var gw=Math.round(vw*0.68), gh=Math.round(vh*0.90);
+    var gx=Math.round((vw-gw)/2), gy=Math.round((vh-gh)/2);
+    c.width=gw; c.height=gh;
+    c.getContext('2d').drawImage(v,gx,gy,gw,gh,0,0,gw,gh);
+  } else {
+    // For graded cards: capture full frame (label may be anywhere)
+    c.width=vw; c.height=vh;
+    c.getContext('2d').drawImage(v,0,0,vw,vh);
+  }
+  var raw=c.toDataURL('image/jpeg',.88);
   resizeDU(raw,function(d){ setFrontImage(d,'camera-capture.jpg',0); });
 }
 
 // ── FILE PICKER ───────────────────────────────────────────
 ge('file-input').addEventListener('change',function(e){
   var f=e.target.files[0]; if(!f) return;
-  resizeFile(f,function(d,n,s){ setFrontImage(d,n,s); });
+  resizeFile(f,function(d,n,s){
+    if(currentMode==='raw'){
+      cropCardFromImage(d,function(cropped){ setFrontImage(cropped,n,s); });
+    } else {
+      setFrontImage(d,n,s);
+    }
+  });
 });
 var dz=ge('drop-zone');
 dz.addEventListener('dragover',function(e){ e.preventDefault(); dz.classList.add('drag-over'); });
@@ -568,9 +584,13 @@ ge('cam-back-btn').addEventListener('click',function(){
 });
 function captureBackFromViewfinder(){
   var v=ge('vf-vid'),c=ge('vf-detect');
-  var w=v.videoWidth||1280,h=v.videoHeight||720;
-  c.width=w; c.height=h; c.getContext('2d').drawImage(v,0,0,w,h);
-  var raw=c.toDataURL('image/jpeg',.85);
+  var vw=v.videoWidth||1280, vh=v.videoHeight||720;
+  // Back capture: always crop to guide box
+  var gw=Math.round(vw*0.68), gh=Math.round(vh*0.90);
+  var gx=Math.round((vw-gw)/2), gy=Math.round((vh-gh)/2);
+  c.width=gw; c.height=gh;
+  c.getContext('2d').drawImage(v,gx,gy,gw,gh,0,0,gw,gh);
+  var raw=c.toDataURL('image/jpeg',.88);
   resizeDU(raw,function(d){ setBackImage(d); });
   ge('vf-wrap').removeEventListener('click',captureBackFromViewfinder);
   ge('vf-wrap').addEventListener('click',captureFromViewfinder);
@@ -579,7 +599,9 @@ function captureBackFromViewfinder(){
 }
 ge('back-file-input').addEventListener('change',function(e){
   var f=e.target.files[0]; if(!f) return;
-  resizeFile(f,function(d){ setBackImage(d); });
+  resizeFile(f,function(d){
+    cropCardFromImage(d,function(cropped){ setBackImage(cropped); });
+  });
 });
 ge('skip-back-btn').addEventListener('click',function(){
   currentBackB64=null; hideEl('back-step');
@@ -603,6 +625,69 @@ function resizeDU(dataUrl,cb){
     var s=Math.min(1,MAX/img.width),w=Math.round(img.width*s),h=Math.round(img.height*s);
     var c=document.createElement('canvas'); c.width=w; c.height=h;
     c.getContext('2d').drawImage(img,0,0,w,h); cb(c.toDataURL('image/jpeg',.82));
+  };
+  img.src=dataUrl;
+}
+
+// Crop a raw card image to remove excess background, keeping card area with padding
+function cropCardFromImage(dataUrl,cb){
+  var img=new Image();
+  img.onload=function(){
+    var W=img.width, H=img.height;
+    var c=document.createElement('canvas'); c.width=W; c.height=H;
+    var ctx=c.getContext('2d');
+    ctx.drawImage(img,0,0,W,H);
+    var data=ctx.getImageData(0,0,W,H).data;
+
+    // Find bounding box of non-background pixels
+    // Use edge brightness variance to find card edges
+    var SAMPLE=4; // sample every 4px for speed
+    var minX=W, maxX=0, minY=H, maxY=0;
+
+    // Background color: sample corner pixels
+    function getPixel(x,y){ var i=(y*W+x)*4; return [data[i],data[i+1],data[i+2]]; }
+    function colorDist(a,b){ return Math.abs(a[0]-b[0])+Math.abs(a[1]-b[1])+Math.abs(a[2]-b[2]); }
+
+    // Sample 4 corners for background estimation
+    var bg=[
+      getPixel(2,2), getPixel(W-3,2), getPixel(2,H-3), getPixel(W-3,H-3)
+    ];
+    var bgAvg=[
+      Math.round((bg[0][0]+bg[1][0]+bg[2][0]+bg[3][0])/4),
+      Math.round((bg[0][1]+bg[1][1]+bg[2][1]+bg[3][1])/4),
+      Math.round((bg[0][2]+bg[1][2]+bg[2][2]+bg[3][2])/4)
+    ];
+
+    var THRESH=40; // color distance threshold
+    for(var y=0; y<H; y+=SAMPLE){
+      for(var x=0; x<W; x+=SAMPLE){
+        if(colorDist(getPixel(x,y),bgAvg)>THRESH){
+          if(x<minX) minX=x; if(x>maxX) maxX=x;
+          if(y<minY) minY=y; if(y>maxY) maxY=y;
+        }
+      }
+    }
+
+    // If detection failed or card fills most of frame, return as-is
+    var PAD=Math.round(Math.min(W,H)*0.03);
+    var cX=Math.max(0,minX-PAD), cY=Math.max(0,minY-PAD);
+    var cW=Math.min(W,maxX+PAD)-cX, cH=Math.min(H,maxY+PAD)-cY;
+    var coverageX=cW/W, coverageY=cH/H;
+
+    if(cW<W*0.3||cH<H*0.3||coverageX>0.92||coverageY>0.92){
+      // Card already fills frame or detection failed, just resize
+      var MAX=800,s=Math.min(1,MAX/W),nw=Math.round(W*s),nh=Math.round(H*s);
+      var c2=document.createElement('canvas'); c2.width=nw; c2.height=nh;
+      c2.getContext('2d').drawImage(img,0,0,nw,nh);
+      cb(c2.toDataURL('image/jpeg',.85));
+      return;
+    }
+
+    // Crop to card bounds, resize to max 800px
+    var MAX=800,s=Math.min(1,MAX/cW),nw=Math.round(cW*s),nh=Math.round(cH*s);
+    var c3=document.createElement('canvas'); c3.width=nw; c3.height=nh;
+    c3.getContext('2d').drawImage(img,cX,cY,cW,cH,0,0,nw,nh);
+    cb(c3.toDataURL('image/jpeg',.85));
   };
   img.src=dataUrl;
 }
@@ -673,29 +758,34 @@ function fetchGradedPricing(card){
   var grade=card.grade||'10';
   var set=card.setName||'';
   var variety=card.variety||'';
-  var year=card.year||'';
+  var num=card.cardNumber||'';
 
-  var q1=company+' '+grade+' '+name+(set?' '+set:'')+(variety?' '+variety:'')+(year?' '+year:'');
-  var q2=company+' '+grade+' '+name+(set?' '+set:'');
-  var q3=company+' '+grade+' '+name;
-  var nameParts=name.split(' ').filter(function(w){ return w.length>2; });
-  var q4=company+' '+grade+' '+nameParts.join(' ');
+  // Always include card number in queries when available — it uniquely identifies the card
+  var numStr=num?' #'+num:'';
+  var q1=company+' '+grade+' '+name+numStr+(set?' '+set:'')+(variety?' '+variety:'');
+  var q2=company+' '+grade+' '+name+numStr+(set?' '+set:'');
+  var q3=company+' '+grade+' '+name+(num?' '+num:'')+(set?' '+set:'');
+  var q4=company+' '+grade+' '+name+(set?' '+set:'');
 
-  var prompt='Search eBay completed/sold listings. Find the 10 most recently sold copies of this graded card.\n'
-    +'Card: '+name+(set?' set: '+set:'')+(variety?', '+variety:'')+(year?', '+year:'')+'\n'
-    +'Grade: '+company+' '+grade+'\n'
-    +'Run ALL these searches and combine/deduplicate results:\n'
+  var cardDesc=name+(num?' card #'+num:'')+(set?', set: '+set:'')+(variety?', '+variety:'');
+
+  var prompt='Search eBay completed/sold listings for the 10 most recently sold copies of this EXACT graded card.\n'
+    +'EXACT CARD: '+cardDesc+'\n'
+    +'GRADE: '+company+' '+grade+'\n'
+    +(num?'CRITICAL: The card number is '+num+'. Only include sales for card #'+num+', NOT other numbered cards from the same set.\n':'')
+    +'Run ALL these eBay searches, combine and deduplicate by item URL:\n'
     +'SEARCH 1: '+q1+'\n'
     +'SEARCH 2: '+q2+'\n'
     +'SEARCH 3: '+q3+'\n'
     +'SEARCH 4: '+q4+'\n'
-    +'Rules: NO date restriction. Include any sale regardless of age, newest first. '
-    +'Match listings containing the key card name words + grade even if title is abbreviated, misspelled, or in Japanese. '
-    +'Japanese/foreign language listings are valid if card and grade match. '
-    +'Include eBay item URL (https://www.ebay.com/itm/ITEMNUMBER) where visible. '
-    +'If fewer than 10 found across all searches, return all found.\n'
-    +'Return ONLY valid JSON, no markdown:\n'
-    +'{"sales":[{"price":145,"date":"May 3 2025","title":"listing title","url":"https://www.ebay.com/itm/123456789"}],"trend":"up|down|stable"}';
+    +'Rules:\n'
+    +'- NO date restriction — any sale, newest first\n'
+    +(num?'- MUST be card number '+num+' — reject any result with a different card number\n':'')
+    +'- Match listings with key card name words + grade, even abbreviated or in Japanese/other languages\n'
+    +'- For each result: extract the exact eBay item URL as https://www.ebay.com/itm/ITEMNUMBER\n'
+    +'- Return up to 10 results, or all found if fewer exist\n'
+    +'Return ONLY valid JSON (no markdown, no extra text):\n'
+    +'{"sales":[{"price":145,"date":"May 2025","title":"listing title","url":"https://www.ebay.com/itm/123456789"}],"trend":"up|down|stable"}';
 
   callClaude([{role:'user',content:prompt}], true, function(err,txt){
     if(err){ showErr(err.message); return; }
@@ -745,30 +835,56 @@ function runRaw(){
     catch(e){ showErr('Could not analyze card. Try a clearer, well-lit photo.'); return; }
     if(!card.cardName||card.cardName.toLowerCase()==='unknown'){ showErr('Could not identify card. Try a clearer image.'); return; }
 
-    setStatus('Getting TCGplayer pricing &amp; graded values…');
     var psaG=(card.psa&&card.psa.grade)?card.psa.grade:'9';
+    var bgsG=(card.bgs&&card.bgs.grade)?card.bgs.grade:psaG;
+    var cgcG=(card.cgc&&card.cgc.grade)?card.cgc.grade:psaG;
     var tcgName=card.tcgName||card.cardName+(card.setName?' '+card.setName:'');
+    var cardBase=card.cardName+(card.setName?' '+card.setName:'');
 
-    // Single combined pricing call: TCGplayer raw + 5 most recent graded sales per company for value average
-    var pricingPrompt='Search TCGplayer.com for current market price of: "'+tcgName+'" ('+card.game+'). '
-      +'Also search eBay sold for the 5 most recently sold graded copies at these grades: '
-      +'PSA '+psaG+', BGS '+((card.bgs&&card.bgs.grade)?card.bgs.grade:psaG)+', CGC '+((card.cgc&&card.cgc.grade)?card.cgc.grade:psaG)
-      +' — card: "'+card.cardName+(card.setName?' '+card.setName:'')+'" — no date filter, any recent sale. '
-      +'Average each company\'s 5 sales for an estimated graded value. '
-      +'Return ONLY JSON:\n'
-      +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/...","gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":30,"rawSales":[{"price":42,"date":"May 2025","title":"title","url":"https://www.ebay.com/itm/123"}],"trend":"stable","conf":"medium"}';
+    // Call 1: TCGplayer market price
+    setStatus('Getting TCGplayer market price\u2026');
+    var tcgPrompt='Go to tcgplayer.com and search for the current market price of this trading card: "'+tcgName+'" game: '+card.game+'.\n'
+      +'Find the TCGplayer Market Price, Low price, and a direct product URL.\n'
+      +'Return ONLY valid JSON:\n'
+      +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/product/NUMBER/name","conf":"high|medium|low"}';
 
-    callClaude([{role:'user',content:pricingPrompt}], true, function(err2,priceText){
-      if(err2){ showErr(err2.message); return; }
-      var pricing;
-      try{ pricing=parseJSON(priceText); }
-      catch(e){ pricing={tcgMarket:null,tcgLow:null,tcgHigh:null,tcgUrl:null,gradedPSA:null,gradedBGS:null,gradedCGC:null,gradingFee:30,rawSales:[],trend:'stable',conf:'low'}; }
+    callClaude([{role:'user',content:tcgPrompt}], true, function(err2,tcgText){
+      var tcgData={tcgMarket:null,tcgLow:null,tcgHigh:null,tcgUrl:null,conf:'low'};
+      try{ tcgData=parseJSON(tcgText); }catch(e){}
 
-      var anno=null;
-      try{ anno=drawAnnotation(currentThumb,currentBackB64?('data:image/jpeg;base64,'+currentBackB64):null,card); }catch(e){}
-      hideEl('status-sec');
-      renderRaw(card,pricing,currentThumb,anno);
-      addHist({mode:'raw',cardName:card.cardName,setName:card.setName,grade:psaG,displayValue:pricing.tcgMarket,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing,annotation:anno});
+      // Call 2: eBay graded sales for value estimation  
+      setStatus('Finding graded sale values\u2026');
+      var gradedPrompt='Search eBay completed/sold listings for the 5 most recently sold graded copies of "'+cardBase+'" at each of these grades:\n'
+        +'PSA '+psaG+', BGS '+bgsG+', CGC '+cgcG+'.\n'
+        +'No date restriction. Return the 5 most recent per company, average each company\'s prices.\n'
+        +'Also include up to 5 recent raw/ungraded eBay sales of "'+cardBase+'" for context.\n'
+        +'Return ONLY valid JSON:\n'
+        +'{"gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":25,"rawSales":[{"price":42,"date":"May 2025","title":"title","url":"https://www.ebay.com/itm/123456789"}],"trend":"up|down|stable"}';
+
+      callClaude([{role:'user',content:gradedPrompt}], true, function(err3,gradedText){
+        var gradedData={gradedPSA:null,gradedBGS:null,gradedCGC:null,gradingFee:25,rawSales:[],trend:'stable'};
+        try{ gradedData=parseJSON(gradedText); }catch(e){}
+
+        var pricing={
+          tcgMarket:tcgData.tcgMarket,
+          tcgLow:tcgData.tcgLow,
+          tcgHigh:tcgData.tcgHigh,
+          tcgUrl:tcgData.tcgUrl,
+          gradedPSA:gradedData.gradedPSA,
+          gradedBGS:gradedData.gradedBGS,
+          gradedCGC:gradedData.gradedCGC,
+          gradingFee:gradedData.gradingFee||25,
+          rawSales:gradedData.rawSales||[],
+          trend:gradedData.trend||tcgData.trend||'stable',
+          conf:tcgData.conf||'medium'
+        };
+
+        var anno=null;
+        try{ anno=drawAnnotation(currentThumb,currentBackB64?('data:image/jpeg;base64,'+currentBackB64):null,card); }catch(e){}
+        hideEl('status-sec');
+        renderRaw(card,pricing,currentThumb,anno);
+        addHist({mode:'raw',cardName:card.cardName,setName:card.setName,grade:psaG,displayValue:pricing.tcgMarket,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing,annotation:anno});
+      });
     });
   });
 }
@@ -850,13 +966,23 @@ function trendH(t,p){ if(t==='up') return '<span class="trend-pill t-up">&#8593;
 function saleRows(sales,badge,bl){
   if(!sales||!sales.length) return '';
   return sales.slice(0,10).map(function(s){
-    var ok=s.url&&s.url.indexOf('http')===0;
+    var rawUrl=(s.url||'').trim();
+    // Normalize eBay item numbers — sometimes returned as just number or partial path
+    if(rawUrl && rawUrl.match(/^\d{10,13}$/)) rawUrl='https://www.ebay.com/itm/'+rawUrl;
+    if(rawUrl && rawUrl.match(/^\/itm\//)) rawUrl='https://www.ebay.com'+rawUrl;
+    var ok=rawUrl.indexOf('https://')===0||rawUrl.indexOf('http://')===0;
+    var safeUrl=ok?rawUrl:'';
+    var priceStr=s.price?fmt(s.price):'N/A';
+    var title=(s.title||'')+(s.date?' · '+s.date:'');
     var inner='<span class="s-plat">'+(s.platform||'eBay')+'</span>'
       +'<span class="'+(badge==='raw'?'s-raw-badge':'s-badge')+'">'+(badge==='raw'?'RAW':bl)+'</span>'
-      +'<span class="s-title">'+(s.title||s.date||'')+'</span>'
-      +'<span class="s-price">'+fmt(s.price)+'</span>'
+      +'<span class="s-title">'+title+'</span>'
+      +'<span class="s-price">'+priceStr+'</span>'
       +'<span class="s-ext">'+(ok?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>':'')+'</span>';
-    return ok?'<a class="sale-row" href="'+s.url+'" target="_blank" rel="noopener">'+inner+'</a>':'<div class="sale-row">'+inner+'</div>';
+    if(ok){
+      return '<a class="sale-row" href="'+safeUrl+'" target="_blank" rel="noopener noreferrer" onclick="window.open(\''+safeUrl+'\',\'_blank\');return false;">'+inner+'</a>';
+    }
+    return '<div class="sale-row">'+inner+'</div>';
   }).join('');
 }
 
