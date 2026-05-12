@@ -36,24 +36,35 @@ body{display:flex;flex-direction:column}
 .key-save-btn{padding:9px 14px;background:var(--red);color:#fff;border:none;border-radius:var(--rs);font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;flex-shrink:0}
 .saved-key-row{align-items:center;gap:8px;background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:9px 13px}
 /* SCAN AREA */
-.scan-area{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);overflow:hidden;position:relative}
-.scan-area-title{padding:10px 13px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500}
-.scan-area-sub{font-size:11px;color:var(--tx2);margin-left:auto}
-/* LIVE VIEWFINDER */
-.viewfinder-wrap{position:relative;background:#000;cursor:pointer}
-.viewfinder-wrap video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.scan-area{background:#000;border-radius:var(--r);overflow:hidden;position:relative}
+.scan-area-title{padding:10px 13px;border-bottom:.5px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;background:rgba(0,0,0,.7);color:#fff;position:relative;z-index:2}
+.scan-area-sub{font-size:11px;color:rgba(255,255,255,.6);margin-left:auto}
+/* LIVE VIEWFINDER — full-width tall layout */
+.viewfinder-wrap{position:relative;background:#000;cursor:pointer;width:100%}
+.viewfinder-wrap video{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;max-height:72vw}
 .viewfinder-overlay{position:absolute;inset:0;pointer-events:none}
-.vf-guide{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68%;height:90%;border:2px solid rgba(226,75,74,.8);border-radius:4px;box-shadow:0 0 0 9999px rgba(0,0,0,.35)}
-.vf-corner{position:absolute;width:16px;height:16px;border-color:var(--red);border-style:solid}
-.vf-corner.tl{top:-1px;left:-1px;border-width:2px 0 0 2px}
-.vf-corner.tr{top:-1px;right:-1px;border-width:2px 2px 0 0}
-.vf-corner.bl{bottom:-1px;left:-1px;border-width:0 0 2px 2px}
-.vf-corner.br{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
-.vf-lock{position:absolute;top:6px;right:8px;font-size:10px;font-weight:500;color:#fff;background:rgba(99,153,34,.85);padding:2px 7px;border-radius:10px;opacity:0;transition:opacity .3s}
+/* Card-shaped guide: 63.5% wide, 88% tall for standard card 2.5x3.5 ratio */
+.vf-guide{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:63%;height:88%;border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,.5)}
+/* Animated scan line inside guide */
+.vf-scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(226,75,74,.9),transparent);animation:scanline 2s ease-in-out infinite;top:0}
+@keyframes scanline{0%{top:0;opacity:1}45%{opacity:1}50%{top:100%;opacity:0}50.1%{top:0;opacity:0}55%{opacity:1}100%{top:100%;opacity:1}}
+/* Corner brackets — bigger and more visible */
+.vf-corner{position:absolute;width:22px;height:22px;border-color:var(--red);border-style:solid}
+.vf-corner.tl{top:-1px;left:-1px;border-width:3px 0 0 3px;border-top-left-radius:4px}
+.vf-corner.tr{top:-1px;right:-1px;border-width:3px 3px 0 0;border-top-right-radius:4px}
+.vf-corner.bl{bottom:-1px;left:-1px;border-width:0 0 3px 3px;border-bottom-left-radius:4px}
+.vf-corner.br{bottom:-1px;right:-1px;border-width:0 3px 3px 0;border-bottom-right-radius:4px}
+/* Measurement guides — faint lines showing exact capture region */
+.vf-edge-top{position:absolute;top:-1px;left:22px;right:22px;height:1px;background:rgba(226,75,74,.3)}
+.vf-edge-bottom{position:absolute;bottom:-1px;left:22px;right:22px;height:1px;background:rgba(226,75,74,.3)}
+.vf-edge-left{position:absolute;left:-1px;top:22px;bottom:22px;width:1px;background:rgba(226,75,74,.3)}
+.vf-edge-right{position:absolute;right:-1px;top:22px;bottom:22px;width:1px;background:rgba(226,75,74,.3)}
+.vf-lock{position:absolute;top:6px;right:8px;font-size:10px;font-weight:500;color:#fff;background:rgba(99,153,34,.9);padding:2px 7px;border-radius:10px;opacity:0;transition:opacity .3s}
 .vf-lock.show{opacity:1}
-.vf-tap-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;white-space:nowrap}
-.vf-actions{display:flex;gap:0;border-top:.5px solid var(--bdr)}
-.vf-btn{flex:1;padding:11px 8px;background:none;border:none;border-right:.5px solid var(--bdr);font-size:12px;font-weight:500;color:var(--tx2);font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
+.vf-label{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:600;color:rgba(226,75,74,.9);letter-spacing:.8px;text-transform:uppercase;white-space:nowrap}
+.vf-tap-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;font-size:12px;font-weight:500;padding:6px 16px;border-radius:20px;white-space:nowrap;border:1px solid rgba(255,255,255,.15)}
+.vf-actions{display:flex;gap:0;background:rgba(0,0,0,.75);border-top:.5px solid rgba(255,255,255,.1)}
+.vf-btn{flex:1;padding:12px 8px;background:none;border:none;border-right:.5px solid rgba(255,255,255,.1);font-size:12px;font-weight:500;color:rgba(255,255,255,.7);font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
 .vf-btn:last-child{border-right:none}
 .vf-btn svg{width:14px;height:14px}
 .vf-btn.primary{color:var(--red)}
@@ -234,7 +245,7 @@ a.sale-row:active{background:var(--sur2)}
   <!-- SCAN AREA (live viewfinder + file fallback) -->
   <div class="scan-area" id="scan-area">
     <div class="scan-area-title">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--red)"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
       <span id="scan-area-title-txt">Scan graded card</span>
       <span class="scan-area-sub" id="vf-status-lbl">Camera off</span>
     </div>
@@ -245,15 +256,19 @@ a.sale-row:active{background:var(--sur2)}
         <div class="vf-guide" id="vf-guide">
           <div class="vf-corner tl"></div><div class="vf-corner tr"></div>
           <div class="vf-corner bl"></div><div class="vf-corner br"></div>
+          <div class="vf-edge-top"></div><div class="vf-edge-bottom"></div>
+          <div class="vf-edge-left"></div><div class="vf-edge-right"></div>
+          <div class="vf-scan-line" id="vf-scan-line"></div>
+          <div class="vf-label" id="vf-label">Align card here</div>
         </div>
         <div class="vf-lock" id="vf-lock">Card detected</div>
-        <div class="vf-tap-hint" id="vf-tap-hint">Tap to capture</div>
+        <div class="vf-tap-hint" id="vf-tap-hint">Tap anywhere to capture</div>
       </div>
     </div>
     <canvas id="vf-detect"></canvas>
     <!-- File fallback drop zone (shown when camera off) -->
     <div id="drop-zone-wrap">
-      <div class="drop-zone" id="drop-zone" style="border-radius:0;border:none;border-bottom:.5px solid var(--bdr)">
+      <div class="drop-zone" id="drop-zone" style="border-radius:0;border:none;background:#111;color:#fff;min-height:180px">
         <input type="file" id="file-input" accept="image/*"/>
         <span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
         <div class="drop-title" id="drop-title">Tap to choose photo</div>
@@ -508,7 +523,10 @@ function startViewfinder(){
       setTxt('vf-toggle-btn','Stop camera');
       ge('vf-toggle-btn').classList.add('primary');
       ge('vf-flip-btn').style.display='flex';
-      setTxt('vf-status-lbl','Live');
+      setTxt('vf-status-lbl','Live • tap to capture');
+      // Update guide label based on mode
+      var lbl=ge('vf-label');
+      if(lbl) lbl.textContent=currentMode==='raw'?'Align card — only this region is scanned':'Align card within frame';
       ge('vf-wrap').addEventListener('click',captureFromViewfinder);
     })
     .catch(function(){ alert('Camera access denied. Use the file picker instead.'); });
@@ -529,7 +547,8 @@ function captureFromViewfinder(){
   var vw=v.videoWidth||1280, vh=v.videoHeight||720;
   if(currentMode==='raw'){
     // For raw cards: crop to guide box (68% wide, 90% tall, centered) to isolate the card
-    var gw=Math.round(vw*0.68), gh=Math.round(vh*0.90);
+    // Crop to exact guide box: 63% wide, 88% tall, centered — matches CSS .vf-guide
+    var gw=Math.round(vw*0.63), gh=Math.round(vh*0.88);
     var gx=Math.round((vw-gw)/2), gy=Math.round((vh-gh)/2);
     c.width=gw; c.height=gh;
     c.getContext('2d').drawImage(v,gx,gy,gw,gh,0,0,gw,gh);
@@ -585,8 +604,8 @@ ge('cam-back-btn').addEventListener('click',function(){
 function captureBackFromViewfinder(){
   var v=ge('vf-vid'),c=ge('vf-detect');
   var vw=v.videoWidth||1280, vh=v.videoHeight||720;
-  // Back capture: always crop to guide box
-  var gw=Math.round(vw*0.68), gh=Math.round(vh*0.90);
+  // Back capture: crop to exact same guide box 63%x88%
+  var gw=Math.round(vw*0.63), gh=Math.round(vh*0.88);
   var gx=Math.round((vw-gw)/2), gy=Math.round((vh-gh)/2);
   c.width=gw; c.height=gh;
   c.getContext('2d').drawImage(v,gx,gy,gw,gh,0,0,gw,gh);
@@ -752,7 +771,7 @@ function runGraded(){
 }
 
 function fetchGradedPricing(card){
-  setStatus('Searching eBay for 10 most recent sales\u2026');
+  setStatus('Searching eBay sold listings\u2026');
   var name=card.cardName||'';
   var company=card.gradingCompany||'PSA';
   var grade=card.grade||'10';
@@ -760,32 +779,18 @@ function fetchGradedPricing(card){
   var variety=card.variety||'';
   var num=card.cardNumber||'';
 
-  // Always include card number in queries when available — it uniquely identifies the card
-  var numStr=num?' #'+num:'';
-  var q1=company+' '+grade+' '+name+numStr+(set?' '+set:'')+(variety?' '+variety:'');
-  var q2=company+' '+grade+' '+name+numStr+(set?' '+set:'');
-  var q3=company+' '+grade+' '+name+(num?' '+num:'')+(set?' '+set:'');
-  var q4=company+' '+grade+' '+name+(set?' '+set:'');
+  var searchStr=company+' '+grade+' '+name;
+  if(num) searchStr+=' '+num;
+  if(set) searchStr+=' '+set;
+  if(variety) searchStr+=' '+variety;
 
-  var cardDesc=name+(num?' card #'+num:'')+(set?', set: '+set:'')+(variety?', '+variety:'');
-
-  var prompt='Search eBay completed/sold listings for the 10 most recently sold copies of this EXACT graded card.\n'
-    +'EXACT CARD: '+cardDesc+'\n'
-    +'GRADE: '+company+' '+grade+'\n'
-    +(num?'CRITICAL: The card number is '+num+'. Only include sales for card #'+num+', NOT other numbered cards from the same set.\n':'')
-    +'Run ALL these eBay searches, combine and deduplicate by item URL:\n'
-    +'SEARCH 1: '+q1+'\n'
-    +'SEARCH 2: '+q2+'\n'
-    +'SEARCH 3: '+q3+'\n'
-    +'SEARCH 4: '+q4+'\n'
-    +'Rules:\n'
-    +'- NO date restriction — any sale, newest first\n'
-    +(num?'- MUST be card number '+num+' — reject any result with a different card number\n':'')
-    +'- Match listings with key card name words + grade, even abbreviated or in Japanese/other languages\n'
-    +'- For each result: extract the exact eBay item URL as https://www.ebay.com/itm/ITEMNUMBER\n'
-    +'- Return up to 10 results, or all found if fewer exist\n'
-    +'Return ONLY valid JSON (no markdown, no extra text):\n'
-    +'{"sales":[{"price":145,"date":"May 2025","title":"listing title","url":"https://www.ebay.com/itm/123456789"}],"trend":"up|down|stable"}';
+  var prompt='Search eBay sold/completed listings for: "'+searchStr+'"\n\n'
+    +'Return the 10 most recently SOLD listings for: "'+name+'"'+(num?' #'+num:'')+(set?' '+set:'')+' graded '+company+' '+grade+'.\n'
+    +(num?'Only include card number '+num+' — exclude different card numbers.\n':'')
+    +'Accept any sale regardless of age. Accept abbreviated or non-English titles.\n'
+    +'For each result include: price in USD, date, listing title, eBay item URL (https://www.ebay.com/itm/DIGITS).\n\n'
+    +'Respond with ONLY this JSON, no markdown:\n'
+    +'{"sales":[{"price":145,"date":"May 2025","title":"PSA 10 Charizard Holo","url":"https://www.ebay.com/itm/123456789"},{"price":138,"date":"Apr 2025","title":"title","url":"https://www.ebay.com/itm/987654321"}],"trend":"up"}';
 
   callClaude([{role:'user',content:prompt}], true, function(err,txt){
     if(err){ showErr(err.message); return; }
@@ -843,10 +848,12 @@ function runRaw(){
 
     // Call 1: TCGplayer market price
     setStatus('Getting TCGplayer market price\u2026');
-    var tcgPrompt='Go to tcgplayer.com and search for the current market price of this trading card: "'+tcgName+'" game: '+card.game+'.\n'
-      +'Find the TCGplayer Market Price, Low price, and a direct product URL.\n'
-      +'Return ONLY valid JSON:\n'
-      +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/product/NUMBER/name","conf":"high|medium|low"}';
+    var tcgPrompt='Search for the current TCGplayer market price of this trading card: "'+tcgName+'" ('+card.game+').\n'
+      +'Search query: site:tcgplayer.com "'+tcgName+'"\n'
+      +'Or search: tcgplayer "'+tcgName+'" market price\n'
+      +'Find the TCGplayer Market Price (not "listed from"), Low price, and the direct product page URL on tcgplayer.com.\n'
+      +'Return ONLY valid JSON, no markdown:\n'
+      +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/product/123456/pokemon-base-set-charizard","conf":"high|medium|low"}';
 
     callClaude([{role:'user',content:tcgPrompt}], true, function(err2,tcgText){
       var tcgData={tcgMarket:null,tcgLow:null,tcgHigh:null,tcgUrl:null,conf:'low'};
@@ -854,12 +861,11 @@ function runRaw(){
 
       // Call 2: eBay graded sales for value estimation  
       setStatus('Finding graded sale values\u2026');
-      var gradedPrompt='Search eBay completed/sold listings for the 5 most recently sold graded copies of "'+cardBase+'" at each of these grades:\n'
-        +'PSA '+psaG+', BGS '+bgsG+', CGC '+cgcG+'.\n'
-        +'No date restriction. Return the 5 most recent per company, average each company\'s prices.\n'
-        +'Also include up to 5 recent raw/ungraded eBay sales of "'+cardBase+'" for context.\n'
-        +'Return ONLY valid JSON:\n'
-        +'{"gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":25,"rawSales":[{"price":42,"date":"May 2025","title":"title","url":"https://www.ebay.com/itm/123456789"}],"trend":"up|down|stable"}';
+      var gradedPrompt='Search eBay sold listings for recent sales of "'+cardBase+'" graded at PSA '+psaG+', BGS '+bgsG+', and CGC '+cgcG+'.\n'
+        +'Return average sale price per company (average of up to 5 most recent sales each).\n'
+        +'Also find up to 5 recent raw ungraded eBay sales of "'+cardBase+'".\n'
+        +'Return ONLY valid JSON, no markdown:\n'
+        +'{"gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":25,"rawSales":[{"price":42,"date":"May 2025","title":"card title raw","url":"https://www.ebay.com/itm/123456789"}],"trend":"up|down|stable"}';
 
       callClaude([{role:'user',content:gradedPrompt}], true, function(err3,gradedText){
         var gradedData={gradedPSA:null,gradedBGS:null,gradedCGC:null,gradingFee:25,rawSales:[],trend:'stable'};
@@ -967,20 +973,19 @@ function saleRows(sales,badge,bl){
   if(!sales||!sales.length) return '';
   return sales.slice(0,10).map(function(s){
     var rawUrl=(s.url||'').trim();
-    // Normalize eBay item numbers — sometimes returned as just number or partial path
-    if(rawUrl && rawUrl.match(/^\d{10,13}$/)) rawUrl='https://www.ebay.com/itm/'+rawUrl;
-    if(rawUrl && rawUrl.match(/^\/itm\//)) rawUrl='https://www.ebay.com'+rawUrl;
+    if(rawUrl && /^\d{10,13}$/.test(rawUrl)) rawUrl='https://www.ebay.com/itm/'+rawUrl;
+    if(rawUrl && rawUrl.indexOf('/itm/')===0) rawUrl='https://www.ebay.com'+rawUrl;
     var ok=rawUrl.indexOf('https://')===0||rawUrl.indexOf('http://')===0;
     var safeUrl=ok?rawUrl:'';
     var priceStr=s.price?fmt(s.price):'N/A';
-    var title=(s.title||'')+(s.date?' · '+s.date:'');
+    var titleStr=(s.title||'')+(s.date?' \u00b7 '+s.date:'');
     var inner='<span class="s-plat">'+(s.platform||'eBay')+'</span>'
       +'<span class="'+(badge==='raw'?'s-raw-badge':'s-badge')+'">'+(badge==='raw'?'RAW':bl)+'</span>'
-      +'<span class="s-title">'+title+'</span>'
+      +'<span class="s-title">'+titleStr+'</span>'
       +'<span class="s-price">'+priceStr+'</span>'
       +'<span class="s-ext">'+(ok?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>':'')+'</span>';
     if(ok){
-      return '<a class="sale-row" href="'+safeUrl+'" target="_blank" rel="noopener noreferrer" onclick="window.open(\''+safeUrl+'\',\'_blank\');return false;">'+inner+'</a>';
+      return '<a class="sale-row" href="'+safeUrl+'" target="_blank" rel="noopener noreferrer">'+inner+'</a>';
     }
     return '<div class="sale-row">'+inner+'</div>';
   }).join('');
@@ -1045,7 +1050,10 @@ function reScanRawPricing(card){
 
 // ── RENDER GRADED ─────────────────────────────────────────
 function renderGraded(card,pricing,thumb){
-  var q=encodeURIComponent((card.cardName||'')+' '+(card.gradingCompany||'PSA')+' '+(card.grade||''));
+  var qStr=(card.cardName||'')+' '+(card.gradingCompany||'PSA')+' '+(card.grade||'');
+  if(card.cardNumber) qStr+=' '+card.cardNumber;
+  if(card.setName) qStr+=' '+card.setName;
+  var q=encodeURIComponent(qStr);
   var badge=(card.gradingCompany||'PSA')+' '+(card.grade||'');
   var det=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' · ');
   var n=(pricing.sales||[]).length;
