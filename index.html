@@ -409,7 +409,7 @@ function callClaude(messages, useWebSearch, callback){
 }
 
 function _doCall(messages,useWebSearch,callback,left){
-  var body={model:'claude-sonnet-4-20250514',max_tokens:useWebSearch?1800:900,messages:messages};
+  var body={model:'claude-sonnet-4-6',max_tokens:useWebSearch?1800:900,messages:messages};
   if(useWebSearch) body.tools=[{type:'web_search_20250305',name:'web_search'}];
   fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
