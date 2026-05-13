@@ -834,7 +834,7 @@ function runGraded(){
 }
 
 function fetchGradedPricing(card){
-  setStatus('Searching eBay sold listings\u2026');
+  setStatus('Searching recent sales\u2026');
   var name=card.cardName||'';
   var company=card.gradingCompany||'PSA';
   var grade=card.grade||'10';
@@ -842,30 +842,36 @@ function fetchGradedPricing(card){
   var variety=card.variety||'';
   var num=card.cardNumber||'';
 
-  // Build a tight eBay search query — company + grade + name + set + number
+  // Build the tightest possible search string
   var parts=[company,grade,name];
   if(num) parts.push(num);
   if(set) parts.push(set);
   if(variety) parts.push(variety);
   var searchStr=parts.join(' ');
 
-  // Build the exact eBay sold listings URL (LH_Complete=1&LH_Sold=1)
-  var ebayUrl='https://www.ebay.com/sch/i.html?_nkw='+encodeURIComponent(searchStr)+'&LH_Complete=1&LH_Sold=1&_sop=13';
+  // eBay sold URL — passed to Claude as a reference link for item URLs only
+  var ebaySoldUrl='https://www.ebay.com/sch/i.html?_nkw='+encodeURIComponent(searchStr)+'&LH_Complete=1&LH_Sold=1&_sop=13';
 
-  var prompt='Fetch this exact eBay sold listings page and extract the sale data from it:\n'
-    +ebayUrl+'\n\n'
-    +'From the search results on that page, find the 5 most recently SOLD listings. '
-    +'For each sold listing extract:\n'
-    +'- "price": the final sold price as a number in USD (no $ sign, no commas)\n'
-    +'- "date": the date it sold (e.g. "May 12, 2025")\n'
-    +'- "title": the full listing title\n'
-    +'- "url": the full eBay item URL in the format https://www.ebay.com/itm/ITEMNUMBER\n\n'
-    +'Only include COMPLETED SOLD listings — ignore active listings, unsold, or "Buy It Now" that have not sold.\n\n'
-    +'Your ENTIRE response must be only this JSON — no markdown, no explanation, no text before or after:\n'
-    +'{"sales":[{"price":145,"date":"May 12, 2025","title":"PSA 10 Charizard Base Set Holo #4","url":"https://www.ebay.com/itm/123456789012"}],"trend":"up"}\n\n'
-    +'"trend" must be "up", "down", or "stable" based on whether recent prices are rising, falling, or flat. '
-    +'If no sold listings found on that page, try searching: '+searchStr+' sold eBay completed\n'
-    +'If still nothing found, return: {"sales":[],"trend":"stable"}';
+  var prompt=
+    'I need the 5 most recent SOLD prices for this graded card: '+searchStr+'\n\n'
+    +'IMPORTANT: eBay pages are JavaScript-rendered and cannot be fetched directly. '
+    +'Instead, use these specific search strategies to find real sold prices:\n\n'
+    +'Search 1: '+searchStr+' sold ebay completed listing price\n'
+    +'Search 2: '+searchStr+' ebay sold 2024 OR 2025\n'
+    +'Search 3: pricecharting.com '+company+' '+grade+' '+name+(set?' '+set:'')+'\n\n'
+    +'From the search result SNIPPETS (not by fetching eBay pages), extract sold prices that appear in the results. '
+    +'Google and Bing index eBay listings and show prices in snippets — read those directly.\n'
+    +'Also if pricecharting.com appears in results, fetch that page as it is static HTML with real sale data.\n\n'
+    +'For each sale found:\n'
+    +'- "price": the sold price as a plain USD number (no $ or commas)\n'
+    +'- "date": when it sold (e.g. "May 2025")\n'
+    +'- "title": the listing title\n'
+    +'- "url": eBay item URL (https://www.ebay.com/itm/NUMBERS) if available, else the source page URL\n\n'
+    +'The eBay sold listings page for this card (for reference, not to fetch) is:\n'
+    +ebaySoldUrl+'\n\n'
+    +'Respond with ONLY this JSON — no markdown, no explanation, nothing else:\n'
+    +'{"sales":[{"price":145,"date":"May 2025","title":"'+company+' '+grade+' '+name+' '+set+'","url":"https://www.ebay.com/itm/123456789012"}],"trend":"stable"}\n'
+    +'If no data found after all searches: {"sales":[],"trend":"stable"}';
 
   callClaude([{role:'user',content:prompt}], true, function(err,txt){
     if(err){ showErr(err.message); return; }
@@ -1173,8 +1179,7 @@ function renderGraded(card,pricing,thumb){
     +(sh?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Last '+Math.min(n,5)+' sales</div><div class="sec-hdr-sub">Tap to open on eBay</div></div>'+sh+'</div>':'<div style="font-size:12px;color:var(--tx2);text-align:center;padding:8px">No recent sales found — try editing the card details or search eBay directly below</div>')
     +'<div class="links-card"><div class="links-title">Marketplaces</div><div class="chips">'
     +'<a class="chip" href="https://www.ebay.com/sch/i.html?_nkw='+q+'&LH_Sold=1&LH_Complete=1" target="_blank">eBay Sold</a>'
-    +'<a class="chip" href="https://www.130point.com/sales/?query='+q+'" target="_blank">130point</a>'
-    +'<a class="chip" href="https://mavin.io/search?q='+q+'&sold=1" target="_blank">Mavin</a>'
+    +'<a class="chip" href="https://www.fanatics.com/search?query='+q+'" target="_blank">Fanatics</a>'
     +(card.certNumber?'<a class="chip" href="https://www.psacard.com/cert/'+card.certNumber+'" target="_blank">PSA Verify</a>':'')
     +'</div></div>';
   window._gCard=card;
