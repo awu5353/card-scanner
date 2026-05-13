@@ -380,9 +380,9 @@ try{ apiKey=localStorage.getItem('cg_key')||''; }catch(e){}
 // Track last web-search call time. After a 429, we back off with exponential
 // delay and also set lastWebSearchTime forward so subsequent scans wait.
 var lastWebSearchTime = 0;
-var WEB_SEARCH_GAP = 8000;      // min 8s between any two web-search API calls
+var WEB_SEARCH_GAP = 2000;      // 2s between web-search calls; 429s handled via Retry-After backoff
 var lastScanCompletedTime = 0;
-var SCAN_COOLDOWN = 12000;       // min 12s between full scan starts
+var SCAN_COOLDOWN = 3000;       // 3s between full scan starts
 
 function callClaude(messages, useWebSearch, callback){
   var now = Date.now();
@@ -842,19 +842,30 @@ function fetchGradedPricing(card){
   var variety=card.variety||'';
   var num=card.cardNumber||'';
 
-  var searchStr=company+' '+grade+' '+name;
-  if(set) searchStr+=' '+set;
-  if(num) searchStr+=' '+num;
-  if(variety) searchStr+=' '+variety;
+  // Build a tight eBay search query — company + grade + name + set + number
+  var parts=[company,grade,name];
+  if(num) parts.push(num);
+  if(set) parts.push(set);
+  if(variety) parts.push(variety);
+  var searchStr=parts.join(' ');
 
-  var prompt='Search eBay completed/sold listings for: '+searchStr+'\n\n'
-    +'Find the 5 most recent sold listings. For each one extract: the final sale price (USD number only), '
-    +'the date sold, the listing title, and the eBay item URL (format: https://www.ebay.com/itm/NUMBERS).\n\n'
-    +'IMPORTANT: After searching, your ENTIRE response must be only this JSON structure with no other text:\n'
-    +'{"sales":[{"price":145,"date":"May 2025","title":"PSA 10 Charizard Base Set Holo","url":"https://www.ebay.com/itm/123456789012"},{"price":138,"date":"Apr 2025","title":"PSA 10 Charizard","url":"https://www.ebay.com/itm/987654321098"}],"trend":"stable"}\n\n'
-    +'Rules: "price" must be a number (no $ sign). "trend" must be "up", "down", or "stable". '
-    +'If fewer than 5 sales found, include however many you found. If zero sales found, use {"sales":[],"trend":"stable"}. '
-    +'Output ONLY the JSON — no explanation, no markdown, no preamble.';
+  // Build the exact eBay sold listings URL (LH_Complete=1&LH_Sold=1)
+  var ebayUrl='https://www.ebay.com/sch/i.html?_nkw='+encodeURIComponent(searchStr)+'&LH_Complete=1&LH_Sold=1&_sop=13';
+
+  var prompt='Fetch this exact eBay sold listings page and extract the sale data from it:\n'
+    +ebayUrl+'\n\n'
+    +'From the search results on that page, find the 5 most recently SOLD listings. '
+    +'For each sold listing extract:\n'
+    +'- "price": the final sold price as a number in USD (no $ sign, no commas)\n'
+    +'- "date": the date it sold (e.g. "May 12, 2025")\n'
+    +'- "title": the full listing title\n'
+    +'- "url": the full eBay item URL in the format https://www.ebay.com/itm/ITEMNUMBER\n\n'
+    +'Only include COMPLETED SOLD listings — ignore active listings, unsold, or "Buy It Now" that have not sold.\n\n'
+    +'Your ENTIRE response must be only this JSON — no markdown, no explanation, no text before or after:\n'
+    +'{"sales":[{"price":145,"date":"May 12, 2025","title":"PSA 10 Charizard Base Set Holo #4","url":"https://www.ebay.com/itm/123456789012"}],"trend":"up"}\n\n'
+    +'"trend" must be "up", "down", or "stable" based on whether recent prices are rising, falling, or flat. '
+    +'If no sold listings found on that page, try searching: '+searchStr+' sold eBay completed\n'
+    +'If still nothing found, return: {"sales":[],"trend":"stable"}';
 
   callClaude([{role:'user',content:prompt}], true, function(err,txt){
     if(err){ showErr(err.message); return; }
@@ -872,7 +883,6 @@ function fetchGradedPricing(card){
 
     hideEl('status-sec');
     renderGraded(card,pricing,currentThumb);
-    
     addHist({mode:'graded',cardName:card.cardName,setName:card.setName,gradingCompany:card.gradingCompany,grade:card.grade,displayValue:avg,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing});
     manualCard=null;
   });
