@@ -408,50 +408,81 @@ function callClaude(messages, useWebSearch, callback){
   },delay);
 }
 
-function _doCall(messages,useWebSearch,callback,left){
-  var body={model:'claude-sonnet-4-6',max_tokens:useWebSearch?1800:900,messages:messages};
-  if(useWebSearch) body.tools=[{type:'web_search_20250305',name:'web_search'}];
+function _apiRequest(body,retries,cb){
   fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
     headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
     body:JSON.stringify(body)
   }).then(function(resp){
     if(resp.status===429){
-      if(left<=0){ callback(new Error('Rate limited. Please wait a moment and try again.'),null); return; }
+      if(retries<=0){ cb(new Error('Rate limited. Please wait a moment and try again.'),null); return; }
       var wait=15000;
       var cd=Math.round(wait/1000);
-      var t=setInterval(function(){ setStatus('<strong>Rate limited — retrying in '+(cd--)+'s\u2026</strong>'); if(cd<0) clearInterval(t); },1000);
-      setTimeout(function(){ if(useWebSearch) lastWebSearchTime=Date.now(); _doCall(messages,useWebSearch,callback,left-1); },wait);
+      var t=setInterval(function(){ setStatus('<strong>Rate limited — retrying in '+(cd--)+'s…</strong>'); if(cd<0) clearInterval(t); },1000);
+      setTimeout(function(){ _apiRequest(body,retries-1,cb); },wait);
       return;
     }
     if(!resp.ok){
       resp.json().then(function(e){
         var msg=(e&&e.error&&e.error.message)?e.error.message:'API error '+resp.status;
         if(resp.status===401) msg='Invalid API key. Please remove and re-enter your key.';
-        callback(new Error(msg),null);
-      }).catch(function(){ callback(new Error('API error '+resp.status),null); });
+        cb(new Error(msg),null);
+      }).catch(function(){ cb(new Error('API error '+resp.status),null); });
       return;
     }
-    resp.json().then(function(data){
-      if(useWebSearch) lastWebSearchTime=Date.now();
-      // Extract text from all content blocks including tool_result blocks
-      var text='';
-      (data.content||[]).forEach(function(b){
-        if(b.type==='text') text+=b.text||'';
-        // tool_result content may contain the JSON answer
-        if(b.type==='tool_result'){
-          if(typeof b.content==='string') text+=b.content;
-          else if(Array.isArray(b.content)){
-            b.content.forEach(function(c){ if(c.type==='text') text+=c.text||''; });
-          }
+    resp.json().then(function(data){ cb(null,data); }).catch(function(e){ cb(e,null); });
+  }).catch(function(e){
+    if(retries>0){ setTimeout(function(){ _apiRequest(body,retries-1,cb); },3000); }
+    else { cb(e,null); }
+  });
+}
+
+// Handles the agentic web-search loop: Anthropic's web_search tool stops with
+// stop_reason="tool_use" and requires tool_result blocks sent back before
+// Claude writes its final text answer.
+function _doCall(messages,useWebSearch,callback,left){
+  var tools=useWebSearch?[{type:'web_search_20250305',name:'web_search'}]:undefined;
+  var msgs=messages.slice();
+  var turnsLeft=8;
+
+  function step(){
+    var body={model:'claude-sonnet-4-6',max_tokens:useWebSearch?2000:900,messages:msgs};
+    if(tools) body.tools=tools;
+
+    _apiRequest(body,left,function(err,data){
+      if(err){ callback(err,null); return; }
+
+      var content=data.content||[];
+      var stopReason=data.stop_reason;
+
+      var textOut='';
+      content.forEach(function(b){ if(b.type==='text') textOut+=b.text||''; });
+
+      if(stopReason!=='tool_use'||turnsLeft<=0){
+        if(useWebSearch) lastWebSearchTime=Date.now();
+        callback(null,textOut);
+        return;
+      }
+
+      turnsLeft--;
+      msgs.push({role:'assistant',content:content});
+
+      var toolResults=[];
+      content.forEach(function(b){
+        if(b.type==='tool_use'){
+          toolResults.push({type:'tool_result',tool_use_id:b.id,content:'Search executed.'});
         }
       });
-      callback(null,text);
-    }).catch(function(e){ callback(e,null); });
-  }).catch(function(e){
-    if(left>0){ setTimeout(function(){ _doCall(messages,useWebSearch,callback,left-1); },3000); }
-    else { callback(e,null); }
-  });
+
+      if(toolResults.length>0){
+        msgs.push({role:'user',content:toolResults});
+      } else {
+        msgs.push({role:'user',content:'Please provide the JSON response now.'});
+      }
+      step();
+    });
+  }
+  step();
 }
 
 function parseJSON(text){
@@ -812,16 +843,14 @@ function fetchGradedPricing(card){
   if(num) searchStr+=' '+num;
   if(variety) searchStr+=' '+variety;
 
-  var prompt='Search eBay for recently SOLD listings of this trading card: '+searchStr+'\n\n'
-    +'Also try the search: "'+name+(num?' '+num:'')+'" '+company+' '+grade+' sold eBay\n\n'
-    +'I need the 10 most recent completed eBay sales. For each sale, extract:\n'
-    +'- sale price in USD (number only, no $ sign)\n'
-    +'- approximate sale date (e.g. "May 2025")\n'
-    +'- listing title\n'
-    +'- eBay item URL in format https://www.ebay.com/itm/ITEMNUMBER\n\n'
-    +'After searching, respond with ONLY this JSON (no markdown, no explanation, no preamble):\n'
-    +'{"sales":[{"price":145,"date":"May 2025","title":"PSA 10 Charizard Base Set","url":"https://www.ebay.com/itm/123456789012"}],"trend":"up|down|stable"}\n\n'
-    +'If you find no sales, return: {"sales":[],"trend":"stable"}';
+  var prompt='Search eBay completed/sold listings for: '+searchStr+'\n\n'
+    +'Find the 5 most recent sold listings. For each one extract: the final sale price (USD number only), '
+    +'the date sold, the listing title, and the eBay item URL (format: https://www.ebay.com/itm/NUMBERS).\n\n'
+    +'IMPORTANT: After searching, your ENTIRE response must be only this JSON structure with no other text:\n'
+    +'{"sales":[{"price":145,"date":"May 2025","title":"PSA 10 Charizard Base Set Holo","url":"https://www.ebay.com/itm/123456789012"},{"price":138,"date":"Apr 2025","title":"PSA 10 Charizard","url":"https://www.ebay.com/itm/987654321098"}],"trend":"stable"}\n\n'
+    +'Rules: "price" must be a number (no $ sign). "trend" must be "up", "down", or "stable". '
+    +'If fewer than 5 sales found, include however many you found. If zero sales found, use {"sales":[],"trend":"stable"}. '
+    +'Output ONLY the JSON — no explanation, no markdown, no preamble.';
 
   callClaude([{role:'user',content:prompt}], true, function(err,txt){
     if(err){ showErr(err.message); return; }
@@ -829,7 +858,7 @@ function fetchGradedPricing(card){
     try{ pricing=parseJSON(txt); }
     catch(e){ pricing={sales:[],trend:'stable'}; }
 
-    var sales=(pricing.sales||[]).slice(0,10);
+    var sales=(pricing.sales||[]).slice(0,5);
     var prices=sales.map(function(s){ return +s.price; }).filter(function(p){ return p>0; });
     var avg=prices.length?Math.round(prices.reduce(function(a,b){ return a+b; },0)/prices.length):null;
     pricing.avg=avg;
@@ -1108,7 +1137,7 @@ function renderGraded(card,pricing,thumb){
   var badge=(card.gradingCompany||'PSA')+' '+(card.grade||'');
   var det=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' · ');
   var n=(pricing.sales||[]).length;
-  var sh=saleRows(pricing.sales,'graded',badge);
+  var sh=saleRows((pricing.sales||[]).slice(0,5),'graded',badge);
   var html='<div class="id-card">'
     +'<div class="thumb-wrap"><img class="thumb-lg" src="'+(thumb||'')+'" alt="'+card.cardName+'"><div class="grade-dot">'+(card.grade||'?')+'</div></div>'
     +'<div class="card-meta"><span class="game-tag">'+(card.game||'Card')+'</span>'
@@ -1127,7 +1156,7 @@ function renderGraded(card,pricing,thumb){
     +'<div class="p-card"><div class="p-lbl">Low</div><div class="p-val">'+fmt(pricing.low)+'</div></div>'
     +'<div class="p-card"><div class="p-lbl">High</div><div class="p-val">'+fmt(pricing.high)+'</div></div>'
     +'</div>'
-    +(sh?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Last '+n+' sales</div><div class="sec-hdr-sub">Tap to verify</div></div>'+sh+'</div>':'<div style="font-size:12px;color:var(--tx2);text-align:center;padding:8px">No recent sales found — try editing the card details or search eBay directly below</div>')
+    +(sh?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Last '+Math.min(n,5)+' sales</div><div class="sec-hdr-sub">Tap to open on eBay</div></div>'+sh+'</div>':'<div style="font-size:12px;color:var(--tx2);text-align:center;padding:8px">No recent sales found — try editing the card details or search eBay directly below</div>')
     +'<div class="links-card"><div class="links-title">Marketplaces</div><div class="chips">'
     +'<a class="chip" href="https://www.ebay.com/sch/i.html?_nkw='+q+'&LH_Sold=1&LH_Complete=1" target="_blank">eBay Sold</a>'
     +'<a class="chip" href="https://www.130point.com/sales/?query='+q+'" target="_blank">130point</a>'
