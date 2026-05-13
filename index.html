@@ -378,9 +378,24 @@ try{ apiKey=localStorage.getItem('cg_key')||''; }catch(e){}
 
 // ── API QUEUE — separate vision vs web-search cooldowns ────
 // Vision calls: no minimum gap (they don't consume web-search quota)
-// Web-search calls: 2s minimum between them
+// Web-search calls: 3s minimum between them to avoid rate limits
 var lastWebSearchTime=0;
-var WEB_SEARCH_GAP=1500;
+var WEB_SEARCH_GAP=3000;
+// Per-scan cooldown: track when the last scan COMPLETED (all calls done)
+var lastScanCompletedTime=0;
+var SCAN_COOLDOWN=4000; // 4s between full scans to let rate limits breathe
+
+function withScanCooldown(fn){
+  var now=Date.now();
+  var delay=Math.max(0,(lastScanCompletedTime+SCAN_COOLDOWN)-now);
+  if(delay>0){
+    setStatus('Cooling down — ready in '+Math.ceil(delay/1000)+'s\u2026');
+    setTimeout(fn,delay);
+  } else {
+    fn();
+  }
+}
+function markScanComplete(){ lastScanCompletedTime=Date.now(); }
 
 function callClaude(messages, useWebSearch, callback){
   var now=Date.now();
@@ -394,7 +409,7 @@ function callClaude(messages, useWebSearch, callback){
 }
 
 function _doCall(messages,useWebSearch,callback,left){
-  var body={model:'claude-sonnet-4-5',max_tokens:useWebSearch?1400:800,messages:messages};
+  var body={model:'claude-sonnet-4-20250514',max_tokens:useWebSearch?1800:900,messages:messages};
   if(useWebSearch) body.tools=[{type:'web_search_20250305',name:'web_search'}];
   fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
@@ -403,9 +418,9 @@ function _doCall(messages,useWebSearch,callback,left){
   }).then(function(resp){
     if(resp.status===429){
       if(left<=0){ callback(new Error('Rate limited. Please wait a moment and try again.'),null); return; }
-      var wait=10000;
+      var wait=15000;
       var cd=Math.round(wait/1000);
-      var t=setInterval(function(){ setStatus('<strong>Rate limited — retrying in '+(cd--)+'s…</strong>'); if(cd<0) clearInterval(t); },1000);
+      var t=setInterval(function(){ setStatus('<strong>Rate limited — retrying in '+(cd--)+'s\u2026</strong>'); if(cd<0) clearInterval(t); },1000);
       setTimeout(function(){ if(useWebSearch) lastWebSearchTime=Date.now(); _doCall(messages,useWebSearch,callback,left-1); },wait);
       return;
     }
@@ -419,11 +434,22 @@ function _doCall(messages,useWebSearch,callback,left){
     }
     resp.json().then(function(data){
       if(useWebSearch) lastWebSearchTime=Date.now();
-      var text=data.content.map(function(b){ return b.text||''; }).join('');
+      // Extract text from all content blocks including tool_result blocks
+      var text='';
+      (data.content||[]).forEach(function(b){
+        if(b.type==='text') text+=b.text||'';
+        // tool_result content may contain the JSON answer
+        if(b.type==='tool_result'){
+          if(typeof b.content==='string') text+=b.content;
+          else if(Array.isArray(b.content)){
+            b.content.forEach(function(c){ if(c.type==='text') text+=c.text||''; });
+          }
+        }
+      });
       callback(null,text);
     }).catch(function(e){ callback(e,null); });
   }).catch(function(e){
-    if(left>0){ setTimeout(function(){ _doCall(messages,useWebSearch,callback,left-1); },2000); }
+    if(left>0){ setTimeout(function(){ _doCall(messages,useWebSearch,callback,left-1); },3000); }
     else { callback(e,null); }
   });
 }
@@ -749,8 +775,10 @@ ge('scan-btn').addEventListener('click',function(){
   hideEl('scan-area'); hideEl('prev-bar'); hideEl('back-step');
   hideEl('err-sec'); hideEl('results-sec'); hideEl('fab'); hideEl('scan-btn');
   setHTML('results-sec',''); showEl('status-sec');
-  if(currentMode==='graded') runGraded();
-  else runRaw();
+  withScanCooldown(function(){
+    if(currentMode==='graded') runGraded();
+    else runRaw();
+  });
 });
 
 // ── GRADED FLOW ───────────────────────────────────────────
@@ -780,17 +808,20 @@ function fetchGradedPricing(card){
   var num=card.cardNumber||'';
 
   var searchStr=company+' '+grade+' '+name;
-  if(num) searchStr+=' '+num;
   if(set) searchStr+=' '+set;
+  if(num) searchStr+=' '+num;
   if(variety) searchStr+=' '+variety;
 
-  var prompt='Search eBay sold/completed listings for: "'+searchStr+'"\n\n'
-    +'Return the 10 most recently SOLD listings for: "'+name+'"'+(num?' #'+num:'')+(set?' '+set:'')+' graded '+company+' '+grade+'.\n'
-    +(num?'Only include card number '+num+' — exclude different card numbers.\n':'')
-    +'Accept any sale regardless of age. Accept abbreviated or non-English titles.\n'
-    +'For each result include: price in USD, date, listing title, eBay item URL (https://www.ebay.com/itm/DIGITS).\n\n'
-    +'Respond with ONLY this JSON, no markdown:\n'
-    +'{"sales":[{"price":145,"date":"May 2025","title":"PSA 10 Charizard Holo","url":"https://www.ebay.com/itm/123456789"},{"price":138,"date":"Apr 2025","title":"title","url":"https://www.ebay.com/itm/987654321"}],"trend":"up"}';
+  var prompt='Search eBay for recently SOLD listings of this trading card: '+searchStr+'\n\n'
+    +'Also try the search: "'+name+(num?' '+num:'')+'" '+company+' '+grade+' sold eBay\n\n'
+    +'I need the 10 most recent completed eBay sales. For each sale, extract:\n'
+    +'- sale price in USD (number only, no $ sign)\n'
+    +'- approximate sale date (e.g. "May 2025")\n'
+    +'- listing title\n'
+    +'- eBay item URL in format https://www.ebay.com/itm/ITEMNUMBER\n\n'
+    +'After searching, respond with ONLY this JSON (no markdown, no explanation, no preamble):\n'
+    +'{"sales":[{"price":145,"date":"May 2025","title":"PSA 10 Charizard Base Set","url":"https://www.ebay.com/itm/123456789012"}],"trend":"up|down|stable"}\n\n'
+    +'If you find no sales, return: {"sales":[],"trend":"stable"}';
 
   callClaude([{role:'user',content:prompt}], true, function(err,txt){
     if(err){ showErr(err.message); return; }
@@ -808,6 +839,7 @@ function fetchGradedPricing(card){
 
     hideEl('status-sec');
     renderGraded(card,pricing,currentThumb);
+    markScanComplete();
     addHist({mode:'graded',cardName:card.cardName,setName:card.setName,gradingCompany:card.gradingCompany,grade:card.grade,displayValue:avg,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing});
     manualCard=null;
   });
@@ -846,14 +878,18 @@ function runRaw(){
     var tcgName=card.tcgName||card.cardName+(card.setName?' '+card.setName:'');
     var cardBase=card.cardName+(card.setName?' '+card.setName:'');
 
-    // Call 1: TCGplayer market price
-    setStatus('Getting TCGplayer market price\u2026');
-    var tcgPrompt='Search for the current TCGplayer market price of this trading card: "'+tcgName+'" ('+card.game+').\n'
-      +'Search query: site:tcgplayer.com "'+tcgName+'"\n'
-      +'Or search: tcgplayer "'+tcgName+'" market price\n'
-      +'Find the TCGplayer Market Price (not "listed from"), Low price, and the direct product page URL on tcgplayer.com.\n'
-      +'Return ONLY valid JSON, no markdown:\n'
-      +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/product/123456/pokemon-base-set-charizard","conf":"high|medium|low"}';
+    // Call 1: TCGplayer market price (don't use site: operator — it blocks crawlers)
+    setStatus('Getting raw card market price\u2026');
+    var tcgPrompt='Search for the current market price of this trading card: "'+tcgName+'" '+card.game+'\n\n'
+      +'Try these searches:\n'
+      +'1. tcgplayer "'+tcgName+'" price\n'
+      +'2. "'+tcgName+'" card price market value\n'
+      +'3. pricecharting "'+tcgName+'"\n\n'
+      +'Find: the TCGplayer Market Price (the mid/market price, not just "listed from"), the low price, the high price, and the direct product URL on tcgplayer.com if available.\n'
+      +'If TCGplayer data is unavailable, use eBay raw sold prices or PriceCharting to estimate market, low, high.\n\n'
+      +'Respond with ONLY this JSON (no markdown, no explanation):\n'
+      +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/product/123456","conf":"high|medium|low"}\n\n'
+      +'Use null for any value you cannot find. Do not invent prices.';
 
     callClaude([{role:'user',content:tcgPrompt}], true, function(err2,tcgText){
       var tcgData={tcgMarket:null,tcgLow:null,tcgHigh:null,tcgUrl:null,conf:'low'};
@@ -861,11 +897,17 @@ function runRaw(){
 
       // Call 2: eBay graded sales for value estimation  
       setStatus('Finding graded sale values\u2026');
-      var gradedPrompt='Search eBay sold listings for recent sales of "'+cardBase+'" graded at PSA '+psaG+', BGS '+bgsG+', and CGC '+cgcG+'.\n'
-        +'Return average sale price per company (average of up to 5 most recent sales each).\n'
-        +'Also find up to 5 recent raw ungraded eBay sales of "'+cardBase+'".\n'
-        +'Return ONLY valid JSON, no markdown:\n'
-        +'{"gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":25,"rawSales":[{"price":42,"date":"May 2025","title":"card title raw","url":"https://www.ebay.com/itm/123456789"}],"trend":"up|down|stable"}';
+      var gradedPrompt='Search eBay sold listings for recent COMPLETED sales of "'+cardBase+'" in graded condition.\n\n'
+        +'Search for:\n'
+        +'1. "'+cardBase+'" PSA '+psaG+' sold eBay\n'
+        +'2. "'+cardBase+'" BGS '+bgsG+' sold eBay\n'
+        +'3. "'+cardBase+'" CGC '+cgcG+' sold eBay\n'
+        +'4. "'+cardBase+'" raw ungraded sold eBay\n\n'
+        +'For each grading company, find up to 5 recent sold prices and calculate the average.\n'
+        +'For raw/ungraded sales, return up to 5 recent sold listings with price, date, title, and eBay URL.\n\n'
+        +'Respond with ONLY this JSON (no markdown, no explanation):\n'
+        +'{"gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":25,"rawSales":[{"price":42,"date":"May 2025","title":"listing title here","url":"https://www.ebay.com/itm/123456789012"}],"trend":"up|down|stable"}\n\n'
+        +'Use null for any graded company average you cannot find. If no raw sales, use empty array.';
 
       callClaude([{role:'user',content:gradedPrompt}], true, function(err3,gradedText){
         var gradedData={gradedPSA:null,gradedBGS:null,gradedCGC:null,gradingFee:25,rawSales:[],trend:'stable'};
@@ -889,6 +931,7 @@ function runRaw(){
         try{ anno=drawAnnotation(currentThumb,currentBackB64?('data:image/jpeg;base64,'+currentBackB64):null,card); }catch(e){}
         hideEl('status-sec');
         renderRaw(card,pricing,currentThumb,anno);
+        markScanComplete();
         addHist({mode:'raw',cardName:card.cardName,setName:card.setName,grade:psaG,displayValue:pricing.tcgMarket,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing,annotation:anno});
       });
     });
@@ -1034,10 +1077,18 @@ function openEditModal(card,mode){
   showEl('edit-modal');
 }
 function reScanRawPricing(card){
-  setStatus('Getting updated pricing…');
+  setStatus('Getting updated pricing\u2026');
   var psaG=(card.psa&&card.psa.grade)?card.psa.grade:'9';
+  var bgsG=(card.bgs&&card.bgs.grade)?card.bgs.grade:psaG;
+  var cgcG=(card.cgc&&card.cgc.grade)?card.cgc.grade:psaG;
   var tcgName=card.tcgName||card.cardName+(card.setName?' '+card.setName:'');
-  var pr='Search TCGplayer.com for: "'+tcgName+'" ('+card.game+'). Also search eBay sold for PSA '+psaG+' graded: "'+card.cardName+(card.setName?' '+card.setName:'')+' PSA '+psaG+'". Average 5 most recent graded sales for each company.\nReturn ONLY JSON:\n{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/...","gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":30,"rawSales":[{"price":42,"date":"May 2025","title":"title","url":"https://www.ebay.com/itm/123"}],"trend":"stable","conf":"medium"}';
+  var cardBase=card.cardName+(card.setName?' '+card.setName:'');
+  var pr='Search for current market price of "'+tcgName+'" on tcgplayer or pricecharting.\n'
+    +'Also search eBay sold listings for graded copies: "'+cardBase+'" PSA '+psaG+', BGS '+bgsG+', CGC '+cgcG+'.\n'
+    +'Also find up to 5 recent raw eBay sold listings for "'+cardBase+'".\n\n'
+    +'Respond with ONLY this JSON (no markdown):\n'
+    +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/product/123456","gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":30,"rawSales":[{"price":42,"date":"May 2025","title":"title","url":"https://www.ebay.com/itm/123456789012"}],"trend":"stable","conf":"medium"}\n\n'
+    +'Use null for values you cannot find. Do not invent prices.';
   callClaude([{role:'user',content:pr}], true, function(err,txt){
     var pricing;
     try{ pricing=parseJSON(txt); }
