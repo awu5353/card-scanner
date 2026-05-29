@@ -35,26 +35,20 @@ body{display:flex;flex-direction:column}
 .key-input:focus{border-color:var(--red)}
 .key-save-btn{padding:9px 14px;background:var(--red);color:#fff;border:none;border-radius:var(--rs);font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;flex-shrink:0}
 .saved-key-row{align-items:center;gap:8px;background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:9px 13px}
-/* SCAN AREA */
 .scan-area{background:#000;border-radius:var(--r);overflow:hidden;position:relative}
 .scan-area-title{padding:10px 13px;border-bottom:.5px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;background:rgba(0,0,0,.7);color:#fff;position:relative;z-index:2}
 .scan-area-sub{font-size:11px;color:rgba(255,255,255,.6);margin-left:auto}
-/* LIVE VIEWFINDER — full-width tall layout */
 .viewfinder-wrap{position:relative;background:#000;cursor:pointer;width:100%}
 .viewfinder-wrap video{width:100%;display:block;aspect-ratio:3/4;object-fit:cover;max-height:72vw}
 .viewfinder-overlay{position:absolute;inset:0;pointer-events:none}
-/* Card-shaped guide: 63.5% wide, 88% tall for standard card 2.5x3.5 ratio */
 .vf-guide{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:63%;height:88%;border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,.5)}
-/* Animated scan line inside guide */
 .vf-scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(226,75,74,.9),transparent);animation:scanline 2s ease-in-out infinite;top:0}
 @keyframes scanline{0%{top:0;opacity:1}45%{opacity:1}50%{top:100%;opacity:0}50.1%{top:0;opacity:0}55%{opacity:1}100%{top:100%;opacity:1}}
-/* Corner brackets — bigger and more visible */
 .vf-corner{position:absolute;width:22px;height:22px;border-color:var(--red);border-style:solid}
 .vf-corner.tl{top:-1px;left:-1px;border-width:3px 0 0 3px;border-top-left-radius:4px}
 .vf-corner.tr{top:-1px;right:-1px;border-width:3px 3px 0 0;border-top-right-radius:4px}
 .vf-corner.bl{bottom:-1px;left:-1px;border-width:0 0 3px 3px;border-bottom-left-radius:4px}
 .vf-corner.br{bottom:-1px;right:-1px;border-width:0 3px 3px 0;border-bottom-right-radius:4px}
-/* Measurement guides — faint lines showing exact capture region */
 .vf-edge-top{position:absolute;top:-1px;left:22px;right:22px;height:1px;background:rgba(226,75,74,.3)}
 .vf-edge-bottom{position:absolute;bottom:-1px;left:22px;right:22px;height:1px;background:rgba(226,75,74,.3)}
 .vf-edge-left{position:absolute;left:-1px;top:22px;bottom:22px;width:1px;background:rgba(226,75,74,.3)}
@@ -65,18 +59,14 @@ body{display:flex;flex-direction:column}
 .vf-tap-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;font-size:12px;font-weight:500;padding:6px 16px;border-radius:20px;white-space:nowrap;border:1px solid rgba(255,255,255,.15)}
 .vf-actions{display:flex;gap:0;background:rgba(0,0,0,.75);border-top:.5px solid rgba(255,255,255,.1)}
 .vf-btn{flex:1;padding:12px 8px;background:none;border:none;border-right:.5px solid rgba(255,255,255,.1);font-size:12px;font-weight:500;color:rgba(255,255,255,.7);font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px}
-.vf-btn:last-child{border-right:none}
-.vf-btn svg{width:14px;height:14px}
-.vf-btn.primary{color:var(--red)}
+.vf-btn:last-child{border-right:none}.vf-btn svg{width:14px;height:14px}.vf-btn.primary{color:var(--red)}
 canvas#vf-detect{display:none}
-/* BACK PHOTO STEP */
 .back-step{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center}
 .back-step-title{font-size:14px;font-weight:500;margin-bottom:4px}
 .back-step-sub{font-size:12px;color:var(--tx2);margin-bottom:12px}
 .back-step-imgs{display:flex;gap:10px;justify-content:center;margin-bottom:12px}
 .back-step-thumb{width:58px;height:80px;border-radius:6px;object-fit:cover;border:.5px solid var(--bdr)}
 .back-step-ph{width:58px;height:80px;border-radius:6px;background:var(--sur2);border:1.5px dashed var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:20px}
-/* PREV BAR */
 .prev-bar{display:flex;align-items:center;gap:10px;background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:9px 11px}
 .prev-thumb{width:42px;height:58px;border-radius:5px;object-fit:cover;border:.5px solid var(--bdr);flex-shrink:0}
 .prev-info{flex:1;min-width:0}
@@ -93,7 +83,6 @@ canvas#vf-detect{display:none}
 .err-box{background:var(--err-bg);border:.5px solid rgba(163,45,45,.3);border-radius:var(--r);padding:11px 13px;display:flex;align-items:flex-start;gap:8px}
 .err-box svg{width:17px;height:17px;color:var(--err-tx);flex-shrink:0;margin-top:1px}
 .err-text{font-size:13px;color:var(--err-tx);line-height:1.5}
-/* RESULTS */
 .id-card{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:13px;display:flex;gap:11px;align-items:flex-start}
 .thumb-wrap{flex-shrink:0;position:relative}
 .thumb-lg{width:62px;height:87px;border-radius:6px;object-fit:cover;border:.5px solid var(--bdr)}
@@ -114,7 +103,32 @@ canvas#vf-detect{display:none}
 .p-sub{font-size:10px;color:var(--tx2);margin-top:2px}
 .trend-pill{display:inline-flex;align-items:center;gap:2px;font-size:10px;padding:2px 5px;border-radius:4px;margin-top:3px;font-weight:500}
 .t-up{background:var(--ok-bg);color:var(--ok-tx)}.t-dn{background:var(--err-bg);color:var(--err-tx)}.t-fl{background:var(--sur2);color:var(--tx2)}
-/* VERDICT */
+/* TAG-style score bar */
+.tag-score-wrap{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px}
+.tag-score-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:10px}
+.tag-score-num{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--red);line-height:1}
+.tag-score-grade{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--tx2);line-height:1;margin-left:4px}
+.tag-score-lbl{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px}
+.tag-bar-bg{height:6px;background:var(--sur2);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.tag-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--red),#ff7a6b)}
+.tag-sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tag-sub-item{background:var(--sur2);border-radius:var(--rs);padding:8px 10px}
+.tag-sub-lbl{font-size:10px;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.tag-sub-val{font-size:13px;font-weight:500;display:flex;align-items:center;gap:5px}
+.tag-sub-score{font-size:10px;color:var(--tx3);margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:14px}
+/* CardLadder-style sale rows */
+.cl-table{width:100%;border-collapse:collapse}
+.cl-hdr-row{display:grid;grid-template-columns:60px 1fr 80px 70px;gap:6px;padding:6px 13px;background:var(--sur2);border-bottom:.5px solid var(--bdr)}
+.cl-hdr-cell{font-size:9px;font-weight:500;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px}
+.cl-sale-row{display:grid;grid-template-columns:60px 1fr 80px 70px;gap:6px;padding:9px 13px;border-bottom:.5px solid var(--bdr);align-items:center;text-decoration:none;color:inherit}
+.cl-sale-row:last-child{border-bottom:none}
+a.cl-sale-row:active{background:var(--sur2)}
+.cl-date{font-size:11px;color:var(--tx2)}
+.cl-title{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cl-plat{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:600;padding:2px 5px;border-radius:3px;background:var(--sur2);color:var(--tx2);border:.5px solid var(--bdr);margin-top:2px}
+.cl-price{font-size:14px;font-weight:500;font-family:'Bebas Neue',sans-serif;letter-spacing:.3px;text-align:right}
+.cl-ext{display:flex;justify-content:flex-end;color:var(--tx3)}.cl-ext svg{width:10px;height:10px}
+/* Verdict */
 .verdict-card{border-radius:var(--r);padding:12px 13px;border:.5px solid var(--bdr)}
 .verdict-card.yes{background:var(--ok-bg);border-color:rgba(99,153,34,.3)}.verdict-card.maybe{background:var(--warn-bg);border-color:rgba(186,117,23,.3)}.verdict-card.no{background:var(--err-bg);border-color:rgba(163,45,45,.3)}
 .verdict-top{display:flex;align-items:center;gap:7px;margin-bottom:5px}
@@ -122,11 +136,9 @@ canvas#vf-detect{display:none}
 .verdict-title{font-size:13px;font-weight:500}
 .verdict-title.yes{color:var(--ok-tx)}.verdict-title.maybe{color:var(--warn-tx)}.verdict-title.no{color:var(--err-tx)}
 .verdict-body{font-size:12px;color:var(--tx2);line-height:1.55}
-/* SECTIONS */
 .sec-card{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);overflow:hidden}
 .sec-hdr{padding:10px 13px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center}
 .sec-hdr-title{font-size:13px;font-weight:500}.sec-hdr-sub{margin-left:auto;font-size:11px;color:var(--tx2)}
-/* GRADE ROWS */
 .cg-row{padding:10px 13px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center;gap:9px}
 .cg-row:last-of-type{border-bottom:none}
 .cg-logo{font-size:11px;font-weight:600;color:var(--tx2);width:30px;flex-shrink:0}
@@ -139,7 +151,6 @@ canvas#vf-detect{display:none}
 .cg-val{font-size:12px;font-weight:500;color:var(--tx)}.cg-val-lbl{font-size:10px;color:var(--tx2)}
 .conf-pill{font-size:9px;font-weight:500;padding:2px 5px;border-radius:3px}
 .conf-high{background:var(--ok-bg);color:var(--ok-tx)}.conf-med{background:var(--warn-bg);color:var(--warn-tx)}.conf-low{background:var(--err-bg);color:var(--err-tx)}
-/* CONDITION */
 .cond-sec{padding:10px 13px;border-top:.5px solid var(--bdr)}
 .cond-title{font-size:10px;font-weight:500;color:var(--tx2);margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
 .cond-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
@@ -147,32 +158,16 @@ canvas#vf-detect{display:none}
 .cond-lbl{font-size:10px;color:var(--tx2);margin-bottom:2px;text-transform:uppercase;letter-spacing:.4px}
 .cond-val{font-size:12px;font-weight:500;display:flex;align-items:center;gap:4px}
 .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}.dot-g{background:#639922}.dot-o{background:#BA7517}.dot-b{background:#E24B4A}
-/* ANNOTATION */
-.anno-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.anno-side{display:flex;flex-direction:column;align-items:center}
-.anno-side-lbl{font-size:10px;font-weight:500;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;padding:5px 0 3px}
 .anno-img{width:100%;display:block}
-.anno-legend{padding:7px 12px;display:flex;flex-wrap:wrap;gap:5px;border-top:.5px solid var(--bdr);grid-column:1/-1}
+.anno-legend{padding:7px 12px;display:flex;flex-wrap:wrap;gap:5px;border-top:.5px solid var(--bdr)}
 .leg-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx2)}
 .leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-/* SALE ROWS */
-.sale-row{padding:9px 13px;border-bottom:.5px solid var(--bdr);display:grid;grid-template-columns:auto auto 1fr auto auto;align-items:center;gap:6px;text-decoration:none;color:inherit}
-.sale-row:last-of-type{border-bottom:none}
-a.sale-row:active{background:var(--sur2)}
-.s-plat{font-size:10px;color:var(--tx2)}.s-badge{font-size:9px;font-weight:600;padding:2px 4px;border-radius:3px;background:var(--red);color:#fff;white-space:nowrap}
-.s-raw-badge{font-size:9px;font-weight:600;padding:2px 4px;border-radius:3px;background:var(--sur2);color:var(--tx2)}
-.s-title{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.s-price{font-size:13px;font-weight:500;white-space:nowrap}
-.s-ext{color:var(--tx3);display:flex;align-items:center}.s-ext svg{width:11px;height:11px}
-/* LINKS */
 .links-card{background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:10px 13px}
 .links-title{font-size:12px;font-weight:500;margin-bottom:7px;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px}
 .chips{display:flex;flex-wrap:wrap;gap:5px}
 .chip{display:inline-flex;align-items:center;border:.5px solid var(--bdr2);border-radius:20px;padding:5px 11px;font-size:12px;color:var(--tx);text-decoration:none;background:var(--sur2);font-family:'DM Sans',sans-serif}
-/* FAB */
 .fab{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;border:none;border-radius:30px;padding:12px 26px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;gap:7px;box-shadow:0 4px 16px rgba(226,75,74,.45);z-index:15;white-space:nowrap}
 .fab svg{width:15px;height:15px}
-/* EDIT MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40;display:flex;align-items:flex-end;justify-content:center}
 .modal-panel{background:var(--sur);border-radius:var(--r) var(--r) 0 0;width:100%;max-width:480px;padding:18px 16px 32px;display:flex;flex-direction:column;gap:10px;max-height:90vh;overflow-y:auto}
 .modal-title{font-size:15px;font-weight:500}
@@ -183,7 +178,6 @@ a.sale-row:active{background:var(--sur2)}
 .modal-row{display:flex;gap:8px}
 .modal-btn{flex:1;padding:11px;border:none;border-radius:var(--rs);font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer}
 .modal-btn.primary{background:var(--red);color:#fff}.modal-btn.secondary{background:var(--sur2);color:var(--tx)}
-/* HISTORY */
 .hist-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:30;display:flex;flex-direction:column;justify-content:flex-end}
 .hist-panel{background:var(--sur);border-radius:var(--r) var(--r) 0 0;max-height:80vh;display:flex;flex-direction:column;overflow:hidden}
 .hist-hdr{padding:13px 15px;border-bottom:.5px solid var(--bdr);display:flex;align-items:center;gap:7px;flex-shrink:0}
@@ -206,6 +200,8 @@ a.sale-row:active{background:var(--sur2)}
 .sec-btn{width:100%;padding:11px;background:none;border:.5px solid var(--bdr2);border-radius:var(--rs);font-size:13px;font-weight:500;color:var(--tx);font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
 .sec-btn svg{width:14px;height:14px}
 .d-none{display:none!important}
+/* no-sales callout */
+.no-sales-box{background:var(--warn-bg);border:.5px solid rgba(186,117,23,.3);border-radius:var(--rs);padding:10px 13px;font-size:12px;color:var(--warn-tx);line-height:1.55}
 </style>
 </head>
 <body>
@@ -227,10 +223,9 @@ a.sale-row:active{background:var(--sur2)}
   </button>
 </div>
 <div class="body" id="main-body">
-  <!-- KEY -->
   <div class="setup-card" id="setup-card">
     <div class="setup-title">Anthropic API key</div>
-    <div class="setup-desc">Runs on your device only. Key sent exclusively to Anthropic over HTTPS. Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — set a spend limit for safety.</div>
+    <div class="setup-desc">Runs on your device only. Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — set a spend limit for safety.</div>
     <div class="key-row">
       <input class="key-input" type="password" id="key-input" placeholder="sk-ant-..." autocomplete="off" spellcheck="false"/>
       <button class="key-save-btn" id="key-save-btn">Save</button>
@@ -241,15 +236,12 @@ a.sale-row:active{background:var(--sur2)}
     <span style="font-size:12px;color:var(--tx2);flex:1">API key saved</span>
     <button id="remove-key-btn" style="font-size:11px;color:var(--err-tx);background:var(--err-bg);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:2px 7px;border-radius:4px">Remove</button>
   </div>
-
-  <!-- SCAN AREA (live viewfinder + file fallback) -->
   <div class="scan-area" id="scan-area">
     <div class="scan-area-title">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--red)"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
       <span id="scan-area-title-txt">Scan graded card</span>
       <span class="scan-area-sub" id="vf-status-lbl">Camera off</span>
     </div>
-    <!-- Live viewfinder -->
     <div class="viewfinder-wrap d-none" id="vf-wrap">
       <video id="vf-vid" autoplay playsinline muted></video>
       <div class="viewfinder-overlay">
@@ -266,16 +258,14 @@ a.sale-row:active{background:var(--sur2)}
       </div>
     </div>
     <canvas id="vf-detect"></canvas>
-    <!-- File fallback drop zone (shown when camera off) -->
     <div id="drop-zone-wrap">
-      <div class="drop-zone" id="drop-zone" style="border-radius:0;border:none;background:#111;color:#fff;min-height:180px">
-        <input type="file" id="file-input" accept="image/*"/>
-        <span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
-        <div class="drop-title" id="drop-title">Tap to choose photo</div>
-        <div class="drop-sub" id="drop-sub">or use camera below · <strong>PSA · BGS · CGC</strong></div>
+      <div class="drop-zone" id="drop-zone" style="border-radius:0;border:none;background:#111;color:#fff;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px;cursor:pointer">
+        <input type="file" id="file-input" accept="image/*" style="display:none"/>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.4"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <div style="font-size:14px;font-weight:500;color:rgba(255,255,255,.8)" id="drop-title">Tap to choose photo</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.4)" id="drop-sub">or use camera below</div>
       </div>
     </div>
-    <!-- Actions -->
     <div class="vf-actions">
       <button class="vf-btn primary" id="vf-toggle-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
@@ -287,8 +277,6 @@ a.sale-row:active{background:var(--sur2)}
       </button>
     </div>
   </div>
-
-  <!-- BACK STEP (raw) -->
   <div id="back-step" class="back-step d-none">
     <div class="back-step-title">Now capture the <strong>back</strong></div>
     <div class="back-step-sub">Both sides needed for full pre-grade</div>
@@ -303,20 +291,16 @@ a.sale-row:active{background:var(--sur2)}
     <input type="file" id="back-file-input" accept="image/*" style="display:none"/>
     <button class="sec-btn" id="skip-back-btn">Skip (front only)</button>
   </div>
-
-  <!-- PREVIEW -->
   <div class="prev-bar d-none" id="prev-bar">
     <img id="prev-thumb" class="prev-thumb" src="" alt="Preview"/>
     <div class="prev-info"><div class="prev-name" id="prev-name">card.jpg</div><div class="prev-sz" id="prev-sz"></div></div>
     <button class="rm-btn" id="rm-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
   <button class="scan-btn d-none" id="scan-btn" disabled>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
     <span id="scan-lbl">Scan &amp; Get Pricing</span>
   </button>
-  <!-- STATUS -->
   <div id="status-sec" class="d-none"><div class="status-box"><div class="spin"></div><div class="status-text" id="status-text">Analyzing…</div></div></div>
-  <!-- ERROR -->
   <div id="err-sec" class="d-none">
     <div class="err-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span class="err-text" id="err-text">Something went wrong.</span></div>
     <br><button class="sec-btn" id="retry-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>Try again</button>
@@ -325,7 +309,6 @@ a.sale-row:active{background:var(--sur2)}
 </div>
 <button class="fab d-none" id="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Scan another</button>
 
-<!-- EDIT MODAL -->
 <div class="modal-overlay d-none" id="edit-modal">
   <div class="modal-panel">
     <div class="modal-title">Correct card details</div>
@@ -346,7 +329,6 @@ a.sale-row:active{background:var(--sur2)}
   </div>
 </div>
 
-<!-- HISTORY -->
 <div class="hist-overlay d-none" id="hist-overlay">
   <div class="hist-panel">
     <div class="hist-hdr"><span class="hist-hdr-title">Scan history</span><button class="hist-clear-btn" id="hist-clear-btn">Clear all</button><button class="hist-close-btn" id="hist-close-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
@@ -355,15 +337,20 @@ a.sale-row:active{background:var(--sur2)}
 </div>
 
 <script>
-// ── UTILS ─────────────────────────────────────────────────
+// ── UTILS ────────────────────────────────────────────────
 var ge = function(id){ return document.getElementById(id); };
 function showEl(id){ var e=ge(id); if(e) e.classList.remove('d-none'); }
 function hideEl(id){ var e=ge(id); if(e) e.classList.add('d-none'); }
 function setHTML(id,h){ var e=ge(id); if(e) e.innerHTML=h; }
 function setTxt(id,t){ var e=ge(id); if(e) e.textContent=t; }
 function setStatus(m){ var e=ge('status-text'); if(e) e.innerHTML=m; }
+function fmt(v){ if(v==null||isNaN(+v)||+v===0) return 'N/A'; return '$'+parseFloat(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
+function glabel(g){ var n=parseFloat(g); if(isNaN(n)) return ''; if(n>=10) return 'Gem Mint'; if(n>=9.5) return 'Pristine'; if(n>=9) return 'Mint'; if(n>=8) return 'NM-Mint'; if(n>=7) return 'Near Mint'; if(n>=6) return 'Exc-Mint'; return 'VG or lower'; }
+function gpct(g){ var n=parseFloat(g); return isNaN(n)?0:Math.round(Math.min(n,10)/10*100); }
+function dotC(v){ if(!v) return ''; var s=v.toLowerCase(); if(s.indexOf('sharp')>=0||s.indexOf('clean')>=0||s.indexOf('excellent')>=0) return 'dot-g'; if(s.indexOf('minor')>=0||s.indexOf('moderate')>=0||s.indexOf('off')>=0) return 'dot-o'; return 'dot-b'; }
+function trendH(t){ if(t==='up') return '<span class="trend-pill t-up">&#8593; Rising</span>'; if(t==='down') return '<span class="trend-pill t-dn">&#8595; Falling</span>'; return '<span class="trend-pill t-fl">Stable</span>'; }
 
-// ── STATE ─────────────────────────────────────────────────
+// ── STATE ────────────────────────────────────────────────
 var currentMode='graded';
 var currentImgB64=null;
 var currentBackB64=null;
@@ -373,132 +360,97 @@ var apiKey='';
 var facingMode='environment';
 var camActive=false;
 var vfStream=null;
-
 try{ apiKey=localStorage.getItem('cg_key')||''; }catch(e){}
 
-// ── RATE LIMIT MANAGEMENT ────────────────────────────────
-// Track last web-search call time. After a 429, we back off with exponential
-// delay and also set lastWebSearchTime forward so subsequent scans wait.
-var lastWebSearchTime = 0;
-var WEB_SEARCH_GAP = 2000;      // 2s between web-search calls; 429s handled via Retry-After backoff
-var lastScanCompletedTime = 0;
-var SCAN_COOLDOWN = 3000;       // 3s between full scan starts
+// ── API ENGINE ───────────────────────────────────────────
+// Single tracking variable: timestamp of last completed web-search call.
+// Enough gap to avoid rate limits without over-throttling.
+var lastSearchDone=0;
+var MIN_SEARCH_GAP=2500; // ms between web-search API calls
 
-function callClaude(messages, useWebSearch, callback){
-  var now = Date.now();
-  var delay = 0;
-  if(useWebSearch){
-    // Wait whichever is longer: the web-search gap or the scan cooldown
-    var gapDelay = Math.max(0, (lastWebSearchTime + WEB_SEARCH_GAP) - now);
-    delay = Math.max(delay, gapDelay);
-  }
-  if(delay > 0){
-    var secs = Math.ceil(delay / 1000);
-    setStatus('Waiting ' + secs + 's before next search…');
-  }
-  setTimeout(function(){
-    _doCall(messages, useWebSearch, callback);
-  }, delay);
+function callClaude(messages, useSearch, callback){
+  if(!useSearch){ _sendRequest(messages, false, callback); return; }
+  var wait=Math.max(0, (lastSearchDone+MIN_SEARCH_GAP)-Date.now());
+  if(wait>0) setTimeout(function(){ _sendRequest(messages, true, callback); }, wait);
+  else _sendRequest(messages, true, callback);
 }
 
-function _apiRequest(body, retries, cb){
-  fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true'
-    },
-    body: JSON.stringify(body)
-  }).then(function(resp){
-    if(resp.status === 429){
-      // Parse Retry-After header if present, else use exponential backoff
-      var retryAfter = parseInt(resp.headers.get('Retry-After') || '0', 10);
-      var wait = retryAfter > 0 ? retryAfter * 1000 : Math.min(60000, 20000 * (4 - retries));
-      // Push lastWebSearchTime forward so the next scan waits too
-      lastWebSearchTime = Date.now() + wait;
-      if(retries <= 0){
-        cb(new Error('Rate limited. Please wait about a minute before scanning again.'), null);
+// Agentic loop: handles tool_use/tool_result turns for web_search
+function _sendRequest(messages, useSearch, callback){
+  var tools=useSearch?[{type:'web_search_20250305',name:'web_search'}]:undefined;
+  var msgs=messages.slice();
+  var loopsLeft=10;
+
+  function attempt(retries){
+    var body={model:'claude-sonnet-4-6',max_tokens:useSearch?2400:1000,messages:msgs};
+    if(tools) body.tools=tools;
+    fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify(body)
+    }).then(function(resp){
+      if(resp.status===429){
+        var retryAfter=parseInt(resp.headers.get('Retry-After')||'30',10);
+        var wait=retryAfter*1000;
+        // Push lastSearchDone forward so next scan also waits
+        lastSearchDone=Date.now()+wait;
+        if(retries<=0){ callback(new Error('Rate limited. Wait '+retryAfter+'s then try again.'),null); return; }
+        var cd=retryAfter;
+        var t=setInterval(function(){ setStatus('<strong>Rate limited \u2014 resuming in '+(cd--)+'s\u2026</strong>'); if(cd<0) clearInterval(t); },1000);
+        setTimeout(function(){ attempt(retries-1); }, wait);
         return;
       }
-      var cd = Math.round(wait / 1000);
-      var t = setInterval(function(){
-        setStatus('<strong>Rate limited — retrying in ' + (cd--) + 's…</strong>');
-        if(cd < 0) clearInterval(t);
-      }, 1000);
-      setTimeout(function(){ _apiRequest(body, retries - 1, cb); }, wait);
-      return;
-    }
-    if(!resp.ok){
-      resp.json().then(function(e){
-        var msg = (e && e.error && e.error.message) ? e.error.message : 'API error ' + resp.status;
-        if(resp.status === 401) msg = 'Invalid API key. Please remove and re-enter your key.';
-        cb(new Error(msg), null);
-      }).catch(function(){ cb(new Error('API error ' + resp.status), null); });
-      return;
-    }
-    resp.json().then(function(data){ cb(null, data); }).catch(function(e){ cb(e, null); });
-  }).catch(function(e){
-    if(retries > 0){ setTimeout(function(){ _apiRequest(body, retries - 1, cb); }, 4000); }
-    else { cb(e, null); }
-  });
-}
-
-// Agentic web-search loop: Anthropic web_search responds with stop_reason="tool_use"
-// until all searches complete, then stop_reason="end_turn" with the final text answer.
-function _doCall(messages, useWebSearch, callback){
-  var tools = useWebSearch ? [{type: 'web_search_20250305', name: 'web_search'}] : undefined;
-  var msgs = messages.slice();
-  var turnsLeft = 8;
-
-  function step(){
-    var body = {model: 'claude-sonnet-4-6', max_tokens: useWebSearch ? 2000 : 900, messages: msgs};
-    if(tools) body.tools = tools;
-
-    _apiRequest(body, 3, function(err, data){
-      if(err){ callback(err, null); return; }
-
-      var content = data.content || [];
-      var stopReason = data.stop_reason;
-
-      var textOut = '';
-      content.forEach(function(b){ if(b.type === 'text') textOut += b.text || ''; });
-
-      if(stopReason !== 'tool_use' || turnsLeft <= 0){
-        if(useWebSearch) lastWebSearchTime = Date.now();
-        callback(null, textOut);
+      if(!resp.ok){
+        resp.json().then(function(e){
+          var m=(e&&e.error&&e.error.message)?e.error.message:'API error '+resp.status;
+          if(resp.status===401) m='Invalid API key \u2014 please remove and re-enter.';
+          callback(new Error(m),null);
+        }).catch(function(){ callback(new Error('API error '+resp.status),null); });
         return;
       }
+      resp.json().then(function(data){
+        var content=data.content||[];
+        var stop=data.stop_reason;
+        var text='';
+        content.forEach(function(b){ if(b.type==='text') text+=b.text||''; });
 
-      turnsLeft--;
-      msgs.push({role: 'assistant', content: content});
-
-      var toolResults = [];
-      content.forEach(function(b){
-        if(b.type === 'tool_use'){
-          toolResults.push({type: 'tool_result', tool_use_id: b.id, content: 'Search executed.'});
+        // If end_turn or no tool_use blocks, return final text
+        if(stop!=='tool_use'||loopsLeft<=0){
+          if(useSearch) lastSearchDone=Date.now();
+          callback(null,text);
+          return;
         }
-      });
 
-      msgs.push({
-        role: 'user',
-        content: toolResults.length > 0 ? toolResults : 'Please provide the JSON response now.'
-      });
-      step();
+        // Build tool_result acknowledgments and loop
+        loopsLeft--;
+        msgs.push({role:'assistant',content:content});
+        var results=[];
+        content.forEach(function(b){
+          if(b.type==='tool_use'){
+            results.push({type:'tool_result',tool_use_id:b.id,content:'Search completed.'});
+          }
+        });
+        msgs.push({role:'user',content:results.length?results:'Continue.'});
+        attempt(retries);
+      }).catch(function(e){ callback(e,null); });
+    }).catch(function(e){
+      if(retries>0) setTimeout(function(){ attempt(retries-1); },3000);
+      else callback(e,null);
     });
   }
-  step();
+  attempt(3);
 }
 
 function parseJSON(text){
+  // Strip markdown code fences
+  text=text.replace(/```json|```/g,'').trim();
   var s=text.indexOf('{'),e=text.lastIndexOf('}');
-  if(s<0||e<0) throw new Error('No JSON found');
+  if(s<0||e<0) throw new Error('No JSON');
   return JSON.parse(text.slice(s,e+1));
 }
 
 // ── HISTORY ──────────────────────────────────────────────
-var HK='cg_hist_v4';
+var HK='cg_hist_v5';
 function loadHist(){ try{ return JSON.parse(localStorage.getItem(HK)||'[]'); }catch(e){ return []; } }
 function saveHist(a){ try{ localStorage.setItem(HK,JSON.stringify(a.slice(0,60))); }catch(e){} }
 function addHist(e){ var h=loadHist(); e.id=Date.now(); h.unshift(e); saveHist(h); updHistBtn(); }
@@ -513,7 +465,7 @@ ge('hist-btn').addEventListener('click',function(){
     var thumb=x.thumb?'<img class="hist-thumb" src="'+x.thumb+'" alt="" loading="lazy">':'<div class="hist-ph">&#127183;</div>';
     var badge=x.mode==='raw'?'<span class="hist-raw-badge">RAW</span>':'<span class="hist-badge">'+(x.gradingCompany||'')+(x.grade?' '+x.grade:'')+'</span>';
     var price=x.displayValue?'<span class="hist-price">$'+Math.round(x.displayValue)+'</span>':'';
-    var meta=[x.setName,x.gradingCompany&&x.grade?x.gradingCompany+' '+x.grade:null,x.scannedAt].filter(Boolean).join(' · ');
+    var meta=[x.setName,x.gradingCompany&&x.grade?x.gradingCompany+' '+x.grade:null,x.scannedAt].filter(Boolean).join(' \xb7 ');
     return '<div class="hist-item" onclick="loadHistItem('+x.id+')">'+thumb+'<div class="hist-info"><div class="hist-name">'+(x.cardName||'Unknown')+'</div><div class="hist-meta">'+meta+'</div></div>'+price+badge+'</div>';
   }).join(''); }
   showEl('hist-overlay');
@@ -542,12 +494,11 @@ function loadHistItem(id){
 // ── INIT ─────────────────────────────────────────────────
 function init(){
   if(apiKey){ hideEl('setup-card'); ge('saved-key-row').style.display='flex'; }
-  updHistBtn();
-  showEl('scan-btn');
+  updHistBtn(); showEl('scan-btn');
 }
 ge('key-save-btn').addEventListener('click',function(){
   var v=ge('key-input').value.trim();
-  if(!v||v.indexOf('sk-')!==0){ alert('Enter a valid Anthropic API key starting with sk-'); return; }
+  if(!v||v.indexOf('sk-')!==0){ alert('Enter a valid API key starting with sk-'); return; }
   apiKey=v; try{ localStorage.setItem('cg_key',apiKey); }catch(e){}
   hideEl('setup-card'); ge('saved-key-row').style.display='flex';
 });
@@ -564,42 +515,33 @@ function setMode(m){
   ge('tab-graded').classList.toggle('on',m==='graded');
   ge('tab-raw').classList.toggle('on',m==='raw');
   setTxt('scan-area-title-txt',m==='graded'?'Scan graded card':'Scan front of card');
-  setTxt('drop-title','Tap to choose photo');
   setTxt('scan-lbl',m==='graded'?'Scan & Get Pricing':'Scan, Grade & Price');
   resetUI();
 }
 
-// ── LIVE VIEWFINDER ───────────────────────────────────────
+// ── CAMERA ───────────────────────────────────────────────
 ge('vf-toggle-btn').addEventListener('click',function(){ camActive?stopViewfinder():startViewfinder(); });
 ge('vf-flip-btn').addEventListener('click',function(){ facingMode=(facingMode==='environment'?'user':'environment'); startViewfinder(); });
-
 function startViewfinder(){
   if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ alert('Camera not available.'); return; }
   if(vfStream){ vfStream.getTracks().forEach(function(t){ t.stop(); }); }
   navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facingMode},width:{ideal:1280},height:{ideal:720}}})
     .then(function(s){
       vfStream=s; camActive=true;
-      ge('vf-vid').srcObject=s;
-      ge('vf-vid').play().catch(function(){});
-      showEl('vf-wrap');
-      hideEl('drop-zone-wrap');
+      ge('vf-vid').srcObject=s; ge('vf-vid').play().catch(function(){});
+      showEl('vf-wrap'); hideEl('drop-zone-wrap');
       setTxt('vf-toggle-btn','Stop camera');
       ge('vf-toggle-btn').classList.add('primary');
       ge('vf-flip-btn').style.display='flex';
-      setTxt('vf-status-lbl','Live • tap to capture');
-      // Update guide label based on mode
-      var lbl=ge('vf-label');
-      if(lbl) lbl.textContent=currentMode==='raw'?'Align card — only this region is scanned':'Align card within frame';
+      setTxt('vf-status-lbl','Live \u2022 tap to capture');
       ge('vf-wrap').addEventListener('click',captureFromViewfinder);
     })
     .catch(function(){ alert('Camera access denied. Use the file picker instead.'); });
 }
 function stopViewfinder(){
   if(vfStream){ vfStream.getTracks().forEach(function(t){ t.stop(); }); vfStream=null; }
-  camActive=false;
-  ge('vf-vid').srcObject=null;
-  hideEl('vf-wrap');
-  showEl('drop-zone-wrap');
+  camActive=false; ge('vf-vid').srcObject=null;
+  hideEl('vf-wrap'); showEl('drop-zone-wrap');
   setTxt('vf-toggle-btn','Start camera');
   ge('vf-flip-btn').style.display='none';
   setTxt('vf-status-lbl','Camera off');
@@ -609,81 +551,51 @@ function captureFromViewfinder(){
   var v=ge('vf-vid'),c=ge('vf-detect');
   var vw=v.videoWidth||1280, vh=v.videoHeight||720;
   if(currentMode==='raw'){
-    // For raw cards: crop to guide box (68% wide, 90% tall, centered) to isolate the card
-    // Crop to exact guide box: 63% wide, 88% tall, centered — matches CSS .vf-guide
-    var gw=Math.round(vw*0.63), gh=Math.round(vh*0.88);
-    var gx=Math.round((vw-gw)/2), gy=Math.round((vh-gh)/2);
-    c.width=gw; c.height=gh;
-    c.getContext('2d').drawImage(v,gx,gy,gw,gh,0,0,gw,gh);
-  } else {
-    // For graded cards: capture full frame (label may be anywhere)
-    c.width=vw; c.height=vh;
-    c.getContext('2d').drawImage(v,0,0,vw,vh);
-  }
-  var raw=c.toDataURL('image/jpeg',.88);
-  resizeDU(raw,function(d){ setFrontImage(d,'camera-capture.jpg',0); });
+    var gw=Math.round(vw*0.63),gh=Math.round(vh*0.88);
+    var gx=Math.round((vw-gw)/2),gy=Math.round((vh-gh)/2);
+    c.width=gw; c.height=gh; c.getContext('2d').drawImage(v,gx,gy,gw,gh,0,0,gw,gh);
+  } else { c.width=vw; c.height=vh; c.getContext('2d').drawImage(v,0,0,vw,vh); }
+  resizeDU(c.toDataURL('image/jpeg',.88),function(d){ setFrontImage(d,'camera-capture.jpg',0); });
 }
 
 // ── FILE PICKER ───────────────────────────────────────────
+ge('drop-zone').addEventListener('click',function(){ ge('file-input').click(); });
 ge('file-input').addEventListener('change',function(e){
   var f=e.target.files[0]; if(!f) return;
   resizeFile(f,function(d,n,s){
-    if(currentMode==='raw'){
-      cropCardFromImage(d,function(cropped){ setFrontImage(cropped,n,s); });
-    } else {
-      setFrontImage(d,n,s);
-    }
+    if(currentMode==='raw'){ cropCardFromImage(d,function(cr){ setFrontImage(cr,n,s); }); }
+    else { setFrontImage(d,n,s); }
   });
 });
-var dz=ge('drop-zone');
-dz.addEventListener('dragover',function(e){ e.preventDefault(); dz.classList.add('drag-over'); });
-dz.addEventListener('dragleave',function(){ dz.classList.remove('drag-over'); });
-dz.addEventListener('drop',function(e){
-  e.preventDefault(); dz.classList.remove('drag-over');
-  var f=e.dataTransfer.files[0]; if(!f) return;
-  resizeFile(f,function(d,n,s){ setFrontImage(d,n,s); });
-});
-
 ge('rm-btn').addEventListener('click',function(){
   currentImgB64=null; currentThumb=null; currentBackB64=null;
-  ge('file-input').value='';
-  hideEl('prev-bar'); hideEl('back-step');
-  ge('scan-btn').disabled=true;
-  showEl('scan-area');
+  ge('file-input').value=''; hideEl('prev-bar'); hideEl('back-step');
+  ge('scan-btn').disabled=true; showEl('scan-area');
 });
 
 // ── BACK PHOTO ────────────────────────────────────────────
 ge('cam-back-btn').addEventListener('click',function(){
   if(camActive){
-    // use live viewfinder for back
     ge('vf-wrap').removeEventListener('click',captureFromViewfinder);
     ge('vf-wrap').addEventListener('click',captureBackFromViewfinder);
     setTxt('vf-tap-hint','Tap to capture BACK of card');
     showEl('scan-area');
-  } else {
-    ge('back-file-input').click();
-  }
+  } else { ge('back-file-input').click(); }
 });
 function captureBackFromViewfinder(){
   var v=ge('vf-vid'),c=ge('vf-detect');
-  var vw=v.videoWidth||1280, vh=v.videoHeight||720;
-  // Back capture: crop to exact same guide box 63%x88%
-  var gw=Math.round(vw*0.63), gh=Math.round(vh*0.88);
-  var gx=Math.round((vw-gw)/2), gy=Math.round((vh-gh)/2);
-  c.width=gw; c.height=gh;
-  c.getContext('2d').drawImage(v,gx,gy,gw,gh,0,0,gw,gh);
-  var raw=c.toDataURL('image/jpeg',.88);
-  resizeDU(raw,function(d){ setBackImage(d); });
+  var vw=v.videoWidth||1280,vh=v.videoHeight||720;
+  var gw=Math.round(vw*0.63),gh=Math.round(vh*0.88);
+  var gx=Math.round((vw-gw)/2),gy=Math.round((vh-gh)/2);
+  c.width=gw; c.height=gh; c.getContext('2d').drawImage(v,gx,gy,gw,gh,0,0,gw,gh);
+  resizeDU(c.toDataURL('image/jpeg',.88),function(d){ setBackImage(d); });
   ge('vf-wrap').removeEventListener('click',captureBackFromViewfinder);
   ge('vf-wrap').addEventListener('click',captureFromViewfinder);
-  setTxt('vf-tap-hint','Tap to capture');
-  hideEl('scan-area');
+  setTxt('vf-tap-hint','Tap to capture'); hideEl('scan-area');
 }
 ge('back-file-input').addEventListener('change',function(e){
   var f=e.target.files[0]; if(!f) return;
-  resizeFile(f,function(d){
-    cropCardFromImage(d,function(cropped){ setBackImage(cropped); });
-  });
+  resizeFile(f,function(d){ cropCardFromImage(d,function(cr){ setBackImage(cr); }); });
 });
 ge('skip-back-btn').addEventListener('click',function(){
   currentBackB64=null; hideEl('back-step');
@@ -698,8 +610,7 @@ function resizeFile(file,cb){
     var s=Math.min(1,MAX/img.width),w=Math.round(img.width*s),h=Math.round(img.height*s);
     var c=document.createElement('canvas'); c.width=w; c.height=h;
     c.getContext('2d').drawImage(img,0,0,w,h); cb(c.toDataURL('image/jpeg',.82),file.name,file.size);
-  };
-  img.src=url;
+  }; img.src=url;
 }
 function resizeDU(dataUrl,cb){
   var MAX=800,img=new Image();
@@ -707,74 +618,45 @@ function resizeDU(dataUrl,cb){
     var s=Math.min(1,MAX/img.width),w=Math.round(img.width*s),h=Math.round(img.height*s);
     var c=document.createElement('canvas'); c.width=w; c.height=h;
     c.getContext('2d').drawImage(img,0,0,w,h); cb(c.toDataURL('image/jpeg',.82));
-  };
-  img.src=dataUrl;
+  }; img.src=dataUrl;
 }
-
-// Crop a raw card image to remove excess background, keeping card area with padding
 function cropCardFromImage(dataUrl,cb){
   var img=new Image();
   img.onload=function(){
-    var W=img.width, H=img.height;
+    var W=img.width,H=img.height;
     var c=document.createElement('canvas'); c.width=W; c.height=H;
-    var ctx=c.getContext('2d');
-    ctx.drawImage(img,0,0,W,H);
+    var ctx=c.getContext('2d'); ctx.drawImage(img,0,0,W,H);
     var data=ctx.getImageData(0,0,W,H).data;
-
-    // Find bounding box of non-background pixels
-    // Use edge brightness variance to find card edges
-    var SAMPLE=4; // sample every 4px for speed
-    var minX=W, maxX=0, minY=H, maxY=0;
-
-    // Background color: sample corner pixels
+    var SAMPLE=4;
+    var minX=W,maxX=0,minY=H,maxY=0;
     function getPixel(x,y){ var i=(y*W+x)*4; return [data[i],data[i+1],data[i+2]]; }
     function colorDist(a,b){ return Math.abs(a[0]-b[0])+Math.abs(a[1]-b[1])+Math.abs(a[2]-b[2]); }
-
-    // Sample 4 corners for background estimation
-    var bg=[
-      getPixel(2,2), getPixel(W-3,2), getPixel(2,H-3), getPixel(W-3,H-3)
-    ];
+    var bg=[getPixel(2,2),getPixel(W-3,2),getPixel(2,H-3),getPixel(W-3,H-3)];
     var bgAvg=[
       Math.round((bg[0][0]+bg[1][0]+bg[2][0]+bg[3][0])/4),
       Math.round((bg[0][1]+bg[1][1]+bg[2][1]+bg[3][1])/4),
       Math.round((bg[0][2]+bg[1][2]+bg[2][2]+bg[3][2])/4)
     ];
-
-    var THRESH=40; // color distance threshold
-    for(var y=0; y<H; y+=SAMPLE){
-      for(var x=0; x<W; x+=SAMPLE){
-        if(colorDist(getPixel(x,y),bgAvg)>THRESH){
-          if(x<minX) minX=x; if(x>maxX) maxX=x;
-          if(y<minY) minY=y; if(y>maxY) maxY=y;
-        }
+    var THRESH=40;
+    for(var y=0;y<H;y+=SAMPLE){ for(var x=0;x<W;x+=SAMPLE){
+      if(colorDist(getPixel(x,y),bgAvg)>THRESH){
+        if(x<minX)minX=x; if(x>maxX)maxX=x; if(y<minY)minY=y; if(y>maxY)maxY=y;
       }
-    }
-
-    // If detection failed or card fills most of frame, return as-is
+    }}
     var PAD=Math.round(Math.min(W,H)*0.03);
-    var cX=Math.max(0,minX-PAD), cY=Math.max(0,minY-PAD);
-    var cW=Math.min(W,maxX+PAD)-cX, cH=Math.min(H,maxY+PAD)-cY;
-    var coverageX=cW/W, coverageY=cH/H;
-
-    if(cW<W*0.3||cH<H*0.3||coverageX>0.92||coverageY>0.92){
-      // Card already fills frame or detection failed, just resize
+    var cX=Math.max(0,minX-PAD),cY=Math.max(0,minY-PAD);
+    var cW=Math.min(W,maxX+PAD)-cX,cH=Math.min(H,maxY+PAD)-cY;
+    if(cW<W*0.3||cH<H*0.3||cW/W>0.92||cH/H>0.92){
       var MAX=800,s=Math.min(1,MAX/W),nw=Math.round(W*s),nh=Math.round(H*s);
       var c2=document.createElement('canvas'); c2.width=nw; c2.height=nh;
-      c2.getContext('2d').drawImage(img,0,0,nw,nh);
-      cb(c2.toDataURL('image/jpeg',.85));
-      return;
+      c2.getContext('2d').drawImage(img,0,0,nw,nh); cb(c2.toDataURL('image/jpeg',.85)); return;
     }
-
-    // Crop to card bounds, resize to max 800px
-    var MAX=800,s=Math.min(1,MAX/cW),nw=Math.round(cW*s),nh=Math.round(cH*s);
-    var c3=document.createElement('canvas'); c3.width=nw; c3.height=nh;
-    c3.getContext('2d').drawImage(img,cX,cY,cW,cH,0,0,nw,nh);
-    cb(c3.toDataURL('image/jpeg',.85));
-  };
-  img.src=dataUrl;
+    var MAX2=800,s2=Math.min(1,MAX2/cW),nw2=Math.round(cW*s2),nh2=Math.round(cH*s2);
+    var c3=document.createElement('canvas'); c3.width=nw2; c3.height=nh2;
+    c3.getContext('2d').drawImage(img,cX,cY,cW,cH,0,0,nw2,nh2); cb(c3.toDataURL('image/jpeg',.85));
+  }; img.src=dataUrl;
 }
-function fmtB(b){ if(!b) return''; if(b<1024) return b+' B'; if(b<1048576) return(b/1024).toFixed(1)+' KB'; return(b/1048576).toFixed(1)+' MB'; }
-
+function fmtB(b){ if(!b)return''; if(b<1024)return b+' B'; if(b<1048576)return(b/1024).toFixed(1)+' KB'; return(b/1048576).toFixed(1)+' MB'; }
 function setFrontImage(dataUrl,name,size){
   currentImgB64=dataUrl.split(',')[1]; currentThumb=dataUrl; currentBackB64=null;
   ge('prev-thumb').src=dataUrl; setTxt('prev-name',name||'card.jpg'); setTxt('prev-sz',size?fmtB(size):'');
@@ -782,9 +664,7 @@ function setFrontImage(dataUrl,name,size){
   if(currentMode==='raw'){
     ge('front-preview').src=dataUrl;
     hideEl('scan-area'); showEl('back-step'); hideEl('scan-btn');
-  } else {
-    ge('scan-btn').disabled=false; showEl('scan-btn'); hideEl('scan-area');
-  }
+  } else { ge('scan-btn').disabled=false; showEl('scan-btn'); hideEl('scan-area'); }
 }
 function setBackImage(dataUrl){
   currentBackB64=dataUrl.split(',')[1];
@@ -819,10 +699,10 @@ ge('scan-btn').addEventListener('click',function(){
 // ── GRADED FLOW ───────────────────────────────────────────
 function runGraded(){
   if(manualCard){ fetchGradedPricing(manualCard); return; }
-  setStatus('Reading grading label…');
+  setStatus('Reading grading label\u2026');
   callClaude([{role:'user',content:[
     {type:'image',source:{type:'base64',media_type:'image/jpeg',data:currentImgB64}},
-    {type:'text',text:'Identify this graded trading card. Return ONLY JSON, no markdown:\n{"cardName":"","setName":null,"cardNumber":null,"year":null,"game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","gradingCompany":"PSA|BGS|CGC|Other","grade":"10","certNumber":null,"variety":null}'}
+    {type:'text',text:'Identify this graded trading card from the label/slab. Return ONLY JSON, no markdown, no preamble:\n{"cardName":"","setName":null,"cardNumber":null,"year":null,"game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","gradingCompany":"PSA|BGS|CGC|SGC|TAG|Other","grade":"10","certNumber":null,"variety":null}'}
   ]}], false, function(err,txt){
     if(err){ showErr(err.message); return; }
     var card;
@@ -833,60 +713,60 @@ function runGraded(){
   });
 }
 
+// ── GRADED PRICING — CardLadder-style with multi-source search ─────────
 function fetchGradedPricing(card){
-  setStatus('Searching recent sales\u2026');
+  setStatus('Finding recent sales\u2026');
   var name=card.cardName||'';
   var company=card.gradingCompany||'PSA';
   var grade=card.grade||'10';
   var set=card.setName||'';
-  var variety=card.variety||'';
   var num=card.cardNumber||'';
+  var variety=card.variety||'';
 
-  // Build the tightest possible search string
+  // Build a tight search string matching what collectors actually search for
   var parts=[company,grade,name];
   if(num) parts.push(num);
   if(set) parts.push(set);
   if(variety) parts.push(variety);
   var searchStr=parts.join(' ');
 
-  // eBay sold URL — passed to Claude as a reference link for item URLs only
-  var ebaySoldUrl='https://www.ebay.com/sch/i.html?_nkw='+encodeURIComponent(searchStr)+'&LH_Complete=1&LH_Sold=1&_sop=13';
-
+  // CardLadder-style prompt: extract price, date, platform, title, url
+  // Key insight: ask Claude to search AND report snippet data directly,
+  // since eBay pages are JS-rendered but search engine snippets contain the sold prices.
   var prompt=
-    'I need the 5 most recent SOLD prices for this graded card: '+searchStr+'\n\n'
-    +'IMPORTANT: eBay pages are JavaScript-rendered and cannot be fetched directly. '
-    +'Instead, use these specific search strategies to find real sold prices:\n\n'
-    +'Search 1: '+searchStr+' sold ebay completed listing price\n'
-    +'Search 2: '+searchStr+' ebay sold 2024 OR 2025\n'
-    +'Search 3: pricecharting.com '+company+' '+grade+' '+name+(set?' '+set:'')+'\n\n'
-    +'From the search result SNIPPETS (not by fetching eBay pages), extract sold prices that appear in the results. '
-    +'Google and Bing index eBay listings and show prices in snippets — read those directly.\n'
-    +'Also if pricecharting.com appears in results, fetch that page as it is static HTML with real sale data.\n\n'
-    +'For each sale found:\n'
-    +'- "price": the sold price as a plain USD number (no $ or commas)\n'
-    +'- "date": when it sold (e.g. "May 2025")\n'
-    +'- "title": the listing title\n'
-    +'- "url": eBay item URL (https://www.ebay.com/itm/NUMBERS) if available, else the source page URL\n\n'
-    +'The eBay sold listings page for this card (for reference, not to fetch) is:\n'
-    +ebaySoldUrl+'\n\n'
-    +'Respond with ONLY this JSON — no markdown, no explanation, nothing else:\n'
-    +'{"sales":[{"price":145,"date":"May 2025","title":"'+company+' '+grade+' '+name+' '+set+'","url":"https://www.ebay.com/itm/123456789012"}],"trend":"stable"}\n'
-    +'If no data found after all searches: {"sales":[],"trend":"stable"}';
+    'You are a trading card price researcher. I need verified SOLD sale prices for:\n'
+    +searchStr+'\n\n'
+    +'SEARCH STRATEGY (perform all of these):\n'
+    +'1. Search: '+searchStr+' sold\n'
+    +'2. Search: "'+name+'" '+company+' '+grade+(set?' "'+set+'"':'')+' sold price 2024 2025\n'
+    +'3. Search: site:cardladder.com '+name+' '+company+' '+grade+(set?' '+set:'')+'\n'
+    +'4. Search: '+searchStr+' ebay completed\n\n'
+    +'From search result snippets and any accessible pages, extract up to 5 real SOLD transactions.\n'
+    +'NOTE: eBay listing pages are JS-rendered so cannot be fetched — read prices from search snippets instead.\n'
+    +'CardLadder, PriceCharting, and PWCC pages ARE readable if they appear in results.\n\n'
+    +'For each sale found, extract:\n'
+    +'- price: number in USD (no $ sign, no commas)\n'
+    +'- date: when it sold e.g. "May 15, 2025" or "May 2025"\n'
+    +'- platform: where it sold e.g. "eBay", "Goldin", "PWCC", "Heritage", "Fanatics"\n'
+    +'- title: the exact listing title\n'
+    +'- url: direct link (eBay: https://www.ebay.com/itm/NUMBERS; use source URL if not eBay)\n\n'
+    +'Also determine if prices are trending up, down, or stable.\n\n'
+    +'Respond with ONLY this JSON \u2014 no markdown, no text before or after:\n'
+    +'{"sales":[{"price":145,"date":"May 15, 2025","platform":"eBay","title":"'+company+' '+grade+' '+name+' '+set+'","url":"https://www.ebay.com/itm/123456789012"}],"trend":"stable","note":null}\n\n'
+    +'"note" can be a short string if something is worth flagging (e.g. "Limited recent sales found") or null.\n'
+    +'If truly no sales found after all searches: {"sales":[],"trend":"stable","note":"No recent sales found in search results"}';
 
   callClaude([{role:'user',content:prompt}], true, function(err,txt){
     if(err){ showErr(err.message); return; }
-    var pricing;
-    try{ pricing=parseJSON(txt); }
-    catch(e){ pricing={sales:[],trend:'stable'}; }
-
+    var pricing={sales:[],trend:'stable',note:null};
+    try{ pricing=parseJSON(txt); }catch(e){}
     var sales=(pricing.sales||[]).slice(0,5);
     var prices=sales.map(function(s){ return +s.price; }).filter(function(p){ return p>0; });
-    var avg=prices.length?Math.round(prices.reduce(function(a,b){ return a+b; },0)/prices.length):null;
+    var avg=prices.length?Math.round(prices.reduce(function(a,b){return a+b;},0)/prices.length):null;
     pricing.avg=avg;
     pricing.low=prices.length?Math.min.apply(null,prices):null;
     pricing.high=prices.length?Math.max.apply(null,prices):null;
     pricing.sales=sales;
-
     hideEl('status-sec');
     renderGraded(card,pricing,currentThumb);
     addHist({mode:'graded',cardName:card.cardName,setName:card.setName,gradingCompany:card.gradingCompany,grade:card.grade,displayValue:avg,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing});
@@ -894,24 +774,45 @@ function fetchGradedPricing(card){
   });
 }
 
-// ── RAW FLOW ──────────────────────────────────────────────
+// ── RAW FLOW — TAG-inspired grading rubric ─────────────────────────────
 function runRaw(){
-  setStatus('Analyzing physical card condition…');
+  setStatus('Analyzing card condition\u2026');
   var content=[{type:'image',source:{type:'base64',media_type:'image/jpeg',data:currentImgB64}}];
-  if(currentBackB64){
-    content.push({type:'image',source:{type:'base64',media_type:'image/jpeg',data:currentBackB64}});
-  }
+  if(currentBackB64) content.push({type:'image',source:{type:'base64',media_type:'image/jpeg',data:currentBackB64}});
   var hasBoth=!!currentBackB64;
-  content.push({type:'text',text:'You are a PSA/BGS/CGC professional grader assessing the PHYSICAL CARD shown in '+(hasBoth?'these images (image 1=FRONT, image 2=BACK)':'this image')
-    +'. Evaluate ONLY the card\'s physical attributes, NOT photo quality or lighting. '
-    +'Assess: (1) print centering within borders, (2) corner sharpness or fraying/whitening, '
-    +'(3) edge nicks/chips/roughness on all four sides, (4) surface scratches/print lines/scuffs/indentations. '
-    +(hasBoth?'Assess front and back sides separately. ':'')
-    +'Return ONLY JSON:\n'
-    +'{"cardName":"","setName":null,"cardNumber":null,"year":null,"game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","variety":null,"tcgName":"exact name for TCGplayer","condition":{"centering":"Excellent|Good|Moderate|Off-center","corners":"Sharp|Minor Wear|Moderate Wear|Rounded","edges":"Clean|Minor Chips|Moderate Chips|Heavy Damage","surface":"Clean|Minor Scratches|Moderate Scratches|Heavy Scratches"'
-    +(hasBoth?',"backCentering":"Excellent|Good|Moderate|Off-center","backCorners":"Sharp|Minor Wear|Moderate Wear|Rounded","backEdges":"Clean|Minor Chips|Moderate Chips|Heavy Damage","backSurface":"Clean|Minor Scratches|Moderate Scratches|Heavy Scratches"':'')
-    +'},"issues":[{"type":"whitening|scratch|dent|crease|stain|print_defect","side":"front|back","severity":"minor|moderate|severe","x":0.1,"y":0.05,"w":0.1,"h":0.08}],'
-    +'"psa":{"grade":"9","conf":"high|medium|low"},"bgs":{"grade":"9.5","conf":"high|medium|low"},"cgc":{"grade":"9","conf":"high|medium|low"},"notes":"one sentence"}'
+
+  // TAG-inspired grading prompt: 1000pt score system, explicit rubric criteria
+  content.push({type:'text',text:
+    'You are a professional trading card grader using TAG\'s precise grading rubric. '
+    +'Evaluate the PHYSICAL CARD in '+(hasBoth?'these images (image 1 = FRONT, image 2 = BACK)':'this image')
+    +'. Grade the card itself, NOT the photo quality.\n\n'
+    +'TAG GRADING RUBRIC (use these exact standards):\n'
+    +'CENTERING: Pristine=front 51/49, back 54.5/45.5 (sports) or 52/48 (TCG). '
+    +'GemMint=front 55/45, back 70/30 (sports) or 65/35 (TCG). '
+    +'NearMint=front 60/40, back 90/10 (sports) or 75/25 (TCG). '
+    +'CORNERS: Pristine=no visible wear under hi-res. GemMint=4 sharp corners, minor fill/fray. '
+    +'NearMint=corners show minor fill/fray, may have 1-2 light touches on reverse. '
+    +'EDGES: Pristine=virtually flawless, minor fill/fray under magnification. '
+    +'GemMint=minor fill/fray visible. NearMint=edge may show minor fill/fray, very minor surface wear. '
+    +'SURFACE: Pristine=only Non-Human Observable Defects (NHODs). GemMint=extremely attractive, '
+    +'slight print imperfection possible under hi-res. NearMint=very minor defect (small pit, light scratch not penetrating gloss, light print/refractor line).\n\n'
+    +'TAG SCORE SYSTEM: Score each category 100-250 points, total 100-1000.\n'
+    +'- centering_score: 100-250 (250=perfectly centered, 100=heavily off)\n'
+    +'- corners_score: 100-250 (250=pristine, 100=severe damage)\n'
+    +'- edges_score: 100-250 (250=flawless, 100=heavy chips/nicks)\n'
+    +'- surface_score: 100-250 (250=NHOD only, 100=heavy scratches/stains)\n'
+    +'Total tag_score = sum of four scores (400-1000 range in practice).\n'
+    +'TAG Grade from score: 950-1000=10 Pristine, 900-949=10 GemMint, 850-899=9.5, 800-849=9, 750-799=8.5, 700-749=8, etc.\n\n'
+    +'Also predict PSA, BGS, and CGC grades (they use similar but slightly different standards).\n\n'
+    +'Identify specific defects with bounding box coordinates (0.0-1.0 relative to image dimensions).\n\n'
+    +'Return ONLY JSON, no markdown:\n'
+    +'{"cardName":"","setName":null,"cardNumber":null,"year":null,"game":"Pokemon|One Piece|Magic: The Gathering|Yu-Gi-Oh|Sports|Other","variety":null,"tcgName":"exact search name",'
+    +'"tagScore":{"total":875,"centering":220,"corners":225,"edges":215,"surface":215},'
+    +'"condition":{"centering":"Excellent","corners":"Sharp","edges":"Clean","surface":"Clean"'
+    +(hasBoth?',"backCentering":"Excellent","backCorners":"Sharp","backEdges":"Clean","backSurface":"Clean"':'')
+    +'},"issues":[{"type":"whitening|scratch|dent|crease|stain|print_defect","side":"front|back","severity":"minor|moderate|severe","x":0.1,"y":0.05,"w":0.1,"h":0.08,"desc":"brief description"}],'
+    +'"psa":{"grade":"9","conf":"high|medium|low"},"bgs":{"grade":"9.5","conf":"high|medium|low"},"cgc":{"grade":"9","conf":"high|medium|low"},'
+    +'"notes":"one concise sentence about the card\'s overall condition"}'
   });
 
   callClaude([{role:'user',content:content}], false, function(err,identText){
@@ -927,126 +828,94 @@ function runRaw(){
     var tcgName=card.tcgName||card.cardName+(card.setName?' '+card.setName:'');
     var cardBase=card.cardName+(card.setName?' '+card.setName:'');
 
-    // Call 1: TCGplayer market price (don't use site: operator — it blocks crawlers)
-    setStatus('Getting raw card market price\u2026');
-    var tcgPrompt='Search for the current market price of this trading card: "'+tcgName+'" '+card.game+'\n\n'
-      +'Try these searches:\n'
-      +'1. tcgplayer "'+tcgName+'" price\n'
-      +'2. "'+tcgName+'" card price market value\n'
-      +'3. pricecharting "'+tcgName+'"\n\n'
-      +'Find: the TCGplayer Market Price (the mid/market price, not just "listed from"), the low price, the high price, and the direct product URL on tcgplayer.com if available.\n'
-      +'If TCGplayer data is unavailable, use eBay raw sold prices or PriceCharting to estimate market, low, high.\n\n'
-      +'Respond with ONLY this JSON (no markdown, no explanation):\n'
-      +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/product/123456","conf":"high|medium|low"}\n\n'
-      +'Use null for any value you cannot find. Do not invent prices.';
+    setStatus('Getting market price\u2026');
+    var tcgPrompt=
+      'Find the current raw (ungraded) market price for this trading card: "'+tcgName+'" ('+card.game+')\n\n'
+      +'Search: tcgplayer "'+tcgName+'" price\n'
+      +'Search: "'+tcgName+'" price guide market value\n'
+      +'Search: pricecharting "'+tcgName+'"\n\n'
+      +'Find the TCGplayer Market price, Low, High. If TCGplayer unavailable, use PriceCharting or recent eBay raw sold average.\n\n'
+      +'Return ONLY JSON:\n'
+      +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/product/123456","conf":"high|medium|low"}';
 
     callClaude([{role:'user',content:tcgPrompt}], true, function(err2,tcgText){
       var tcgData={tcgMarket:null,tcgLow:null,tcgHigh:null,tcgUrl:null,conf:'low'};
       try{ tcgData=parseJSON(tcgText); }catch(e){}
 
-      // Call 2: eBay graded sales for value estimation  
-      setStatus('Finding graded sale values\u2026');
-      var gradedPrompt='Search eBay sold listings for recent COMPLETED sales of "'+cardBase+'" in graded condition.\n\n'
-        +'Search for:\n'
-        +'1. "'+cardBase+'" PSA '+psaG+' sold eBay\n'
-        +'2. "'+cardBase+'" BGS '+bgsG+' sold eBay\n'
-        +'3. "'+cardBase+'" CGC '+cgcG+' sold eBay\n'
-        +'4. "'+cardBase+'" raw ungraded sold eBay\n\n'
-        +'For each grading company, find up to 5 recent sold prices and calculate the average.\n'
-        +'For raw/ungraded sales, return up to 5 recent sold listings with price, date, title, and eBay URL.\n\n'
-        +'Respond with ONLY this JSON (no markdown, no explanation):\n'
-        +'{"gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":25,"rawSales":[{"price":42,"date":"May 2025","title":"listing title here","url":"https://www.ebay.com/itm/123456789012"}],"trend":"up|down|stable"}\n\n'
-        +'Use null for any graded company average you cannot find. If no raw sales, use empty array.';
+      setStatus('Finding graded comps\u2026');
+      var gradedPrompt=
+        'Search for recent eBay sold prices for graded copies of "'+cardBase+'" at these grades:\n'
+        +'- PSA '+psaG+': search "'+cardBase+' PSA '+psaG+' sold"\n'
+        +'- BGS '+bgsG+': search "'+cardBase+' BGS '+bgsG+' sold"\n'
+        +'- CGC '+cgcG+': search "'+cardBase+' CGC '+cgcG+' sold"\n'
+        +'Also search for up to 5 recent raw ungraded eBay sold listings for "'+cardBase+'".\n\n'
+        +'Average the 3-5 most recent sales per grade. Read prices from search snippets (eBay pages are JS-rendered).\n\n'
+        +'Return ONLY JSON:\n'
+        +'{"gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":25,"rawSales":[{"price":42,"date":"May 2025","platform":"eBay","title":"raw listing title","url":"https://www.ebay.com/itm/123456789012"}],"trend":"stable"}';
 
       callClaude([{role:'user',content:gradedPrompt}], true, function(err3,gradedText){
         var gradedData={gradedPSA:null,gradedBGS:null,gradedCGC:null,gradingFee:25,rawSales:[],trend:'stable'};
         try{ gradedData=parseJSON(gradedText); }catch(e){}
-
         var pricing={
-          tcgMarket:tcgData.tcgMarket,
-          tcgLow:tcgData.tcgLow,
-          tcgHigh:tcgData.tcgHigh,
-          tcgUrl:tcgData.tcgUrl,
-          gradedPSA:gradedData.gradedPSA,
-          gradedBGS:gradedData.gradedBGS,
-          gradedCGC:gradedData.gradedCGC,
-          gradingFee:gradedData.gradingFee||25,
-          rawSales:gradedData.rawSales||[],
-          trend:gradedData.trend||tcgData.trend||'stable',
-          conf:tcgData.conf||'medium'
+          tcgMarket:tcgData.tcgMarket, tcgLow:tcgData.tcgLow, tcgHigh:tcgData.tcgHigh, tcgUrl:tcgData.tcgUrl,
+          gradedPSA:gradedData.gradedPSA, gradedBGS:gradedData.gradedBGS, gradedCGC:gradedData.gradedCGC,
+          gradingFee:gradedData.gradingFee||25, rawSales:gradedData.rawSales||[], trend:gradedData.trend||'stable', conf:tcgData.conf||'medium'
         };
-
         var anno=null;
         try{ anno=drawAnnotation(currentThumb,currentBackB64?('data:image/jpeg;base64,'+currentBackB64):null,card); }catch(e){}
         hideEl('status-sec');
         renderRaw(card,pricing,currentThumb,anno);
-        
         addHist({mode:'raw',cardName:card.cardName,setName:card.setName,grade:psaG,displayValue:pricing.tcgMarket,thumb:currentThumb,scannedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'}),cachedCard:card,cachedPricing:pricing,annotation:anno});
       });
     });
   });
 }
 
-// ── ANNOTATION — front + back side by side ────────────────
+// ── ANNOTATION ────────────────────────────────────────────
 function condColor(val){
   if(!val) return '#6b6b67'; var v=val.toLowerCase();
-  if(v.indexOf('sharp')>=0||v.indexOf('clean')>=0||v.indexOf('excellent')>=0) return '#639922';
+  if(v.indexOf('sharp')>=0||v.indexOf('clean')>=0||v.indexOf('excellent')>=0||v.indexOf('pristine')>=0) return '#639922';
   if(v.indexOf('minor')>=0||v.indexOf('moderate')>=0||v.indexOf('off')>=0) return '#BA7517';
   return '#E24B4A';
 }
 function drawSide(ctx,thumbDataUrl,issues,cond,W,H,side){
-  var imgEl=new Image();
-  imgEl.src=thumbDataUrl||'';
+  var imgEl=new Image(); imgEl.src=thumbDataUrl||'';
   try{ ctx.drawImage(imgEl,0,0,W,H); }catch(e){ ctx.fillStyle='#2a2a28'; ctx.fillRect(0,0,W,H); }
   ctx.fillStyle='rgba(0,0,0,0.15)'; ctx.fillRect(0,0,W,H);
-  // Edges
-  ctx.strokeStyle=condColor(cond.edges||cond.backEdges);ctx.lineWidth=3;ctx.globalAlpha=0.85;ctx.strokeRect(2,2,W-4,H-4);ctx.globalAlpha=1;
-  // Corners
+  ctx.strokeStyle=condColor(cond.edges||cond.backEdges); ctx.lineWidth=3; ctx.globalAlpha=0.85; ctx.strokeRect(2,2,W-4,H-4); ctx.globalAlpha=1;
   var cc=condColor(cond.corners||cond.backCorners),CS=16;
-  [[0,0],[W-CS,0],[0,H-CS],[W-CS,H-CS]].forEach(function(pt){ctx.fillStyle=cc;ctx.globalAlpha=0.7;ctx.fillRect(pt[0],pt[1],CS,CS);ctx.globalAlpha=1;});
-  // Centering
-  ctx.strokeStyle=condColor(cond.centering||cond.backCentering);ctx.lineWidth=1.2;ctx.globalAlpha=0.45;ctx.setLineDash([5,4]);
-  ctx.beginPath();ctx.moveTo(W/2,4);ctx.lineTo(W/2,H-4);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(4,H/2);ctx.lineTo(W-4,H/2);ctx.stroke();
-  ctx.setLineDash([]);ctx.globalAlpha=1;
-  // Issues for this side
+  [[0,0],[W-CS,0],[0,H-CS],[W-CS,H-CS]].forEach(function(pt){ ctx.fillStyle=cc; ctx.globalAlpha=0.7; ctx.fillRect(pt[0],pt[1],CS,CS); ctx.globalAlpha=1; });
+  ctx.strokeStyle=condColor(cond.centering||cond.backCentering); ctx.lineWidth=1.2; ctx.globalAlpha=0.45; ctx.setLineDash([5,4]);
+  ctx.beginPath(); ctx.moveTo(W/2,4); ctx.lineTo(W/2,H-4); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(4,H/2); ctx.lineTo(W-4,H/2); ctx.stroke();
+  ctx.setLineDash([]); ctx.globalAlpha=1;
   var colorMap={whitening:'#fbbf24',scratch:'#f87171',dent:'#a78bfa',crease:'#fb923c',stain:'#f472b6',print_defect:'#34d399'};
   issues.forEach(function(iss){
     if(iss.side&&iss.side!==side) return;
     var col=colorMap[iss.type]||'#60a5fa';
     var x=(iss.x||0)*W,y=(iss.y||0)*H,w=(iss.w||0.12)*W,h2=(iss.h||0.1)*H;
-    ctx.fillStyle=col;ctx.globalAlpha=0.22;ctx.fillRect(x,y,w,h2);
-    ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.globalAlpha=0.9;ctx.strokeRect(x,y,w,h2);
-    ctx.fillStyle=col;ctx.globalAlpha=1;ctx.font='bold 9px sans-serif';
+    ctx.fillStyle=col; ctx.globalAlpha=0.22; ctx.fillRect(x,y,w,h2);
+    ctx.strokeStyle=col; ctx.lineWidth=1.5; ctx.globalAlpha=0.9; ctx.strokeRect(x,y,w,h2);
+    ctx.fillStyle=col; ctx.globalAlpha=1; ctx.font='bold 9px sans-serif';
     ctx.fillText((iss.type||'').replace('_',' '),x+2,y>14?y-3:y+h2+10);
   });
 }
-
 function drawAnnotation(frontDataUrl,backDataUrl,card){
   var hasBack=!!backDataUrl;
-  var SW=180,SH=252; // each side
-  var TOTAL_W=hasBack?SW*2:SW,TOTAL_H=SH;
-  var c=document.createElement('canvas');c.width=TOTAL_W;c.height=TOTAL_H;
+  var SW=180,SH=252;
+  var TOTAL_W=hasBack?SW*2:SW;
+  var c=document.createElement('canvas'); c.width=TOTAL_W; c.height=SH;
   var ctx=c.getContext('2d');
   var cond=card.condition||{};
   var issues=card.issues||[];
   var colorMap={whitening:'#fbbf24',scratch:'#f87171',dent:'#a78bfa',crease:'#fb923c',stain:'#f472b6',print_defect:'#34d399'};
   var legend=[];
-
-  // Front side
-  var frontIssues=issues.filter(function(i){return !i.side||i.side==='front';});
-  var frontCond={edges:cond.edges,corners:cond.corners,centering:cond.centering};
-  drawSide(ctx,frontDataUrl||'',frontIssues,frontCond,SW,SH,'front');
-
+  drawSide(ctx,frontDataUrl||'',issues.filter(function(i){return !i.side||i.side==='front';}),{edges:cond.edges,corners:cond.corners,centering:cond.centering},SW,SH,'front');
   if(hasBack){
     ctx.save(); ctx.translate(SW,0);
-    var backIssues=issues.filter(function(i){return i.side==='back';});
-    var backCond={edges:cond.backEdges||'Clean',corners:cond.backCorners||'Sharp',centering:cond.backCentering||'Excellent'};
-    drawSide(ctx,backDataUrl,backIssues,backCond,SW,SH,'back');
+    drawSide(ctx,backDataUrl,issues.filter(function(i){return i.side==='back';}),{edges:cond.backEdges||'Clean',corners:cond.backCorners||'Sharp',centering:cond.backCentering||'Excellent'},SW,SH,'back');
     ctx.restore();
   }
-
-  // Collect legend
   issues.forEach(function(iss){
     var col=colorMap[iss.type]||'#60a5fa';
     var already=false; for(var i=0;i<legend.length;i++){if(legend[i].t===iss.type){already=true;break;}}
@@ -1055,32 +924,201 @@ function drawAnnotation(frontDataUrl,backDataUrl,card){
   return {dataUrl:c.toDataURL('image/png'),legend:legend,hasBack:hasBack};
 }
 
-// ── RENDER HELPERS ────────────────────────────────────────
-function fmt(v){ if(v==null||isNaN(+v)) return 'N/A'; return '$'+parseFloat(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}); }
-function glabel(g){ var n=parseFloat(g); if(isNaN(n)) return ''; if(n>=9.5) return 'Gem Mint'; if(n>=9) return 'Mint'; if(n>=8) return 'NM-Mint'; if(n>=7) return 'Near Mint'; if(n>=6) return 'Exc-Mint'; return 'VG or lower'; }
-function gpct(g){ var n=parseFloat(g); return isNaN(n)?0:Math.round(Math.min(n,10)/10*100); }
-function dotC(v){ if(!v) return ''; var s=v.toLowerCase(); if(s.indexOf('sharp')>=0||s.indexOf('clean')>=0||s.indexOf('excellent')>=0) return 'dot-g'; if(s.indexOf('minor')>=0||s.indexOf('moderate')>=0||s.indexOf('off')>=0) return 'dot-o'; return 'dot-b'; }
-function trendH(t,p){ if(t==='up') return '<span class="trend-pill t-up">&#8593;+'+( p||0)+'%</span>'; if(t==='down') return '<span class="trend-pill t-dn">&#8595;-'+(p||0)+'%</span>'; return '<span class="trend-pill t-fl">Stable</span>'; }
-function saleRows(sales,badge,bl){
-  if(!sales||!sales.length) return '';
-  return sales.slice(0,10).map(function(s){
-    var rawUrl=(s.url||'').trim();
-    if(rawUrl && /^\d{10,13}$/.test(rawUrl)) rawUrl='https://www.ebay.com/itm/'+rawUrl;
-    if(rawUrl && rawUrl.indexOf('/itm/')===0) rawUrl='https://www.ebay.com'+rawUrl;
-    var ok=rawUrl.indexOf('https://')===0||rawUrl.indexOf('http://')===0;
-    var safeUrl=ok?rawUrl:'';
-    var priceStr=s.price?fmt(s.price):'N/A';
-    var titleStr=(s.title||'')+(s.date?' \u00b7 '+s.date:'');
-    var inner='<span class="s-plat">'+(s.platform||'eBay')+'</span>'
-      +'<span class="'+(badge==='raw'?'s-raw-badge':'s-badge')+'">'+(badge==='raw'?'RAW':bl)+'</span>'
-      +'<span class="s-title">'+titleStr+'</span>'
-      +'<span class="s-price">'+priceStr+'</span>'
-      +'<span class="s-ext">'+(ok?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>':'')+'</span>';
-    if(ok){
-      return '<a class="sale-row" href="'+safeUrl+'" target="_blank" rel="noopener noreferrer">'+inner+'</a>';
+// ── RENDER GRADED — CardLadder-style ─────────────────────
+function renderGraded(card,pricing,thumb){
+  var qStr=(card.cardName||'')+' '+(card.gradingCompany||'PSA')+' '+(card.grade||'');
+  if(card.cardNumber) qStr+=' '+card.cardNumber;
+  if(card.setName) qStr+=' '+card.setName;
+  var q=encodeURIComponent(qStr);
+  var badge=(card.gradingCompany||'PSA')+' '+(card.grade||'');
+  var det=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' \xb7 ');
+  var sales=(pricing.sales||[]).slice(0,5);
+  var n=sales.length;
+
+  // Build CardLadder-style sale table
+  var salesHtml='';
+  if(n>0){
+    salesHtml='<div class="cl-hdr-row">'
+      +'<div class="cl-hdr-cell">Date</div>'
+      +'<div class="cl-hdr-cell">Title</div>'
+      +'<div class="cl-hdr-cell" style="text-align:right">Platform</div>'
+      +'<div class="cl-hdr-cell" style="text-align:right">Price</div>'
+      +'</div>';
+    sales.forEach(function(s){
+      var rawUrl=(s.url||'').trim();
+      if(/^\d{10,13}$/.test(rawUrl)) rawUrl='https://www.ebay.com/itm/'+rawUrl;
+      if(rawUrl.indexOf('/itm/')===0) rawUrl='https://www.ebay.com'+rawUrl;
+      var hasUrl=rawUrl.indexOf('https://')===0||rawUrl.indexOf('http://')===0;
+      var inner=
+        '<div class="cl-date">'+(s.date||'\u2014')+'</div>'
+        +'<div><div class="cl-title">'+(s.title||'')+'</div>'
+        +'<div class="cl-plat">'+(s.platform||'eBay')+'</div></div>'
+        +'<div class="cl-ext">'+(hasUrl?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>':'')+'</div>'
+        +'<div class="cl-price">'+(s.price?fmt(s.price):'N/A')+'</div>';
+      if(hasUrl) salesHtml+='<a class="cl-sale-row" href="'+rawUrl+'" target="_blank" rel="noopener noreferrer">'+inner+'</a>';
+      else salesHtml+='<div class="cl-sale-row">'+inner+'</div>';
+    });
+  }
+
+  var noteHtml=pricing.note?'<div class="no-sales-box" style="margin:0 13px 10px">'+pricing.note+'</div>':'';
+
+  var html='<div class="id-card">'
+    +'<div class="thumb-wrap"><img class="thumb-lg" src="'+(thumb||'')+'" alt="'+card.cardName+'"><div class="grade-dot">'+(card.grade||'?')+'</div></div>'
+    +'<div class="card-meta"><span class="game-tag">'+(card.game||'Card')+'</span>'
+    +'<div class="card-name">'+card.cardName+'</div>'
+    +(det?'<div class="card-det">'+det+'</div>':'')
+    +'<div class="card-det">'+(card.gradingCompany||'Graded')+' \xb7 Grade '+(card.grade||'?')+'</div>'
+    +(card.certNumber?'<div class="cert-row">Cert #'+card.certNumber+'</div>':'')
+    +'<button class="edit-btn" onclick="openEditModal(window._gCard,\'graded\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit card</button>'
+    +'</div></div>'
+    // Average price banner
+    +'<div style="background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center">'
+    +'<div class="p-lbl" style="margin-bottom:3px">'+(n>0?n+'-sale average':'Sale average')+'</div>'
+    +'<div style="font-family:\'Bebas Neue\',sans-serif;font-size:42px;color:var(--red);line-height:1">'+(n>0?fmt(pricing.avg):'No data')+'</div>'
+    +'<div style="font-size:11px;color:var(--tx2);margin-top:4px">'+trendH(pricing.trend)+'</div>'
+    +'</div>'
+    // Low / High grid
+    +'<div class="price-grid">'
+    +'<div class="p-card"><div class="p-lbl">Low</div><div class="p-val">'+fmt(pricing.low)+'</div></div>'
+    +'<div class="p-card"><div class="p-lbl">High</div><div class="p-val">'+fmt(pricing.high)+'</div></div>'
+    +'</div>'
+    // CardLadder-style sales table
+    +'<div class="sec-card">'
+    +'<div class="sec-hdr"><div class="sec-hdr-title">Recent sales</div><div class="sec-hdr-sub">Tap row to open listing</div></div>'
+    +noteHtml
+    +(n>0?salesHtml:'<div style="padding:14px;font-size:12px;color:var(--tx2);text-align:center">No sales data found \u2014 search eBay directly below</div>')
+    +'</div>'
+    // Marketplace links
+    +'<div class="links-card"><div class="links-title">Marketplaces</div><div class="chips">'
+    +'<a class="chip" href="https://www.ebay.com/sch/i.html?_nkw='+q+'&LH_Sold=1&LH_Complete=1" target="_blank">eBay Sold</a>'
+    +'<a class="chip" href="https://www.fanatics.com/search?query='+q+'" target="_blank">Fanatics</a>'
+    +(card.certNumber?'<a class="chip" href="https://www.psacard.com/cert/'+card.certNumber+'" target="_blank">PSA Verify</a>':'')
+    +'</div></div>';
+
+  window._gCard=card;
+  setHTML('results-sec',html); showEl('results-sec'); showEl('fab');
+}
+
+// ── RENDER RAW — TAG-inspired score display ───────────────
+function renderRaw(card,pricing,thumb,annotation){
+  var q=encodeURIComponent(card.tcgName||card.cardName+(card.setName?' '+card.setName:''));
+  var det=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' \xb7 ');
+  var cond=card.condition||{};
+  var tag=card.tagScore||{};
+  var hasBack=annotation&&annotation.hasBack;
+
+  // TAG 1000pt score display
+  var totalScore=tag.total||0;
+  var tagGrade=totalScore>=950?'10':totalScore>=900?'10':totalScore>=850?'9.5':totalScore>=800?'9':totalScore>=750?'8.5':totalScore>=700?'8':totalScore>=650?'7.5':totalScore>=600?'7':'6';
+  var tagLabel=totalScore>=950?'Pristine':totalScore>=900?'Gem Mint':totalScore>=850?'Near Mint+':totalScore>=800?'Near Mint':totalScore>=750?'Excellent+':totalScore>=700?'Excellent':'Very Good';
+  var barPct=totalScore?Math.round((totalScore-100)/9):'0'; // 100-1000 maps to 0-100%
+
+  var tagScoreHtml='';
+  if(totalScore>0){
+    tagScoreHtml='<div class="tag-score-wrap">'
+      +'<div class="tag-score-top">'
+      +'<div><div class="tag-score-lbl">TAG Score</div><div style="display:flex;align-items:baseline;gap:4px"><span class="tag-score-num">'+totalScore+'</span><span style="font-family:\'Bebas Neue\',sans-serif;font-size:20px;color:var(--tx2)">/1000</span></div></div>'
+      +'<div style="text-align:right"><div class="tag-score-lbl">Predicted Grade</div><div style="font-family:\'Bebas Neue\',sans-serif;font-size:28px;color:var(--red)">'+tagGrade+'</div><div style="font-size:11px;color:var(--tx2)">'+tagLabel+'</div></div>'
+      +'</div>'
+      +'<div class="tag-bar-bg"><div class="tag-bar-fill" style="width:'+barPct+'%"></div></div>'
+      +'<div class="tag-sub-grid">'
+      +[{l:'Centering',v:tag.centering},{l:'Corners',v:tag.corners},{l:'Edges',v:tag.edges},{l:'Surface',v:tag.surface}].map(function(s){
+        var pct=s.v?Math.round((s.v-100)/1.5):0;
+        return '<div class="tag-sub-item"><div class="tag-sub-lbl">'+s.l+'</div><div class="tag-sub-val"><div style="flex:1;background:var(--sur);border-radius:3px;height:4px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:var(--red);border-radius:3px"></div></div><span class="tag-sub-score">'+(s.v||'\u2014')+'</span></div></div>';
+      }).join('')
+      +'</div></div>';
+  }
+
+  var cos=[{l:'PSA',d:card.psa||{},gv:pricing.gradedPSA},{l:'BGS',d:card.bgs||{},gv:pricing.gradedBGS},{l:'CGC',d:card.cgc||{},gv:pricing.gradedCGC}];
+  var best=Math.max(pricing.gradedPSA||0,pricing.gradedBGS||0,pricing.gradedCGC||0);
+  var rawV=pricing.tcgMarket||0;
+  var fee=pricing.gradingFee||25;
+  var profit=best-(rawV+fee);
+  var vc='maybe',vi='&#x1F914;',vt='Maybe worth grading',vb='';
+  if(best>0&&rawV>0){
+    if(profit>30){vc='yes';vi='&#x2705;';vt='Worth grading!';}
+    else if(profit<0){vc='no';vi='&#x274C;';vt='Not worth grading';}
+    vb='Graded ~'+fmt(best)+' vs raw '+fmt(rawV)+' + '+fmt(fee)+' fee = <strong>'+(profit>=0?'+':'')+fmt(profit)+'</strong>';
+  } else { vb='Insufficient pricing data. Check TCGplayer below.'; }
+
+  // Annotation
+  var annoHtml='';
+  if(annotation&&annotation.dataUrl){
+    var legHtml='';
+    if(annotation.legend&&annotation.legend.length){
+      legHtml='<div class="anno-legend">';
+      annotation.legend.forEach(function(item){ legHtml+='<div class="leg-item"><span class="leg-dot" style="background:'+item.col+'"></span>'+(item.t||'').replace('_',' ')+'</div>'; });
+      legHtml+='<div class="leg-item"><span class="leg-dot" style="background:#639922"></span>Good</div>'
+        +'<div class="leg-item"><span class="leg-dot" style="background:#BA7517"></span>Wear</div>'
+        +'<div class="leg-item"><span class="leg-dot" style="background:#E24B4A"></span>Damage</div>'
+        +'</div>';
     }
-    return '<div class="sale-row">'+inner+'</div>';
-  }).join('');
+    var sideLbls=hasBack?'<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:.5px solid var(--bdr)"><div style="font-size:10px;font-weight:500;color:var(--tx2);text-align:center;padding:4px;border-right:.5px solid var(--bdr)">FRONT</div><div style="font-size:10px;font-weight:500;color:var(--tx2);text-align:center;padding:4px">BACK</div></div>':'';
+    annoHtml='<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Condition map</div><div class="sec-hdr-sub">'+(hasBack?'Front &amp; back':'Front only')+'</div></div>'+sideLbls+'<img class="anno-img" src="'+annotation.dataUrl+'" alt="Condition map"/>'+legHtml+'</div>';
+  }
+
+  // Condition grid
+  var condItems=[{l:'Centering',v:cond.centering||'N/A'},{l:'Corners',v:cond.corners||'N/A'},{l:'Edges',v:cond.edges||'N/A'},{l:'Surface',v:cond.surface||'N/A'}];
+  if(hasBack){ condItems.push({l:'Back surface',v:cond.backSurface||'N/A'}); condItems.push({l:'Back edges',v:cond.backEdges||'N/A'}); }
+
+  // Raw sale rows (CardLadder-style)
+  var rawSaleHtml='';
+  var rs=pricing.rawSales||[];
+  if(rs.length){
+    rs.forEach(function(s){
+      var rawUrl=(s.url||'').trim();
+      if(/^\d{10,13}$/.test(rawUrl)) rawUrl='https://www.ebay.com/itm/'+rawUrl;
+      var hasUrl=rawUrl.indexOf('https://')===0;
+      var inner='<div class="cl-date">'+(s.date||'\u2014')+'</div>'
+        +'<div><div class="cl-title">'+(s.title||'')+'</div><div class="cl-plat">'+(s.platform||'eBay')+'</div></div>'
+        +'<div class="cl-ext">'+(hasUrl?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>':'')+'</div>'
+        +'<div class="cl-price">'+(s.price?fmt(s.price):'N/A')+'</div>';
+      if(hasUrl) rawSaleHtml+='<a class="cl-sale-row" href="'+rawUrl+'" target="_blank" rel="noopener noreferrer">'+inner+'</a>';
+      else rawSaleHtml+='<div class="cl-sale-row">'+inner+'</div>';
+    });
+  }
+
+  var html='<div class="id-card">'
+    +'<div class="thumb-wrap"><img class="thumb-lg" src="'+(thumb||'')+'" alt="'+card.cardName+'"><div class="raw-dot">RAW</div></div>'
+    +'<div class="card-meta"><span class="raw-tag">Ungraded</span><div class="card-name">'+card.cardName+'</div>'
+    +(det?'<div class="card-det">'+det+'</div>':'')
+    +'<button class="edit-btn" onclick="openEditModal(window._rCard,\'raw\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit card</button>'
+    +'</div></div>'
+    +tagScoreHtml
+    +'<div style="background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center">'
+    +'<div class="p-lbl" style="margin-bottom:3px">Raw market value</div>'
+    +'<div style="font-family:\'Bebas Neue\',sans-serif;font-size:42px;color:var(--tx);line-height:1">'+fmt(pricing.tcgMarket)+'</div>'
+    +'<div style="font-size:11px;color:var(--tx2);margin-top:4px">'+trendH(pricing.trend)+(pricing.tcgUrl?' \u00b7 <a href="'+pricing.tcgUrl+'" target="_blank" style="color:var(--red);text-decoration:none">View &#x2197;</a>':'')+'</div>'
+    +'</div>'
+    +'<div class="price-grid">'
+    +'<div class="p-card"><div class="p-lbl">Low</div><div class="p-val">'+fmt(pricing.tcgLow)+'</div></div>'
+    +'<div class="p-card"><div class="p-lbl">High</div><div class="p-val">'+fmt(pricing.tcgHigh)+'</div></div>'
+    +'</div>'
+    +annoHtml
+    +'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Grading predictions &amp; value</div><div class="sec-hdr-sub">Based on recent comps</div></div>'
+    +cos.map(function(co){
+      var g=(co.d&&co.d.grade)?co.d.grade:'?';
+      var conf=(co.d&&co.d.conf)?co.d.conf:'low';
+      return '<div class="cg-row"><span class="cg-logo">'+co.l+'</span><span class="cg-grade">'+g+'</span>'
+        +'<div class="cg-mid"><div class="cg-bar-bg"><div class="cg-bar-fill" style="width:'+gpct(g)+'%"></div></div><div class="cg-lbl">'+glabel(g)+'</div></div>'
+        +'<div class="cg-right"><span class="cg-val">'+(co.gv!=null?fmt(co.gv):'N/A')+'</span><span class="cg-val-lbl">if graded</span><span class="conf-pill conf-'+conf+'">'+conf+'</span></div>'
+        +'</div>';
+    }).join('')
+    +'<div class="cond-sec"><div class="cond-title">Condition breakdown</div><div class="cond-grid">'
+    +condItems.map(function(ci){ return '<div class="cond-item"><div class="cond-lbl">'+ci.l+'</div><div class="cond-val"><span class="dot '+dotC(ci.v)+'"></span>'+ci.v+'</div></div>'; }).join('')
+    +'</div></div></div>'
+    +(card.notes?'<div style="font-size:12px;color:var(--tx2);padding:2px 4px;line-height:1.5">'+card.notes+'</div>':'')
+    +'<div class="verdict-card '+vc+'"><div class="verdict-top"><span class="verdict-icon">'+vi+'</span><span class="verdict-title '+vc+'">'+vt+'</span></div><div class="verdict-body">'+vb+'</div></div>'
+    +(rawSaleHtml?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Recent raw sales</div><div class="sec-hdr-sub">Tap to open listing</div></div><div class="cl-hdr-row"><div class="cl-hdr-cell">Date</div><div class="cl-hdr-cell">Title</div><div class="cl-hdr-cell" style="text-align:right">Platform</div><div class="cl-hdr-cell" style="text-align:right">Price</div></div>'+rawSaleHtml+'</div>':'')
+    +'<div class="links-card"><div class="links-title">Links</div><div class="chips">'
+    +(pricing.tcgUrl?'<a class="chip" href="'+pricing.tcgUrl+'" target="_blank">TCGplayer</a>':'<a class="chip" href="https://www.tcgplayer.com/search/all/product?q='+q+'" target="_blank">TCGplayer</a>')
+    +'<a class="chip" href="https://www.ebay.com/sch/i.html?_nkw='+q+'+raw&LH_Sold=1&LH_Complete=1" target="_blank">eBay Raw</a>'
+    +'<a class="chip" href="https://www.psacard.com/submission" target="_blank">Submit PSA</a>'
+    +'<a class="chip" href="https://www.cgccomics.com/cards/submit/" target="_blank">Submit CGC</a>'
+    +'</div></div>';
+
+  window._rCard=card;
+  setHTML('results-sec',html); showEl('results-sec'); showEl('fab');
 }
 
 // ── EDIT MODAL ────────────────────────────────────────────
@@ -1120,157 +1158,22 @@ function openEditModal(card,mode){
     ge('edit-company').value=card.gradingCompany||'PSA';
     ge('edit-grade').value=card.grade||'';
     ge('edit-cert').value=card.certNumber||'';
-  } else {
-    hideEl('graded-edit-fields');
-  }
+  } else { hideEl('graded-edit-fields'); }
   showEl('edit-modal');
 }
 function reScanRawPricing(card){
   setStatus('Getting updated pricing\u2026');
   var psaG=(card.psa&&card.psa.grade)?card.psa.grade:'9';
-  var bgsG=(card.bgs&&card.bgs.grade)?card.bgs.grade:psaG;
-  var cgcG=(card.cgc&&card.cgc.grade)?card.cgc.grade:psaG;
   var tcgName=card.tcgName||card.cardName+(card.setName?' '+card.setName:'');
-  var cardBase=card.cardName+(card.setName?' '+card.setName:'');
-  var pr='Search for current market price of "'+tcgName+'" on tcgplayer or pricecharting.\n'
-    +'Also search eBay sold listings for graded copies: "'+cardBase+'" PSA '+psaG+', BGS '+bgsG+', CGC '+cgcG+'.\n'
-    +'Also find up to 5 recent raw eBay sold listings for "'+cardBase+'".\n\n'
-    +'Respond with ONLY this JSON (no markdown):\n'
-    +'{"tcgMarket":40.00,"tcgLow":25.00,"tcgHigh":65.00,"tcgUrl":"https://www.tcgplayer.com/product/123456","gradedPSA":180.00,"gradedBGS":160.00,"gradedCGC":150.00,"gradingFee":30,"rawSales":[{"price":42,"date":"May 2025","title":"title","url":"https://www.ebay.com/itm/123456789012"}],"trend":"stable","conf":"medium"}\n\n'
-    +'Use null for values you cannot find. Do not invent prices.';
+  var pr='Find price for "'+tcgName+'" on tcgplayer or pricecharting. '
+    +'Also search eBay sold for PSA '+psaG+' graded "'+tcgName+'". '
+    +'Return ONLY JSON: {"tcgMarket":40,"tcgLow":25,"tcgHigh":65,"tcgUrl":null,"gradedPSA":180,"gradedBGS":160,"gradedCGC":150,"gradingFee":25,"rawSales":[],"trend":"stable","conf":"medium"}';
   callClaude([{role:'user',content:pr}], true, function(err,txt){
     var pricing;
     try{ pricing=parseJSON(txt); }
-    catch(e){ pricing={tcgMarket:null,tcgLow:null,tcgHigh:null,tcgUrl:null,gradedPSA:null,gradedBGS:null,gradedCGC:null,gradingFee:30,rawSales:[],trend:'stable',conf:'low'}; }
-    hideEl('status-sec');
-    renderRaw(card,pricing,currentThumb,null);
-    manualCard=null;
+    catch(e){ pricing={tcgMarket:null,tcgLow:null,tcgHigh:null,tcgUrl:null,gradedPSA:null,gradedBGS:null,gradedCGC:null,gradingFee:25,rawSales:[],trend:'stable',conf:'low'}; }
+    hideEl('status-sec'); renderRaw(card,pricing,currentThumb,null); manualCard=null;
   });
-}
-
-// ── RENDER GRADED ─────────────────────────────────────────
-function renderGraded(card,pricing,thumb){
-  var qStr=(card.cardName||'')+' '+(card.gradingCompany||'PSA')+' '+(card.grade||'');
-  if(card.cardNumber) qStr+=' '+card.cardNumber;
-  if(card.setName) qStr+=' '+card.setName;
-  var q=encodeURIComponent(qStr);
-  var badge=(card.gradingCompany||'PSA')+' '+(card.grade||'');
-  var det=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' · ');
-  var n=(pricing.sales||[]).length;
-  var sh=saleRows((pricing.sales||[]).slice(0,5),'graded',badge);
-  var html='<div class="id-card">'
-    +'<div class="thumb-wrap"><img class="thumb-lg" src="'+(thumb||'')+'" alt="'+card.cardName+'"><div class="grade-dot">'+(card.grade||'?')+'</div></div>'
-    +'<div class="card-meta"><span class="game-tag">'+(card.game||'Card')+'</span>'
-    +'<div class="card-name">'+card.cardName+'</div>'
-    +(det?'<div class="card-det">'+det+'</div>':'')
-    +'<div class="card-det">'+(card.gradingCompany||'Graded')+' · Grade '+(card.grade||'?')+'</div>'
-    +(card.certNumber?'<div class="cert-row">Cert #'+card.certNumber+'</div>':'')
-    +'<button class="edit-btn" onclick="openEditModal(window._gCard,\'graded\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit card</button>'
-    +'</div></div>'
-    +'<div style="background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center">'
-    +'<div class="p-lbl" style="margin-bottom:3px">'+(n>0?n+'-sale average':'Average')+'</div>'
-    +'<div style="font-family:\'Bebas Neue\',sans-serif;font-size:36px;color:var(--red);line-height:1">'+(n>0?fmt(pricing.avg):'No sales found')+'</div>'
-    +'<div style="font-size:11px;color:var(--tx2);margin-top:3px">'+trendH(pricing.trend,pricing.trendPct)+(n===0?' — check marketplaces below':'')+'</div>'
-    +'</div>'
-    +'<div class="price-grid">'
-    +'<div class="p-card"><div class="p-lbl">Low</div><div class="p-val">'+fmt(pricing.low)+'</div></div>'
-    +'<div class="p-card"><div class="p-lbl">High</div><div class="p-val">'+fmt(pricing.high)+'</div></div>'
-    +'</div>'
-    +(sh?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Last '+Math.min(n,5)+' sales</div><div class="sec-hdr-sub">Tap to open on eBay</div></div>'+sh+'</div>':'<div style="font-size:12px;color:var(--tx2);text-align:center;padding:8px">No recent sales found — try editing the card details or search eBay directly below</div>')
-    +'<div class="links-card"><div class="links-title">Marketplaces</div><div class="chips">'
-    +'<a class="chip" href="https://www.ebay.com/sch/i.html?_nkw='+q+'&LH_Sold=1&LH_Complete=1" target="_blank">eBay Sold</a>'
-    +'<a class="chip" href="https://www.fanatics.com/search?query='+q+'" target="_blank">Fanatics</a>'
-    +(card.certNumber?'<a class="chip" href="https://www.psacard.com/cert/'+card.certNumber+'" target="_blank">PSA Verify</a>':'')
-    +'</div></div>';
-  window._gCard=card;
-  setHTML('results-sec',html); showEl('results-sec'); showEl('fab');
-}
-
-// ── RENDER RAW ────────────────────────────────────────────
-function renderRaw(card,pricing,thumb,annotation){
-  var q=encodeURIComponent(card.tcgName||card.cardName+(card.setName?' '+card.setName:''));
-  var det=[card.setName,card.cardNumber?'#'+card.cardNumber:null,card.year,card.variety].filter(Boolean).join(' · ');
-  var cond=card.condition||{};
-  var hasBack=annotation&&annotation.hasBack;
-  var condItems=[{l:'Centering',v:cond.centering||'N/A'},{l:'Corners',v:cond.corners||'N/A'},{l:'Edges',v:cond.edges||'N/A'},{l:'Surface',v:cond.surface||'N/A'}];
-  if(hasBack){ condItems.push({l:'Back surface',v:cond.backSurface||'N/A'}); condItems.push({l:'Back edges',v:cond.backEdges||'N/A'}); }
-  var cos=[{l:'PSA',d:card.psa||{},gv:pricing.gradedPSA},{l:'BGS',d:card.bgs||{},gv:pricing.gradedBGS},{l:'CGC',d:card.cgc||{},gv:pricing.gradedCGC}];
-
-  var best=Math.max(pricing.gradedPSA||0,pricing.gradedBGS||0,pricing.gradedCGC||0);
-  var rawV=pricing.tcgMarket||0;
-  var fee=pricing.gradingFee||30;
-  var profit=best-(rawV+fee);
-  var vc='maybe',vi='&#x1F914;',vt='Maybe worth grading',vb='';
-  if(best>0&&rawV>0){
-    if(profit>30){vc='yes';vi='&#x2705;';vt='Worth grading!';}
-    else if(profit<0){vc='no';vi='&#x274C;';vt='Not worth grading';}
-    vb='Graded ~'+fmt(best)+' vs raw '+fmt(rawV)+' + '+fmt(fee)+' fee = <strong>'+(profit>=0?'+':'')+fmt(profit)+'</strong>';
-  } else { vb='Insufficient pricing data. Check TCGplayer link below.'; }
-
-  var annoHtml='';
-  if(annotation&&annotation.dataUrl){
-    var legHtml='';
-    if(annotation.legend&&annotation.legend.length){
-      legHtml='<div class="anno-legend">';
-      annotation.legend.forEach(function(item){ legHtml+='<div class="leg-item"><span class="leg-dot" style="background:'+item.col+'"></span>'+(item.t||'').replace('_',' ')+'</div>'; });
-      legHtml+='<div class="leg-item"><span class="leg-dot" style="background:#639922"></span>Good</div>'
-        +'<div class="leg-item"><span class="leg-dot" style="background:#BA7517"></span>Wear</div>'
-        +'<div class="leg-item"><span class="leg-dot" style="background:#E24B4A"></span>Damage</div>'
-        +'</div>';
-    }
-    var sideLbls='';
-    if(hasBack){
-      sideLbls='<div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:.5px solid var(--bdr)">'
-        +'<div style="font-size:10px;font-weight:500;color:var(--tx2);text-align:center;padding:4px;border-right:.5px solid var(--bdr)">FRONT</div>'
-        +'<div style="font-size:10px;font-weight:500;color:var(--tx2);text-align:center;padding:4px">BACK</div>'
-        +'</div>';
-    }
-    annoHtml='<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Condition map</div><div class="sec-hdr-sub">'+(hasBack?'Front &amp; back':'Front only')+'</div></div>'
-      +sideLbls
-      +'<img class="anno-img" src="'+annotation.dataUrl+'" alt="Condition map" style="width:100%;display:block"/>'
-      +legHtml+'</div>';
-  }
-
-  var sh=saleRows(pricing.rawSales,'raw','');
-  var html='<div class="id-card">'
-    +'<div class="thumb-wrap"><img class="thumb-lg" src="'+(thumb||'')+'" alt="'+card.cardName+'"><div class="raw-dot">RAW</div></div>'
-    +'<div class="card-meta"><span class="raw-tag">Ungraded</span><div class="card-name">'+card.cardName+'</div>'
-    +(det?'<div class="card-det">'+det+'</div>':'')
-    +'<button class="edit-btn" onclick="openEditModal(window._rCard,\'raw\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit card</button>'
-    +'</div></div>'
-    +'<div style="background:var(--sur);border:.5px solid var(--bdr);border-radius:var(--r);padding:14px;text-align:center">'
-    +'<div class="p-lbl" style="margin-bottom:3px">TCGplayer market</div>'
-    +'<div style="font-family:\'Bebas Neue\',sans-serif;font-size:36px;color:var(--tx);line-height:1">'+fmt(pricing.tcgMarket)+'</div>'
-    +'<div style="font-size:11px;color:var(--tx2);margin-top:3px">'+trendH(pricing.trend,pricing.trendPct)+(pricing.tcgUrl?'&nbsp;<a href="'+pricing.tcgUrl+'" target="_blank" style="color:var(--red);text-decoration:none">View &#x2197;</a>':'')+'</div>'
-    +'</div>'
-    +'<div class="price-grid">'
-    +'<div class="p-card"><div class="p-lbl">TCG Low</div><div class="p-val">'+fmt(pricing.tcgLow)+'</div></div>'
-    +'<div class="p-card"><div class="p-lbl">TCG High</div><div class="p-val">'+fmt(pricing.tcgHigh)+'</div></div>'
-    +'</div>'
-    +annoHtml
-    +'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Predicted grades &amp; graded value</div><div class="sec-hdr-sub">Avg 5 recent sales</div></div>'
-    +cos.map(function(co){
-      var g=(co.d&&co.d.grade)?co.d.grade:'?';
-      var conf=(co.d&&co.d.conf)?co.d.conf:'low';
-      return '<div class="cg-row"><span class="cg-logo">'+co.l+'</span><span class="cg-grade">'+g+'</span>'
-        +'<div class="cg-mid"><div class="cg-bar-bg"><div class="cg-bar-fill" style="width:'+gpct(g)+'%"></div></div><div class="cg-lbl">'+glabel(g)+'</div></div>'
-        +'<div class="cg-right"><span class="cg-val">'+(co.gv!=null?fmt(co.gv):'N/A')+'</span><span class="cg-val-lbl">if graded</span><span class="conf-pill conf-'+conf+'">'+conf+'</span></div>'
-        +'</div>';
-    }).join('')
-    +'<div class="cond-sec"><div class="cond-title">Condition</div><div class="cond-grid">'
-    +condItems.map(function(ci){ return '<div class="cond-item"><div class="cond-lbl">'+ci.l+'</div><div class="cond-val"><span class="dot '+dotC(ci.v)+'"></span>'+ci.v+'</div></div>'; }).join('')
-    +'</div></div></div>'
-    +(card.notes?'<div style="font-size:12px;color:var(--tx2);padding:2px 4px">'+card.notes+'</div>':'')
-    +'<div class="verdict-card '+vc+'"><div class="verdict-top"><span class="verdict-icon">'+vi+'</span><span class="verdict-title '+vc+'">'+vt+'</span></div><div class="verdict-body">'+vb+'</div></div>'
-    +(sh?'<div class="sec-card"><div class="sec-hdr"><div class="sec-hdr-title">Recent raw sales</div><div class="sec-hdr-sub">Tap to verify</div></div>'+sh+'</div>':'')
-    +'<div class="links-card"><div class="links-title">Links</div><div class="chips">'
-    +(pricing.tcgUrl?'<a class="chip" href="'+pricing.tcgUrl+'" target="_blank">TCGplayer</a>':'<a class="chip" href="https://www.tcgplayer.com/search/all/product?q='+q+'&view=grid" target="_blank">TCGplayer</a>')
-    +'<a class="chip" href="https://www.ebay.com/sch/i.html?_nkw='+q+'+raw&LH_Sold=1&LH_Complete=1" target="_blank">eBay Raw</a>'
-    +'<a class="chip" href="https://www.psacard.com/submission" target="_blank">Submit PSA</a>'
-    +'<a class="chip" href="https://www.cgccomics.com/cards/submit/" target="_blank">Submit CGC</a>'
-    +'</div></div>';
-  window._rCard=card;
-  setHTML('results-sec',html); showEl('results-sec'); showEl('fab');
 }
 
 init();
